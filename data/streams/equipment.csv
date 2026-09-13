@@ -1,0 +1,42 @@
+tag,service,size,unit,basis
+V-101,Black mass receiving silo,60.0,t,48 h hold-up
+T-101,Slurry make-up tank,2.576,m3,2 h at S-105
+P-101 A/B,Feed slurry pump,1.288,m3/h,S-105 volumetric
+V-201,Glucose syrup storage,861.249,m3,7 d of S-201 as 70 % syrup
+T-201,Medium make-up,844.637,m3/batch,1 batch of S-202
+R-201A,Pre-seed fermenter,80.177,L,"1/100 of R-201B (1 % inoculum, Keshav 2026-09-12)"
+R-201B,Seed fermenter,80.177,m3,1/10 of R-202 working
+R-202 A/B,Production fermenter,962.118,m3 each,"24 h of broth, x1.2 headspace"
+K-201,Sterile air blower,24052.955,m3/h,0.5 vvm on R-202 working volume
+F-201,Cell removal,33.437,m3/h,S-209 volumetric
+T-202,Biolixiviant hold,400.763,m3,12 h at S-211
+P-201,Biolixiviant dose pump,33.397,m3/h,S-212 volumetric
+V-301,FeSO4.7H2O silo,59.237,t,7 d of S-301
+E-301,Slurry preheater,1014.648,kW,S-302 x 3.5 kJ/kgK x (55-25)
+R-301 A-D,Batch leach tank,483.166,m3 each,"12.5 h fill at S-302, x1.2 headspace"
+T-303,Leached-slurry surge,257.688,m3,8 h at S-305 (drain 150 m3 in 7.5 h vs filter 12 m3/h)
+F-301,Belt filter,7.846,m2,dry residue / 100 kg/m2.h
+T-301,PLS tank,135.912,m3,4 h at S-309
+T-302,Wash-filtrate tank,6.277,m3,4 h at S-311
+SC-301,Vent scrubber,115.574,m3/h gas,S-303 + displacement air
+T-401,Cementation reactor,33.978,m3,1 h at S-401
+F-401,Cement Cu filter,24.775,kg/h dry,S-403 dry solids
+T-402,Fe/Al oxidation + neutralisation,81.547,m3,"2 h at S-404, x1.2"
+K-401,Oxidation air blower,89.524,m3/h,S-405 at 1.2 kg/m3
+F-402,Fe/Al cake filter press,13.924,m2,dry cake at 15 kg/m2.h
+X-401/402/403,D2EHPA mixer-settlers (2E + 1S + 2St),11.399,m3 mixer each,"10 min mixer at O/A 1, S-409 + organic"
+T-404,MnSO4 strip liquor tank,14.596,m3,24 h at S-413
+T-405,Purified liquor tank,136.534,m3,4 h at S-414
+X-501/502/503,Co SX mixer-settlers (3E + 2S + 2St),11.378,m3 mixer each,10 min mixer at O/A 1
+X-504,CoSO4 crystalliser (evaporative),0.395,t/h H2O,water evaporated
+X-511/512/513,Ni SX mixer-settlers (3E + 1S + 2St),11.378,m3 mixer each,10 min mixer at O/A 1
+X-514,NiSO4 crystalliser (evaporative),0.925,t/h H2O,water evaporated
+T-501,Li3PO4 precipitation,34.588,m3,"1 h at barren flow, 60 C"
+F-501,Li3PO4 filter,228.884,kg/h dry,cake at 15 % moisture
+T-601,Effluent equalisation tank,111.85,m3,8 h of combined liquid effluent
+D-601,Crude-salt dryer (steam-tube / spray),7.862,t/h H2O,water evaporated from the brine
+X-601,Leach residue bunker,80.706,t,3 days of wet cake
+X-602,Fe/Al cake bunker,37.594,t,3 days of wet cake
+X-603,Spent-biomass skip,6.72,t,7 days of wet cake
+E-501,"Barren evaporator (MVR), water recovery",20.889,t/h H2O,to 500 g/L Na-gluconate
+D-501/D-502,Product dryers,1173.649,kg/h,CoSO4 + NiSO4 crystals

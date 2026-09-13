@@ -1,0 +1,8 @@
+parameter,value,unit
+black mass feed,1250.0,kg/h
+pulp density,0.042,fraction
+broth titre,150.0,g/L gluconic acid
+gluconate in liquor,895.9639,mM
+crystalliser per-pass,0.86,fraction
+crystalliser overall,0.9919,fraction
+gluconic acid pKa,3.86,-

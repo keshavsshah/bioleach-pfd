@@ -1,0 +1,32 @@
+PLS from mass_balance.py (g/L): {'Co': 3.96, 'Ni': 8.69, 'Mn': 2.88, 'Li': 2.01, 'Cu': 0.92, 'Al': 1.04, 'Fe': 3.26, 'SO4': 5.6, 'Gluc': 199.65}
+
+--- Q0: charge budget at pH 2.5 — cation excess 1.03 eq/L; gluconate given 219 mM, gluconate for electroneutrality ≈ 1,248 mM (5.7x). Forcing balance (charge keyword) does not converge: I > 3 M is outside the Davies model — the liquor cannot exist as a dilute solution ---
+
+--- Q1/Q3: neutralisation of the PLS at 55 C — fraction of each metal STILL DISSOLVED after hydroxides equilibrate ---
+  pH     Fe     Al     Cu     Co     Ni   Fe(III)-gluc
+ 2.5  0.066  1.000  1.000  1.000  1.000           0.03
+ 3.0  0.002  1.000  1.000  1.000  1.000           0.36
+ 3.5  0.002  1.000  1.000  1.000  1.000           0.45
+ 4.0  0.002  0.446  1.000  1.000  1.000           0.29
+ 4.5  0.002  0.089  1.000  1.000  1.000           0.18
+ 5.0  0.002  0.029  1.000  1.000  1.000           0.14
+ 5.5  0.002  0.007  1.000  1.000  1.000           0.09
+ 6.0  0.002  0.000  1.000  1.000  1.000           0.03
+ 7.0  0.002  0.000  1.000  1.000  1.000           0.02
+ 8.0  0.002  0.000  1.000  1.000  1.000           0.01
+
+--- Q1 sensitivity: Fe(III)-gluconate log K (the uncertain constant) — Fe still dissolved at pH 3.5 and 4.5 ---
+ logK  Fe diss pH3.5  Fe diss pH4.5  Fe-gluc pH3.5
+  2.0          0.002          0.002           0.03
+  3.5          0.002          0.002           0.45
+  5.0          0.002          0.002           0.96
+  6.5          0.003          0.002           1.00
+  8.0          0.067          0.003           1.00
+ 10.0          1.000          0.164           1.00
+
+--- Q2: solubility ceiling on Cu / Al at leach pH? (saturation indices, no precipitation allowed) ---
+  pH 2.5: SI Gibbsite  -2.67 · Al(OH)3(am)  -4.93 · Tenorite  -4.78 · Cu(OH)2  -5.95 · Ferrihydrite  -1.41
+  pH 3.0: SI Gibbsite  -1.40 · Al(OH)3(am)  -3.66 · Tenorite  -4.17 · Cu(OH)2  -5.34 · Ferrihydrite  -0.57
+  pH 3.5: SI Gibbsite  -0.08 · Al(OH)3(am)  -2.34 · Tenorite  -3.50 · Cu(OH)2  -4.67 · Ferrihydrite   0.08
+
+Notes: 25 C constants for gluconate species (no dH available); ionic strength ~1 M is beyond the Davies range — treat as indicative.

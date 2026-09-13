@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+title: Black-mass bioleaching refinery — process design and mass balance
+message: If you use this work, please cite it.
+type: software
+authors:
+  - family-names: Shah
+    given-names: Keshav
+repository-code: "https://github.com/keshavsshah/bioleach-refinery"
+abstract: >-
+  Conceptual process design for a 10,000 t/yr spent lithium-ion black-mass
+  refinery using a Gluconobacter oxydans gluconic-acid biolixiviant. Includes a
+  six-sheet process flow diagram, a closed mass balance for all seven blocks,
+  PHREEQC speciation, and a cited design basis.
+license: MIT
+date-released: "2026-09-13"

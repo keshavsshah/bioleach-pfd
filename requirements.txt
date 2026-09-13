@@ -1,0 +1,9 @@
+# mass_balance.py and export_tables.py need only pandas.
+pandas>=2.0
+
+# thermo_speciation.py additionally needs PHREEQC bindings.
+# The PHREEQC database (minteq.v4.dat) ships in data/.
+phreeqpython>=1.5
+
+# sensitivity_pulp.py plots.
+matplotlib>=3.7

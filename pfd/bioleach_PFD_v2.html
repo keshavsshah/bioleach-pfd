@@ -1,0 +1,787 @@
+<meta charset="utf-8">
+<title>Black Mass Bioleach PFD</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#ECEAE3; --paper:#F7F5EE; --ink:#1C1F24; --ink-2:#4A4F58; --rule:#C9C6BC;
+  --tag:#111111; --tag-bg:#EEECE4; --util:#8A8F99; --warn:#B8772A; --text:#1C1F24; --muted:#5C616B;
+  --row:#F3F1EA;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --ground:#15171B; --text:#E6E4DC; --muted:#A3A7B0; --rule:#33373F; --row:#1D2025; --tag-bg:#2A2D33; }
+}
+:root[data-theme="dark"]{ --ground:#15171B; --text:#E6E4DC; --muted:#A3A7B0; --rule:#33373F; --row:#1D2025; --tag-bg:#2A2D33; }
+
+body{background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:14px;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px;display:flex;flex-direction:column;gap:20px}
+h1{font-family:"Barlow Condensed",Impact,sans-serif;font-weight:600;font-size:30px;letter-spacing:.02em;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:13px}
+.eyebrow{font-family:"Barlow Condensed",sans-serif;font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+
+/* the sheet is a deliberately single-world object: paper + ink in both themes */
+.sheeth{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:18px;letter-spacing:.03em;margin:8px 0 -8px}
+.tab{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:15px;letter-spacing:.03em;padding:7px 14px;border:1.5px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--paper);color:#111;border-color:#B9B6AC}
+.tab:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.sheet{background:var(--paper);color:var(--ink);border:1px solid #B9B6AC;box-shadow:0 2px 12px rgba(0,0,0,.12);overflow-x:auto}
+.sheet svg{display:block;width:100%;height:auto;min-width:880px;font-family:"IBM Plex Sans",sans-serif}
+.tagf{font-family:"Barlow Condensed",sans-serif;font-weight:600}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+section h2{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:20px;letter-spacing:.03em;margin:0 0 10px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-family:"Barlow Condensed",sans-serif;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:12px;color:var(--muted);padding:6px 10px;border-bottom:1.5px solid var(--rule)}
+td{padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:nth-child(even) td{background:var(--row)}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+td.t{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:15px;color:var(--text);white-space:nowrap}
+.note{font-size:12.5px;color:var(--muted);max-width:68ch;margin:8px 0 0}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Black Mass Bioleaching · Process Flow Diagram · Sheets 1–6 of 6</div>
+    <h1>Black Mass Bioleach PFD</h1>
+    <p class="sub">Live drawing, added to one block at a time. Equipment and stream detail is kept in the companion PFD Index.</p>
+  </header>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="#111111"/>
+      </marker>
+      <marker id="arr-u" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="#111111"/>
+      </marker>
+    </defs>
+    <symbol id="fn" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="#F7F5EE" stroke="#111111" stroke-width="1"/></symbol>
+  </svg>
+  <h2 class="sheeth">Sheet 1 · Area 100 · Feed preparation</h2>
+  <div class="sheet" id="sheet1">
+  <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- sheet border -->
+    <rect x="12" y="12" width="1076" height="696" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <rect x="20" y="20" width="1060" height="680" fill="none" stroke="#111111" stroke-width=".6"/>
+
+
+    <!-- ===== S-101 black mass in from OSBL (see note 1) ===== -->
+    <path d="M40 222 H165 V152" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+    <text x="42" y="204" font-size="10.5" fill="#111111">black mass, OSBL</text>
+    <g transform="translate(95,222)">
+      <polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+      <text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-101</text>
+    </g>
+    <g transform="translate(95,247)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">1</text></g>
+
+    <!-- ===== V-101 receiving silo ===== -->
+    <text x="134" y="85" font-size="10.5" fill="#111111">bulk-bag unloader</text>
+    <rect x="140" y="92" width="50" height="34" fill="none" stroke="#111111" stroke-width="1.4"/>
+    <path d="M140 126 L165 152 L190 126" fill="none" stroke="#111111" stroke-width="1.4"/>
+    <path d="M130 152 H200 V280 L165 330 L130 280 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+    <text x="165" y="214" text-anchor="middle" class="tagf" font-size="17" fill="#111111">V-101</text>
+    <text x="165" y="230" text-anchor="middle" font-size="10.5" fill="#111111">receiving silo</text>
+    <g transform="translate(165,262)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">3</text></g>
+    <!-- N2 blanket utility stub (note 2) -->
+    <path d="M80 266 H130" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr-u)"/>
+    <text x="72" y="270" text-anchor="end" font-size="10" fill="#111111">N₂</text>
+    <g transform="translate(104,284)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">2</text></g>
+
+    <!-- ===== S-102 vent -> F-101 baghouse ===== -->
+    <path d="M200 165 H320 V120" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+    <g transform="translate(258,165)">
+      <polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+      <text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-102</text>
+    </g>
+    <rect x="295" y="40" width="50" height="80" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <line x1="295" y1="70" x2="345" y2="70" stroke="#111111" stroke-width="1"/>
+    <g stroke="#111111" stroke-width=".9">
+      <line x1="305" y1="42" x2="305" y2="68"/><line x1="315" y1="42" x2="315" y2="68"/>
+      <line x1="325" y1="42" x2="325" y2="68"/><line x1="335" y1="42" x2="335" y2="68"/>
+    </g>
+    <text x="355" y="96" class="tagf" font-size="15" fill="#111111">F-101</text>
+    <text x="355" y="111" font-size="10.5" fill="#111111">dust baghouse</text>
+    <path d="M345 55 H385" fill="none" stroke="#111111" stroke-width="1.2" marker-end="url(#arr-u)"/>
+    <text x="390" y="59" font-size="10" fill="#111111">to atm</text>
+    <!-- fines return -->
+    <path d="M295 110 H225 V156" fill="none" stroke="#111111" stroke-width="1.1" stroke-dasharray="5 3" marker-end="url(#arr)"/>
+    <text x="260" y="100" text-anchor="middle" font-size="9.5" fill="#111111">fines return</text>
+
+
+    <!-- ===== BLOCK 2 : W-101 weigh feeder ===== -->
+    <path d="M165 330 V350" fill="none" stroke="#111111" stroke-width="1.8"/>
+    <path d="M150 350 H180 V370 H150 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+    <rect x="150" y="370" width="110" height="20" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+    <g stroke="#111111" stroke-width=".9"><line x1="156" y1="372" x2="164" y2="388"/><line x1="168" y1="372" x2="176" y2="388"/><line x1="180" y1="372" x2="188" y2="388"/><line x1="192" y1="372" x2="200" y2="388"/><line x1="204" y1="372" x2="212" y2="388"/><line x1="216" y1="372" x2="224" y2="388"/><line x1="228" y1="372" x2="236" y2="388"/><line x1="240" y1="372" x2="248" y2="388"/><line x1="252" y1="372" x2="260" y2="388"/></g>
+    <text x="142" y="358" text-anchor="end" class="tagf" font-size="15" fill="#111111">W-101</text>
+    <text x="142" y="371" text-anchor="end" font-size="10.5" fill="#111111">weigh feeder</text>
+    <g transform="translate(205,406)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">4</text></g>
+
+    <!-- S-103 metered solids -> T-101 -->
+    <path d="M260 380 H350 V426" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+    <g transform="translate(305,380)">
+      <polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+      <text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-103</text>
+    </g>
+
+    <!-- ===== T-101 slurry make-up tank ===== -->
+    <path d="M320 430 V530 Q370 572 420 530 V430 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+    <rect x="360" y="392" width="20" height="13" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/>
+    <line x1="370" y1="405" x2="370" y2="515" stroke="#111111" stroke-width="1.4"/>
+    <path d="M352 504 L368 516 M372 516 L388 504" fill="none" stroke="#111111" stroke-width="1.4"/>
+    <text x="432" y="470" class="tagf" font-size="17" fill="#111111">T-101</text>
+    <text x="432" y="486" font-size="10.5" fill="#111111">slurry make-up</text>
+
+    <!-- S-104 make-up water (off-page in) with control valve -->
+    <polygon points="40,490 95,490 105,500 95,510 40,510" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/>
+    <text x="68" y="504" text-anchor="middle" font-size="9" fill="#111111">Sh 2 / 3</text>
+    <text x="42" y="482" font-size="10.5" fill="#111111">make-up water</text>
+    <path d="M105 500 H320" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+    <g transform="translate(190,500)">
+      <polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+      <text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-104</text>
+    </g>
+    <g transform="translate(190,524)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">5</text></g>
+    <polygon points="265,493 285,507 285,493 265,507" fill="#F7F5EE" stroke="#111111" stroke-width="1.3"/>
+    <line x1="275" y1="500" x2="275" y2="486" stroke="#111111" stroke-width="1"/>
+    <rect x="268" y="478" width="14" height="8" fill="#F7F5EE" stroke="#111111" stroke-width="1"/>
+
+    <!-- ===== P-101 A/B ===== -->
+    <path d="M370 551 V574 H500" fill="none" stroke="#111111" stroke-width="1.8"/>
+    <circle cx="460" cy="590" r="16" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <circle cx="500" cy="590" r="16" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <path d="M452 596 L468 590 L452 584 Z M492 596 L508 590 L492 584 Z" fill="#111111"/>
+    <path d="M460 606 V622 H500 V606" fill="none" stroke="#111111" stroke-width="1.8"/>
+    <text x="432" y="595" text-anchor="end" class="tagf" font-size="15" fill="#111111">P-101 A/B</text>
+    <g transform="translate(530,590)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">7</text></g>
+
+    <!-- S-105 slurry to R-301 (off-page out) -->
+    <path d="M500 622 H640" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+    <g transform="translate(570,622)">
+      <polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/>
+      <text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-105</text>
+    </g>
+    <polygon points="642,612 697,612 707,622 697,632 642,632" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/>
+    <text x="672" y="626" text-anchor="middle" font-size="9" fill="#111111">R-301 · Sh 3</text>
+
+    <!-- DIC pulp-density loop: transmitter on P-101 discharge, trims S-104 valve -->
+    <line x1="610" y1="622" x2="610" y2="637" stroke="#111111" stroke-width="1"/>
+    <circle cx="610" cy="650" r="13" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/>
+    <text x="610" y="654" text-anchor="middle" font-size="9" fill="#111111">DIC</text>
+    <path d="M597 650 H275 V510" fill="none" stroke="#111111" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+    <g transform="translate(640,650)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">6</text></g>
+
+    <!-- ===== title strip ===== -->
+    <line x1="20" y1="676" x2="1080" y2="676" stroke="#111111" stroke-width=".8"/>
+    <text x="30" y="692" class="tagf" font-size="13" fill="#111111">BLACK MASS BIOLEACH — PROCESS FLOW DIAGRAM</text>
+    <text x="1070" y="692" text-anchor="end" font-size="10.5" fill="#111111">Sheet 1 / 6 · Area 100 Feed Prep · ① notes, basis, streams → PFD Index</text>
+  </svg>
+  </div>
+
+
+  <h2 class="sheeth">Sheet 2 · Area 200 · Biolixiviant fermentation</h2>
+  <div class="sheet" id="sheet2">
+  <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg">
+    <rect x="12" y="12" width="1076" height="696" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <rect x="20" y="20" width="1060" height="680" fill="none" stroke="#111111" stroke-width=".6"/>
+<!-- ===== SHEET 2 : AREA 200 BIOLIXIVIANT ===== -->
+<path d="M90 66 V124 Q115.0 136 140 124 V66 Q115.0 54 90 66 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="148" y="90" class="tagf" font-size="15" fill="#111111">V-201</text><text x="148" y="104" font-size="10.5" fill="#111111">glucose syrup</text>
+<path d="M115 136 V160 H230 V188" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(165,160)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-201</text></g>
+<path d="M215 200 V290 Q250.0 302 285 290 V200 Q250.0 188 215 200 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="243" y="187" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="250" y1="198" x2="250" y2="275" stroke="#111111" stroke-width="1.4"/><path d="M236 260 L248 270 M252 270 L264 260" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="222" y="178" text-anchor="end" class="tagf" font-size="15" fill="#111111">T-201</text><text x="222" y="191" text-anchor="end" font-size="10.5" fill="#111111">medium make-up</text>
+<path d="M170 210 H215" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/><text x="166" y="214" text-anchor="end" font-size="10" fill="#111111">salts · fresh H₂O</text>
+<polygon points="28,235 83,235 93,245 83,255 28,255" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="61" y="249" text-anchor="middle" font-size="9" fill="#111111">Sh 5</text>
+<text x="28" y="228" font-size="10.5" fill="#111111">condensate return</text>
+<path d="M93 245 H215" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(120,245)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-203</text></g>
+<circle cx="165" cy="245" r="2.2" fill="#111111"/>
+<path d="M165 245 V310" fill="none" stroke="#111111" stroke-width="1.6" marker-end="url(#arr)"/>
+<g transform="translate(165,282)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-204</text></g>
+<polygon points="132,310 187,310 197,320 187,330 132,330" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="165" y="324" text-anchor="middle" font-size="9" fill="#111111">Sh 1</text>
+<text x="126" y="324" text-anchor="end" font-size="10.5" fill="#111111">surplus</text>
+<g transform="translate(210,320)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">11</text></g>
+<path d="M250 302 V350 H760 V366" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M590 350 V366" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(400,350)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-202</text></g>
+<path d="M300 350 V145 H330" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M300 250 H420" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M330 120 V170 Q345.0 180 360 170 V120 Q345.0 110 330 120 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="366" y="108" class="tagf" font-size="14" fill="#111111">R-201A</text>
+<path d="M420 215 V295 Q450.0 309 480 295 V215 Q450.0 201 420 215 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="443" y="202" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="450" y1="213" x2="450" y2="285" stroke="#111111" stroke-width="1.4"/><path d="M436 270 L448 280 M452 280 L464 270" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="486" y="240" class="tagf" font-size="14" fill="#111111">R-201B</text>
+<path d="M345 180 V195 H432 V209" fill="none" stroke="#111111" stroke-width="1.6" marker-end="url(#arr)"/>
+<g transform="translate(392,195)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-207</text></g>
+<g transform="translate(392,220)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">8</text></g>
+<path d="M450 309 V320 H750" fill="none" stroke="#111111" stroke-width="1.6"/>
+<path d="M572 320 V345 a5 5 0 0 0 0 10 V366" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M742 320 V345 a5 5 0 0 0 0 10 V366" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(700,320)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-208</text></g>
+<path d="M560 380 V490 Q610.0 510 660 490 V380 Q610.0 360 560 380 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="603" y="367" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="610" y1="378" x2="610" y2="480" stroke="#111111" stroke-width="1.4"/><path d="M596 424 L608 434 M612 434 L624 424" fill="none" stroke="#111111" stroke-width="1.3"/><path d="M596 464 L608 474 M612 474 L624 464" fill="none" stroke="#111111" stroke-width="1.3"/>
+<path d="M730 380 V490 Q780.0 510 830 490 V380 Q780.0 360 730 380 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="773" y="367" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="780" y1="378" x2="780" y2="480" stroke="#111111" stroke-width="1.4"/><path d="M766 424 L778 434 M782 434 L794 424" fill="none" stroke="#111111" stroke-width="1.3"/><path d="M766 464 L778 474 M782 474 L794 464" fill="none" stroke="#111111" stroke-width="1.3"/>
+<path d="M568 486 H652 M738 486 H822" stroke="#111111" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="600" y="522" text-anchor="end" class="tagf" font-size="14" fill="#111111">R-202A</text>
+<text x="770" y="522" text-anchor="end" class="tagf" font-size="14" fill="#111111">R-202B</text>
+<text x="720" y="654" text-anchor="middle" font-size="10.5" fill="#111111">R-202 A/B production fermenters · staggered batch</text>
+<g transform="translate(700,508)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">9</text></g>
+<path d="M338 110 V60 H1000" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M435 205 V150 a5 5 0 0 1 0 -10 V60" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M640 370 V355 a5 5 0 0 1 0 -10 V325 a5 5 0 0 1 0 -10 V60" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M810 370 V355 a5 5 0 0 1 0 -10 V325 a5 5 0 0 1 0 -10 V60" fill="none" stroke="#111111" stroke-width="1.4"/>
+<g transform="translate(900,60)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-206</text></g>
+<text x="1005" y="64" font-size="10" fill="#111111">to atm</text>
+<path d="M610 510 V540 H820" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M780 510 V540" fill="none" stroke="#111111" stroke-width="1.8"/>
+<g transform="translate(700,540)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-209</text></g>
+<rect x="820" y="515" width="50" height="50" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><line x1="820" y1="565" x2="870" y2="515" stroke="#111111" stroke-width="1"/>
+<text x="876" y="530" class="tagf" font-size="14" fill="#111111">F-201</text><text x="876" y="543" font-size="10" fill="#111111">0.22 µm</text>
+<path d="M845 565 V610" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(845,588)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-210</text></g>
+<polygon points="812,610 867,610 877,620 867,630 812,630" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="845" y="624" text-anchor="middle" font-size="9" fill="#111111">Sh 5</text>
+<text x="882" y="624" font-size="10.5" fill="#111111">spent cells</text>
+<path d="M870 556 H920 V430 H985" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(920,485)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-211</text></g>
+<path d="M985 380 V470 Q1020.0 484 1055 470 V380 Q1020.0 366 985 380 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="1020" y="356" text-anchor="middle" class="tagf" font-size="15" fill="#111111">T-202</text><text x="1020" y="370" text-anchor="middle" font-size="10.5" fill="#111111">biolixiviant hold</text>
+<path d="M1020 484 V500" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="1020" cy="514" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M1013 520 L1027 514 L1013 508 Z" fill="#111111"/>
+<text x="1000" y="518" text-anchor="end" class="tagf" font-size="14" fill="#111111">P-201</text>
+<path d="M1020 528 V585 H957" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(1020,560)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-212</text></g>
+<polygon points="955,575 900,575 890,585 900,595 955,595" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="923" y="589" text-anchor="middle" font-size="9" fill="#111111">R-301 · Sh 3</text>
+<g transform="translate(975,560)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">12</text></g>
+<path d="M262 620 H282" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/><text x="258" y="624" text-anchor="end" font-size="10" fill="#111111">air</text>
+<circle cx="300" cy="620" r="18" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M288 608 L312 632 M288 632 L312 608" stroke="#111111" stroke-width="1.2"/>
+<text x="300" y="652" text-anchor="middle" class="tagf" font-size="14" fill="#111111">K-201</text>
+<path d="M318 620 H345" fill="none" stroke="#111111" stroke-width="1.6"/>
+<rect x="345" y="608" width="30" height="24" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><line x1="345" y1="632" x2="375" y2="608" stroke="#111111" stroke-width="1"/>
+<text x="360" y="598" text-anchor="middle" class="tagf" font-size="12" fill="#111111">F-202</text>
+<g transform="translate(392,598)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">10</text></g>
+<path d="M375 620 H810" fill="none" stroke="#111111" stroke-width="1.6"/>
+<g transform="translate(450,620)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-205</text></g>
+<path d="M635 620 V545 a5 5 0 0 1 0 -10 V502" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M805 620 V545 a5 5 0 0 1 0 -10 V502" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M545 620 V355 a5 5 0 0 1 0 -10 V325 a5 5 0 0 1 0 -10 V145" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M545 270 H480" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M545 145 H360" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<line x1="20" y1="676" x2="1080" y2="676" stroke="#111111" stroke-width=".8"/>
+<text x="30" y="692" class="tagf" font-size="13" fill="#111111">BLACK MASS BIOLEACH — PROCESS FLOW DIAGRAM</text>
+<text x="1070" y="692" text-anchor="end" font-size="10.5" fill="#111111">Sheet 2 / 6 · Area 200 Biolixiviant · ① notes, basis, streams → PFD Index</text>
+  </svg>
+  </div>
+
+
+  <h2 class="sheeth">Sheet 3 · Area 300 · Batch leach and solid/liquid separation</h2>
+  <div class="sheet" id="sheet3">
+  <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg">
+    <rect x="12" y="12" width="1076" height="696" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <rect x="20" y="20" width="1060" height="680" fill="none" stroke="#111111" stroke-width=".6"/>
+<!-- ===== SHEET 3 : AREA 300 BATCH LEACH + S/L ===== -->
+<polygon points="28,240 83,240 93,250 83,260 28,260" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="61" y="254" text-anchor="middle" font-size="9" fill="#111111">Sh 1</text>
+<text x="28" y="233" font-size="10.5" fill="#111111">feed slurry S-105</text>
+<path d="M93 250 H132" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="150" cy="250" r="18" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M137 250 L143 240 L150 260 L157 240 L163 250" fill="none" stroke="#111111" stroke-width="1.2"/>
+<text x="150" y="286" text-anchor="middle" class="tagf" font-size="14" fill="#111111">E-301</text>
+<path d="M150 214 V232" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/><text x="144" y="224" text-anchor="end" font-size="10" fill="#111111">steam</text>
+<path d="M168 250 H285 V292" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="28,310 83,310 93,320 83,330 28,330" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="61" y="324" text-anchor="middle" font-size="9" fill="#111111">Sh 2</text>
+<text x="28" y="303" font-size="10.5" fill="#111111">biolixiviant S-212</text>
+<path d="M93 320 H195 V250" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="195" cy="250" r="2.2" fill="#111111"/>
+<path d="M195 120 H235 V165 L215 185 L195 165 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<text x="215" y="108" text-anchor="middle" font-size="10.5" fill="#111111">FeSO₄·7H₂O</text>
+<text x="241" y="150" class="tagf" font-size="14" fill="#111111">V-301</text>
+<path d="M215 185 V196" fill="none" stroke="#111111" stroke-width="1.6"/>
+<rect x="180" y="196" width="70" height="16" fill="#F7F5EE" stroke="#111111" stroke-width="1.3"/><line x1="184" y1="197" x2="190" y2="211" stroke="#111111" stroke-width=".8"/><line x1="194" y1="197" x2="200" y2="211" stroke="#111111" stroke-width=".8"/><line x1="204" y1="197" x2="210" y2="211" stroke="#111111" stroke-width=".8"/><line x1="214" y1="197" x2="220" y2="211" stroke="#111111" stroke-width=".8"/><line x1="224" y1="197" x2="230" y2="211" stroke="#111111" stroke-width=".8"/><line x1="234" y1="197" x2="240" y2="211" stroke="#111111" stroke-width=".8"/><line x1="244" y1="197" x2="250" y2="211" stroke="#111111" stroke-width=".8"/>
+<text x="176" y="208" text-anchor="end" class="tagf" font-size="13" fill="#111111">W-301</text>
+<path d="M250 204 H255 V245" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(255,226)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-301</text></g>
+<g transform="translate(298,226)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">14</text></g>
+<path d="M285 250 H615" fill="none" stroke="#111111" stroke-width="1.8"/>
+<g transform="translate(365,250)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-302</text></g>
+<path d="M265 300 V430 Q300.0 448 335 430 V300 Q300.0 282 265 300 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="293" y="287" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="300" y1="298" x2="300" y2="420" stroke="#111111" stroke-width="1.4"/><path d="M286 364 L298 374 M302 374 L314 364" fill="none" stroke="#111111" stroke-width="1.3"/><path d="M286 406 L298 416 M302 416 L314 406" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="292" y="464" text-anchor="end" class="tagf" font-size="14" fill="#111111">R-301A</text>
+<path d="M300 440 V480" fill="none" stroke="#111111" stroke-width="1.8"/>
+<path d="M325 290 V255 a5 5 0 0 1 0 -10 V120" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M375 300 V430 Q410.0 448 445 430 V300 Q410.0 282 375 300 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="403" y="287" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="410" y1="298" x2="410" y2="420" stroke="#111111" stroke-width="1.4"/><path d="M396 364 L408 374 M412 374 L424 364" fill="none" stroke="#111111" stroke-width="1.3"/><path d="M396 406 L408 416 M412 416 L424 406" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="402" y="464" text-anchor="end" class="tagf" font-size="14" fill="#111111">R-301B</text>
+<path d="M410 440 V480" fill="none" stroke="#111111" stroke-width="1.8"/>
+<path d="M435 290 V255 a5 5 0 0 1 0 -10 V120" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M395 250 V292" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M485 300 V430 Q520.0 448 555 430 V300 Q520.0 282 485 300 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="513" y="287" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="520" y1="298" x2="520" y2="420" stroke="#111111" stroke-width="1.4"/><path d="M506 364 L518 374 M522 374 L534 364" fill="none" stroke="#111111" stroke-width="1.3"/><path d="M506 406 L518 416 M522 416 L534 406" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="512" y="464" text-anchor="end" class="tagf" font-size="14" fill="#111111">R-301C</text>
+<path d="M520 440 V480" fill="none" stroke="#111111" stroke-width="1.8"/>
+<path d="M545 290 V255 a5 5 0 0 1 0 -10 V120" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M505 250 V292" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M595 300 V430 Q630.0 448 665 430 V300 Q630.0 282 595 300 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="623" y="287" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="630" y1="298" x2="630" y2="420" stroke="#111111" stroke-width="1.4"/><path d="M616 364 L628 374 M632 374 L644 364" fill="none" stroke="#111111" stroke-width="1.3"/><path d="M616 406 L628 416 M632 416 L644 406" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="622" y="464" text-anchor="end" class="tagf" font-size="14" fill="#111111">R-301D</text>
+<path d="M630 440 V480" fill="none" stroke="#111111" stroke-width="1.8"/>
+<path d="M655 290 V255 a5 5 0 0 1 0 -10 V120" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M615 250 V292" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="450" y="508" text-anchor="middle" font-size="10.5" fill="#111111">R-301 A–D · staggered batch leach · 30 h · 55 °C</text>
+<g transform="translate(612,508)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">13</text></g>
+<path d="M630 480 H180" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(240,480)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-305</text></g>
+<path d="M110 440 V530 Q145.0 544 180 530 V440 Q145.0 426 110 440 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="138" y="427" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="145" y1="438" x2="145" y2="520" stroke="#111111" stroke-width="1.4"/><path d="M131 506 L143 516 M147 516 L159 506" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="102" y="470" text-anchor="end" class="tagf" font-size="14" fill="#111111">T-303</text><text x="102" y="483" text-anchor="end" font-size="10" fill="#111111">surge</text>
+<path d="M145 544 V556" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="145" cy="570" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M138 576 L152 570 L138 564 Z" fill="#111111"/>
+<text x="122" y="574" text-anchor="end" class="tagf" font-size="13" fill="#111111">P-303</text>
+<path d="M159 570 H250 V562" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(205,570)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-306</text></g>
+<path d="M325 120 H900" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(800,120)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-303</text></g>
+<rect x="900" y="80" width="40" height="90" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M900 100 L940 150 M900 150 L940 100" stroke="#111111" stroke-width=".9"/>
+<text x="948" y="112" class="tagf" font-size="14" fill="#111111">SC-301</text><text x="948" y="125" font-size="10" fill="#111111">vent scrubber</text>
+<path d="M920 80 V50" fill="none" stroke="#111111" stroke-width="1.2" marker-end="url(#arr)"/><text x="928" y="54" font-size="10" fill="#111111">to atm</text>
+<path d="M985 90 H940" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/><text x="990" y="94" font-size="10" fill="#111111">NaOH</text>
+<path d="M920 170 V200 H960" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<polygon points="962,190 1017,190 1027,200 1017,210 962,210" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="995" y="204" text-anchor="middle" font-size="9" fill="#111111">Sh 6</text>
+<text x="1032" y="204" font-size="10" fill="#111111">S-304</text>
+<g transform="translate(890,200)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">15</text></g>
+<rect x="250" y="562" width="300" height="36" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<circle cx="268" cy="580" r="12" fill="none" stroke="#111111" stroke-width="1.2"/><circle cx="532" cy="580" r="12" fill="none" stroke="#111111" stroke-width="1.2"/>
+<line x1="280" y1="580" x2="520" y2="580" stroke="#111111" stroke-width="1" stroke-dasharray="6 3"/>
+<text x="400" y="662" text-anchor="middle" class="tagf" font-size="14" fill="#111111">F-301 belt filter · countercurrent wash</text>
+<path d="M470 525 V560" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(470,538)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-307</text></g>
+<text x="504" y="542" font-size="10" fill="#111111">wash water</text>
+<path d="M550 580 H600" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="602,570 657,570 667,580 657,590 602,590" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="635" y="584" text-anchor="middle" font-size="9" fill="#111111">Sh 6</text>
+<text x="602" y="566" font-size="10.5" fill="#111111">residue S-308</text>
+<g transform="translate(685,580)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">16</text></g>
+<path d="M440 598 V622 H735 V470 H750" fill="none" stroke="#111111" stroke-width="1.6" marker-end="url(#arr)"/>
+<g transform="translate(600,622)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-311</text></g>
+<path d="M320 598 V648 H865 V565 a5 5 0 0 1 0 -10 V470 H880" fill="none" stroke="#111111" stroke-width="1.6" marker-end="url(#arr)"/>
+<g transform="translate(560,648)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-309</text></g>
+<path d="M750 420 V510 Q785.0 524 820 510 V420 Q785.0 406 750 420 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="785" y="396" text-anchor="middle" class="tagf" font-size="14" fill="#111111">T-302 wash filtrate</text>
+<path d="M880 420 V510 Q915.0 524 950 510 V420 Q915.0 406 880 420 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="915" y="396" text-anchor="middle" class="tagf" font-size="14" fill="#111111">T-301 PLS</text>
+<path d="M785 524 V546" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="785" cy="560" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M778 566 L792 560 L778 554 Z" fill="#111111"/>
+<text x="766" y="564" text-anchor="end" class="tagf" font-size="13" fill="#111111">P-302</text>
+<path d="M799 560 H995" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(838,560)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-312</text></g>
+<polygon points="997,550 1052,550 1062,560 1052,570 997,570" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="1030" y="564" text-anchor="middle" font-size="9" fill="#111111">Sh 1</text>
+<g transform="translate(838,584)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">17</text></g>
+<path d="M915 524 V555 a5 5 0 0 0 0 10 V586" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="915" cy="600" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M908 606 L922 600 L908 594 Z" fill="#111111"/>
+<text x="915" y="630" text-anchor="middle" class="tagf" font-size="13" fill="#111111">P-301</text>
+<path d="M929 600 H995" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(962,600)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-310</text></g>
+<polygon points="997,590 1052,590 1062,600 1052,610 997,610" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="1030" y="604" text-anchor="middle" font-size="9" fill="#111111">Sh 4</text>
+<g transform="translate(962,626)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">18</text></g>
+<line x1="20" y1="676" x2="1080" y2="676" stroke="#111111" stroke-width=".8"/>
+<text x="30" y="692" class="tagf" font-size="13" fill="#111111">BLACK MASS BIOLEACH — PROCESS FLOW DIAGRAM</text>
+<text x="1070" y="692" text-anchor="end" font-size="10.5" fill="#111111">Sheet 3 / 6 · Area 300 Leach · ① notes, basis, streams → PFD Index</text>
+  </svg>
+  </div>
+
+
+  <h2 class="sheeth">Sheet 4 · Area 400 · Impurity removal (Cu → Fe/Al → Mn)</h2>
+  <div class="sheet" id="sheet4">
+  <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg">
+    <rect x="12" y="12" width="1076" height="696" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <rect x="20" y="20" width="1060" height="680" fill="none" stroke="#111111" stroke-width=".6"/>
+<!-- ===== SHEET 4 : AREA 400 IMPURITY REMOVAL ===== -->
+<polygon points="24,240 79,240 89,250 79,260 24,260" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="254" text-anchor="middle" font-size="9" fill="#111111">Sh 3</text>
+<text x="24" y="233" text-anchor="start" font-size="10.5" fill="#111111">PLS S-401</text>
+<path d="M89 250 H130" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M62 90 H102 V135 L82 155 L62 135 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<text x="82" y="78" text-anchor="middle" font-size="10.5" fill="#111111">Fe powder</text>
+<text x="108" y="118" text-anchor="start" class="tagf" font-size="13" fill="#111111">V-401</text>
+<path d="M82 155 V165" fill="none" stroke="#111111" stroke-width="1.6"/>
+<rect x="60" y="165" width="70" height="16" fill="#F7F5EE" stroke="#111111" stroke-width="1.3"/><line x1="64" y1="166" x2="70" y2="180" stroke="#111111" stroke-width=".8"/><line x1="74" y1="166" x2="80" y2="180" stroke="#111111" stroke-width=".8"/><line x1="84" y1="166" x2="90" y2="180" stroke="#111111" stroke-width=".8"/><line x1="94" y1="166" x2="100" y2="180" stroke="#111111" stroke-width=".8"/><line x1="104" y1="166" x2="110" y2="180" stroke="#111111" stroke-width=".8"/><line x1="114" y1="166" x2="120" y2="180" stroke="#111111" stroke-width=".8"/><line x1="124" y1="166" x2="130" y2="180" stroke="#111111" stroke-width=".8"/>
+<text x="56" y="177" text-anchor="end" class="tagf" font-size="12" fill="#111111">W-401</text>
+<path d="M130 173 H165 V190" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="148" y="166" text-anchor="start" font-size="9" fill="#111111">S-402</text>
+<g transform="translate(190,175)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">20</text></g>
+<path d="M130 200 V290 Q165.0 304 200 290 V200 Q165.0 186 130 200 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="158" y="187" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="165" y1="198" x2="165" y2="280" stroke="#111111" stroke-width="1.4"/><path d="M151 264 L163 274 M167 274 L179 264" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="206" y="222" text-anchor="start" class="tagf" font-size="14" fill="#111111">T-401</text>
+<text x="206" y="235" text-anchor="start" font-size="10" fill="#111111">cementation</text>
+<path d="M165 304 V325 H250" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="250" y="300" width="50" height="50" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><line x1="250" y1="350" x2="300" y2="300" stroke="#111111" stroke-width="1"/>
+<text x="275" y="290" text-anchor="middle" class="tagf" font-size="13" fill="#111111">F-401</text>
+<path d="M275 350 V385" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="243,385 298,385 308,395 298,405 243,405" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="276" y="399" text-anchor="middle" font-size="9" fill="#111111">product</text>
+<text x="312" y="399" text-anchor="start" font-size="10.5" fill="#111111">Cu cement S-403</text>
+<path d="M300 325 H380" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(340,325)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-404</text></g>
+<path d="M380 280 V370 Q415.0 384 450 370 V280 Q415.0 266 380 280 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="408" y="267" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="415" y1="278" x2="415" y2="360" stroke="#111111" stroke-width="1.4"/><path d="M401 344 L413 354 M417 354 L429 344" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="456" y="300" text-anchor="start" class="tagf" font-size="14" fill="#111111">T-402</text>
+<text x="456" y="313" text-anchor="start" font-size="10" fill="#111111">Fe/Al removal · pH 5.5</text>
+<g transform="translate(370,258)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">19</text></g>
+<path d="M395 235 V273" fill="none" stroke="#111111" stroke-width="1.6" marker-end="url(#arr)"/>
+<text x="395" y="228" text-anchor="middle" font-size="10" fill="#111111">NaOH 50 % S-406</text>
+<g transform="translate(470,228)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">21</text></g>
+<circle cx="520" cy="355" r="16" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M509 344 L531 366 M509 366 L531 344" stroke="#111111" stroke-width="1.2"/>
+<text x="520" y="387" text-anchor="middle" class="tagf" font-size="13" fill="#111111">K-401</text>
+<path d="M552 355 H538" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+<text x="556" y="359" text-anchor="start" font-size="10" fill="#111111">air</text>
+<path d="M504 355 H450" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="464" y="349" text-anchor="start" font-size="9" fill="#111111">S-405</text>
+<path d="M415 384 V440 H500" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(455,440)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-407</text></g>
+<rect x="500" y="425" width="60" height="30" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><line x1="508" y1="427" x2="508" y2="453" stroke="#111111" stroke-width=".8"/><line x1="516" y1="427" x2="516" y2="453" stroke="#111111" stroke-width=".8"/><line x1="524" y1="427" x2="524" y2="453" stroke="#111111" stroke-width=".8"/><line x1="532" y1="427" x2="532" y2="453" stroke="#111111" stroke-width=".8"/><line x1="540" y1="427" x2="540" y2="453" stroke="#111111" stroke-width=".8"/><line x1="548" y1="427" x2="548" y2="453" stroke="#111111" stroke-width=".8"/>
+<text x="530" y="415" text-anchor="middle" class="tagf" font-size="13" fill="#111111">F-402</text>
+<path d="M530 455 V490" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="498,490 553,490 563,500 553,510 498,510" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="531" y="504" text-anchor="middle" font-size="9" fill="#111111">Sh 6</text>
+<text x="568" y="504" text-anchor="start" font-size="10.5" fill="#111111">Fe/Al cake S-408</text>
+<g transform="translate(662,548)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">22</text></g>
+<path d="M560 440 H600 V315 H640" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(600,375)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-409</text></g>
+<rect x="640" y="270" width="130" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="658" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="676" y1="278" x2="676" y2="322" stroke="#111111" stroke-width=".8"/><text x="723.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-401</text><text x="723.0" y="313" text-anchor="middle" font-size="9" fill="#111111">extraction · 2 stages</text>
+<rect x="790" y="270" width="70" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="808" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="826" y1="278" x2="826" y2="322" stroke="#111111" stroke-width=".8"/><text x="843.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-402</text><text x="843.0" y="313" text-anchor="middle" font-size="9" fill="#111111">scrub</text>
+<rect x="880" y="270" width="130" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="898" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="916" y1="278" x2="916" y2="322" stroke="#111111" stroke-width=".8"/><text x="963.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-403</text><text x="963.0" y="313" text-anchor="middle" font-size="9" fill="#111111">strip · 2 stages</text>
+<path d="M770 285 H790" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M860 285 H880" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1010 285 H1030 V230 H620 V285 H640" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="700" y="224" text-anchor="middle" font-size="9.5" fill="#111111">organic loop S-411 · 20 % D2EHPA in kerosene</text>
+<path d="M680 250 V270" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="680" y="246" text-anchor="middle" font-size="9.5" fill="#111111">NaOH S-410</text>
+<path d="M825 250 V270" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+<text x="825" y="246" text-anchor="middle" font-size="9.5" fill="#111111">scrub H₂O</text>
+<path d="M945 250 V270" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="945" y="246" text-anchor="middle" font-size="9.5" fill="#111111">H₂SO₄ S-412</text>
+<path d="M825 330 V350 H760 V332" fill="none" stroke="#111111" stroke-width="1.2" marker-end="url(#arr)"/>
+<g transform="translate(625,350)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">23</text></g>
+<path d="M705 330 V393" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M670 400 V480 Q705.0 494 740 480 V400 Q705.0 386 670 400 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="748" y="440" text-anchor="start" class="tagf" font-size="14" fill="#111111">T-405</text>
+<text x="748" y="453" text-anchor="start" font-size="10" fill="#111111">purified liquor</text>
+<path d="M705 494 V506" fill="none" stroke="#111111" stroke-width="1.8"/>
+<circle cx="705" cy="520" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M698 526 L712 520 L698 514 Z" fill="#111111"/>
+<text x="686" y="524" text-anchor="end" class="tagf" font-size="13" fill="#111111">P-405</text>
+<path d="M705 534 V560 H960" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(850,560)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-414</text></g>
+<polygon points="962,550 1017,550 1027,560 1017,570 962,570" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="995" y="564" text-anchor="middle" font-size="9" fill="#111111">Sh 5</text>
+<path d="M945 330 V383" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(945,357)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-413</text></g>
+<path d="M880 390 V460 Q915.0 474 950 460 V390 Q915.0 376 880 390 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="915" y="478" text-anchor="middle" class="tagf" font-size="13" fill="#111111">T-404</text>
+<text x="915" y="491" text-anchor="middle" font-size="10" fill="#111111">MnSO₄ liquor</text>
+<path d="M950 425 H995" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="997,415 1052,415 1062,425 1052,435 997,435" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="1030" y="429" text-anchor="middle" font-size="9" fill="#111111">product</text>
+<text x="997" y="411" text-anchor="start" font-size="10" fill="#111111">MnSO₄ S-413</text>
+<g transform="translate(1066,445)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">24</text></g>
+<line x1="20" y1="676" x2="1080" y2="676" stroke="#111111" stroke-width=".8"/>
+<text x="30" y="692" text-anchor="start" class="tagf" font-size="13" fill="#111111">BLACK MASS BIOLEACH — PROCESS FLOW DIAGRAM</text>
+<text x="1070" y="692" text-anchor="end" font-size="10.5" fill="#111111">Sheet 4 / 6 · Area 400 Impurity removal · ① notes, basis, streams → PFD Index</text>
+  </svg>
+  </div>
+
+
+  <h2 class="sheeth">Sheet 5 · Area 500 · Products (Co SX → CoSO₄ · Ni SX → NiSO₄ · Li₃PO₄) and water return</h2>
+  <div class="sheet" id="sheet5">
+  <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg">
+    <rect x="12" y="12" width="1076" height="696" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <rect x="20" y="20" width="1060" height="680" fill="none" stroke="#111111" stroke-width=".6"/>
+<!-- ===== SHEET 5 : AREA 500 PRODUCTS ===== -->
+<polygon points="24,305 79,305 89,315 79,325 24,325" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="319" text-anchor="middle" font-size="9" fill="#111111">Sh 4</text>
+<text x="24" y="298" text-anchor="start" font-size="10.5" fill="#111111">purified liquor S-501</text>
+<path d="M89 315 H130" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="130" y="270" width="160" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="148" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="166" y1="278" x2="166" y2="322" stroke="#111111" stroke-width=".8"/><text x="228.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-501</text><text x="228.0" y="313" text-anchor="middle" font-size="9" fill="#111111">Co extraction · 3 st</text>
+<rect x="310" y="270" width="70" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="328" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="346" y1="278" x2="346" y2="322" stroke="#111111" stroke-width=".8"/><text x="363.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-502</text><text x="363.0" y="313" text-anchor="middle" font-size="9" fill="#111111">scrub</text>
+<rect x="400" y="270" width="130" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="418" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="436" y1="278" x2="436" y2="322" stroke="#111111" stroke-width=".8"/><text x="483.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-503</text><text x="483.0" y="313" text-anchor="middle" font-size="9" fill="#111111">Co strip · 2 st</text>
+<path d="M290 285 H310" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M380 285 H400" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M530 285 H550 V232 H110 V285 H130" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="330" y="222" text-anchor="middle" font-size="9.5" fill="#111111">Co organic loop · Cyanex 272, saponified</text>
+<path d="M210 250 V270" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="210" y="246" text-anchor="middle" font-size="9.5" fill="#111111">NaOH S-502</text>
+<path d="M345 250 V270" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+<text x="345" y="246" text-anchor="middle" font-size="9.5" fill="#111111">scrub H₂O</text>
+<path d="M465 250 V270" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="465" y="246" text-anchor="middle" font-size="9.5" fill="#111111">H₂SO₄ S-503</text>
+<path d="M345 330 V350 H270 V332" fill="none" stroke="#111111" stroke-width="1.2" marker-end="url(#arr)"/>
+<g transform="translate(150,352)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">25</text></g>
+<path d="M210 330 V372 H565 V315 H600" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<path d="M465 330 V367 a5 5 0 0 0 0 10 V381" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(465,350)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-504</text></g>
+<path d="M430 385 V455 Q465.0 469 500 455 V385 Q465.0 371 430 385 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="424" y="412" text-anchor="end" class="tagf" font-size="13" fill="#111111">X-504</text>
+<text x="424" y="425" text-anchor="end" font-size="9.5" fill="#111111">CoSO₄ crystalliser</text>
+<path d="M500 392 H540 V660" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="545" y="404" text-anchor="start" font-size="9.5" fill="#111111">S-506 vapour</text>
+<path d="M430 440 H400 V478" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="353,478 408,478 418,488 408,498 353,498" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="386" y="492" text-anchor="middle" font-size="9" fill="#111111">Sh 6</text>
+<text x="349" y="492" text-anchor="end" font-size="9.5" fill="#111111">purge S-518</text>
+<path d="M465 462 V480" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<circle cx="465" cy="494" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><line x1="456" y1="494" x2="474" y2="494" stroke="#111111" stroke-width="1.4"/><text x="447" y="498" text-anchor="end" class="tagf" font-size="12" fill="#111111">C-501</text>
+<path d="M465 508 V520" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="440" y="520" width="50" height="28" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M447 534 q6 -6 12 0 t12 0 t12 0" fill="none" stroke="#111111" stroke-width="1"/><text x="496" y="538" text-anchor="start" class="tagf" font-size="12" fill="#111111">D-501 dryer</text>
+<path d="M465 548 V575" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="432,575 487,575 497,585 487,595 432,595" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="465" y="589" text-anchor="middle" font-size="9" fill="#111111">product</text>
+<text x="503" y="589" text-anchor="start" font-size="10.5" fill="#111111">CoSO₄·7H₂O S-505</text>
+<g transform="translate(420,534)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">27</text></g>
+<rect x="600" y="270" width="160" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="618" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="636" y1="278" x2="636" y2="322" stroke="#111111" stroke-width=".8"/><text x="698.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-511</text><text x="698.0" y="313" text-anchor="middle" font-size="9" fill="#111111">Ni extraction · 3 st</text>
+<rect x="780" y="270" width="70" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="798" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="816" y1="278" x2="816" y2="322" stroke="#111111" stroke-width=".8"/><text x="833.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-512</text><text x="833.0" y="313" text-anchor="middle" font-size="9" fill="#111111">scrub</text>
+<rect x="870" y="270" width="130" height="60" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><circle cx="888" cy="300" r="9" fill="none" stroke="#111111" stroke-width="1"/><line x1="906" y1="278" x2="906" y2="322" stroke="#111111" stroke-width=".8"/><text x="953.0" y="297" text-anchor="middle" class="tagf" font-size="13" fill="#111111">X-513</text><text x="953.0" y="313" text-anchor="middle" font-size="9" fill="#111111">Ni strip · 2 st</text>
+<path d="M760 285 H780" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M850 285 H870" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M1000 285 H1020 V232 H580 V285 H600" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="800" y="222" text-anchor="middle" font-size="9.5" fill="#111111">Ni organic loop · Versatic 10</text>
+<path d="M680 250 V270" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="680" y="246" text-anchor="middle" font-size="9.5" fill="#111111">NaOH S-507</text>
+<path d="M815 250 V270" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+<text x="815" y="246" text-anchor="middle" font-size="9.5" fill="#111111">scrub H₂O</text>
+<path d="M935 250 V270" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="935" y="246" text-anchor="middle" font-size="9.5" fill="#111111">H₂SO₄ S-508</text>
+<path d="M815 330 V350 H740 V332" fill="none" stroke="#111111" stroke-width="1.2" marker-end="url(#arr)"/>
+<g transform="translate(620,352)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">26</text></g>
+<path d="M935 330 V381" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(935,352)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-509</text></g>
+<path d="M900 385 V455 Q935.0 469 970 455 V385 Q935.0 371 900 385 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="976" y="412" text-anchor="start" class="tagf" font-size="13" fill="#111111">X-514</text>
+<text x="976" y="425" text-anchor="start" font-size="9.5" fill="#111111">NiSO₄ crystalliser</text>
+<path d="M900 392 H760 V561 a5 5 0 0 0 0 10 V660" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="856" y="388" text-anchor="end" font-size="9.5" fill="#111111">S-511 vapour</text>
+<path d="M970 440 H1000 V478" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="967,478 1022,478 1032,488 1022,498 967,498" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="1000" y="492" text-anchor="middle" font-size="9" fill="#111111">Sh 6</text>
+<text x="1000" y="511" text-anchor="middle" font-size="10.5" fill="#111111">purge S-519</text>
+<path d="M935 462 V480" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<circle cx="935" cy="494" r="14" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><line x1="926" y1="494" x2="944" y2="494" stroke="#111111" stroke-width="1.4"/><text x="917" y="498" text-anchor="end" class="tagf" font-size="12" fill="#111111">C-502</text>
+<path d="M935 508 V520" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="910" y="520" width="50" height="28" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><path d="M917 534 q6 -6 12 0 t12 0 t12 0" fill="none" stroke="#111111" stroke-width="1"/><text x="966" y="538" text-anchor="start" class="tagf" font-size="12" fill="#111111">D-502</text>
+<path d="M935 548 V575" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="902,575 957,575 967,585 957,595 902,595" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="935" y="589" text-anchor="middle" font-size="9" fill="#111111">product</text>
+<text x="973" y="589" text-anchor="start" font-size="10.5" fill="#111111">NiSO₄·6H₂O S-510</text>
+<path d="M680 330 V391" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(680,356)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-512</text></g>
+<path d="M645 400 V460 Q680.0 474 715 460 V400 Q680.0 386 645 400 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<rect x="673" y="387" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><line x1="680" y1="398" x2="680" y2="454" stroke="#111111" stroke-width="1.4"/><path d="M666 440 L678 450 M682 450 L694 440" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="639" y="418" text-anchor="end" class="tagf" font-size="13" fill="#111111">T-501</text>
+<text x="639" y="431" text-anchor="end" font-size="9.5" fill="#111111">Li₃PO₄ ppt · 60 °C</text>
+<path d="M600 452 H645" fill="none" stroke="#111111" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+<text x="596" y="456" text-anchor="end" font-size="9.5" fill="#111111">Na₃PO₄ S-514</text>
+<g transform="translate(628,474)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">29</text></g>
+<path d="M680 467 V482" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<rect x="655" y="482" width="50" height="30" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/><line x1="655" y1="512" x2="705" y2="482" stroke="#111111" stroke-width="1"/>
+<text x="712" y="480" text-anchor="start" class="tagf" font-size="12" fill="#111111">F-501</text>
+<path d="M705 497 H760" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="762,487 817,487 827,497 817,507 762,507" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="795" y="501" text-anchor="middle" font-size="9" fill="#111111">product</text>
+<text x="795" y="521" text-anchor="middle" font-size="10.5" fill="#111111">Li₃PO₄ S-515</text>
+<path d="M680 512 V528" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<g transform="translate(700,520)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-520</text></g>
+<path d="M640 540 V600 Q680.0 614 720 600 V540 Q680.0 526 640 540 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.8"/>
+<text x="634" y="549" text-anchor="end" class="tagf" font-size="13" fill="#111111">E-501</text>
+<text x="634" y="561" text-anchor="end" font-size="9.5" fill="#111111">MVR evaporator</text>
+<g transform="translate(628,604)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">28</text></g>
+<path d="M720 555 H760 V660" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="764" y="551" text-anchor="start" font-size="9.5" fill="#111111">S-513 vapour</text>
+<path d="M680 612 V624" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="653,624 708,624 718,634 708,644 653,644" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="686" y="638" text-anchor="middle" font-size="9" fill="#111111">Sh 6</text>
+<text x="649" y="638" text-anchor="end" font-size="10.5" fill="#111111">barren brine S-516</text>
+<g transform="translate(732,634)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">30</text></g>
+<path d="M760 660 H95" fill="none" stroke="#111111" stroke-width="1.8" marker-end="url(#arr)"/>
+<polygon points="95,650 40,650 30,660 40,670 95,670" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="66" y="664" text-anchor="middle" font-size="9" fill="#111111">Sh 1·2·3</text>
+<g transform="translate(300,660)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.4"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-517</text></g>
+<text x="100" y="646" text-anchor="start" font-size="9.5" fill="#111111">condensate return S-517</text>
+<line x1="20" y1="676" x2="1080" y2="676" stroke="#111111" stroke-width=".8"/>
+<text x="30" y="692" text-anchor="start" class="tagf" font-size="13" fill="#111111">BLACK MASS BIOLEACH — PROCESS FLOW DIAGRAM</text>
+<text x="1070" y="692" text-anchor="end" font-size="10.5" fill="#111111">Sheet 5 / 6 · Area 500 Products · ① notes, basis, streams → PFD Index</text>
+  </svg>
+  </div>
+
+  <h2 class="sheeth">Sheet 6 · Area 600 · Effluent, by-product salt and solid residues</h2>
+  <div class="sheet" id="sheet6">
+  <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg">
+    <rect x="12" y="12" width="1076" height="696" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+    <rect x="20" y="20" width="1060" height="680" fill="none" stroke="#111111" stroke-width=".6"/>
+<!-- ===== SHEET 6 : AREA 600 EFFLUENT AND BY-PRODUCT ===== -->
+
+<text x="34" y="66" text-anchor="start" font-size="11" letter-spacing="1.2" fill="#111111">LIQUID EFFLUENT</text>
+
+<!-- inlet 1 : S-516 E-501 brine -->
+<polygon points="24,90 79,90 89,100 79,110 24,110" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="104" text-anchor="middle" font-size="9" fill="#111111">Sh 5</text>
+<path d="M89 100 H270" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="175" y="78" text-anchor="middle" font-size="9.5" fill="#111111">E-501 brine</text>
+<g transform="translate(175,100)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-516</text></g>
+
+<!-- inlet 2 : S-518 Co crystalliser purge -->
+<polygon points="24,148 79,148 89,158 79,168 24,168" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="162" text-anchor="middle" font-size="9" fill="#111111">Sh 5</text>
+<path d="M89 158 H270" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="175" y="136" text-anchor="middle" font-size="9.5" fill="#111111">Co crystalliser purge</text>
+<g transform="translate(175,158)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-518</text></g>
+
+<!-- inlet 3 : S-519 Ni crystalliser purge -->
+<polygon points="24,206 79,206 89,216 79,226 24,226" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="220" text-anchor="middle" font-size="9" fill="#111111">Sh 5</text>
+<path d="M89 216 H270" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="175" y="194" text-anchor="middle" font-size="9.5" fill="#111111">Ni crystalliser purge</text>
+<g transform="translate(175,216)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-519</text></g>
+
+<!-- inlet 4 : S-304 scrubber blowdown -->
+<polygon points="24,264 79,264 89,274 79,284 24,284" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="278" text-anchor="middle" font-size="9" fill="#111111">Sh 3</text>
+<path d="M89 274 H270" fill="none" stroke="#111111" stroke-width="1.4"/>
+<text x="175" y="252" text-anchor="middle" font-size="9.5" fill="#111111">scrubber blowdown</text>
+<g transform="translate(175,274)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-304</text></g>
+
+<!-- collection header -->
+<path d="M270 100 V274" fill="none" stroke="#111111" stroke-width="1.4"/>
+<path d="M270 187 H320" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+
+<!-- T-601 equalisation tank -->
+<path d="M320 140 V240 Q360 254 400 240 V140 Q360 126 320 140 Z" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<rect x="353" y="127" width="14" height="11" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/>
+<line x1="360" y1="138" x2="360" y2="228" stroke="#111111" stroke-width="1.4"/>
+<path d="M346 214 L358 224 M362 224 L374 214" fill="none" stroke="#111111" stroke-width="1.3"/>
+<text x="410" y="170" text-anchor="start" class="tagf" font-size="13" fill="#111111">T-601</text>
+<text x="410" y="184" text-anchor="start" font-size="9.5" fill="#111111">equalisation · 8 h</text>
+<g transform="translate(408,214)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">31</text></g>
+
+<!-- T-601 to D-601 -->
+<path d="M360 254 V292 H500 V207 H520" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(430,292)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-601</text></g>
+
+<!-- D-601 crude-salt dryer -->
+<rect x="520" y="180" width="170" height="55" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<line x1="520" y1="197" x2="690" y2="197" stroke="#111111" stroke-width=".8"/>
+<line x1="520" y1="218" x2="690" y2="218" stroke="#111111" stroke-width=".8"/>
+<text x="690" y="170" text-anchor="end" class="tagf" font-size="13" fill="#111111">D-601</text>
+<text x="605" y="254" text-anchor="middle" font-size="9.5" fill="#111111">crude-salt dryer · 5 % moisture</text>
+
+<!-- exhaust S-602 + optional condenser -->
+<path d="M565 180 V133" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(565,157)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-602</text></g>
+<rect x="515" y="97" width="100" height="36" fill="#F7F5EE" stroke="#111111" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="565" y="113" text-anchor="middle" font-size="9.5" fill="#111111">condenser</text>
+<text x="565" y="126" text-anchor="middle" font-size="9.5" fill="#111111">(option)</text>
+<g transform="translate(636,115)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">32</text></g>
+<path d="M565 97 V66" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="565" y="56" text-anchor="middle" font-size="9.5" fill="#111111">humid air to atmosphere</text>
+
+<!-- S-603 crude salt product -->
+<path d="M690 207 H800" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(745,207)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-603</text></g>
+<polygon points="804,197 859,197 869,207 859,217 804,217" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="832" y="211" text-anchor="middle" font-size="9" fill="#111111">product</text>
+<text x="836" y="234" text-anchor="middle" font-size="9.5" fill="#111111">crude Na-gluconate salt</text>
+
+<!-- ===== solids lane ===== -->
+<text x="34" y="400" text-anchor="start" font-size="11" letter-spacing="1.2" fill="#111111">SOLID RESIDUES AND BY-PRODUCT</text>
+
+<!-- X-601 leach residue -->
+<polygon points="24,440 79,440 89,450 79,460 24,460" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="454" text-anchor="middle" font-size="9" fill="#111111">Sh 3</text>
+<path d="M89 450 H210" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="150" y="428" text-anchor="middle" font-size="9.5" fill="#111111">leach residue</text>
+<g transform="translate(150,450)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-308</text></g>
+<path d="M214 418 V478 H320 V418" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<text x="330" y="444" text-anchor="start" class="tagf" font-size="13" fill="#111111">X-601</text>
+<text x="330" y="458" text-anchor="start" font-size="9.5" fill="#111111">leach residue bunker · 3 d</text>
+
+<!-- X-602 Fe/Al cake -->
+<polygon points="24,520 79,520 89,530 79,540 24,540" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="534" text-anchor="middle" font-size="9" fill="#111111">Sh 4</text>
+<path d="M89 530 H210" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="150" y="508" text-anchor="middle" font-size="9.5" fill="#111111">Fe/Al hydroxide cake</text>
+<g transform="translate(150,530)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-408</text></g>
+<path d="M214 498 V558 H320 V498" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<text x="330" y="524" text-anchor="start" class="tagf" font-size="13" fill="#111111">X-602</text>
+<text x="330" y="538" text-anchor="start" font-size="9.5" fill="#111111">Fe/Al cake bunker · 3 d</text>
+
+<!-- X-603 spent biomass -->
+<polygon points="24,600 79,600 89,610 79,620 24,620" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="57" y="614" text-anchor="middle" font-size="9" fill="#111111">Sh 2</text>
+<path d="M89 610 H210" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<text x="150" y="588" text-anchor="middle" font-size="9.5" fill="#111111">spent biomass</text>
+<g transform="translate(150,610)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-210</text></g>
+<path d="M214 578 V638 H320 V578" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<text x="330" y="604" text-anchor="start" class="tagf" font-size="13" fill="#111111">X-603</text>
+<text x="330" y="618" text-anchor="start" font-size="9.5" fill="#111111">spent-biomass skip · 7 d</text>
+<g transform="translate(267,662)"><use href="#fn" width="18" height="18" x="-9" y="-9"/><text text-anchor="middle" y="3.5" font-size="10" fill="#111111">33</text></g>
+
+<!-- cement copper by-product -->
+<polygon points="600,520 655,520 665,530 655,540 600,540" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text x="627" y="534" text-anchor="middle" font-size="9" fill="#111111">Sh 4</text>
+<path d="M665 530 H745" fill="none" stroke="#111111" stroke-width="1.4" marker-end="url(#arr)"/>
+<g transform="translate(705,530)"><polygon points="-22,-11 22,-11 28,0 22,11 -22,11 -28,0" fill="#F7F5EE" stroke="#111111" stroke-width="1.2"/><text text-anchor="middle" y="4" class="tagf" font-size="12" fill="#111111">S-403</text></g>
+<rect x="749" y="508" width="46" height="44" rx="3" fill="#F7F5EE" stroke="#111111" stroke-width="1.6"/>
+<line x1="749" y1="519" x2="795" y2="519" stroke="#111111" stroke-width=".8"/>
+<line x1="749" y1="541" x2="795" y2="541" stroke="#111111" stroke-width=".8"/>
+<text x="805" y="524" text-anchor="start" class="tagf" font-size="13" fill="#111111">cement Cu</text>
+<text x="805" y="538" text-anchor="start" font-size="9.5" fill="#111111">drummed · to smelter</text>
+  </svg>
+  </div>
+
+
+  <section>
+    <h2>Stream routing</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>No.</th><th>From</th><th>To</th><th>Carries</th></tr></thead>
+      <tbody id="routing">
+        <tr><td class="t">S-101</td><td>Battery pretreatment (OSBL)</td><td>V-101</td><td>black mass</td></tr>
+        <tr><td class="t">S-102</td><td>V-101 vent</td><td>F-101</td><td>N₂ / air + fines</td></tr>
+        <tr><td class="t">S-103</td><td>W-101</td><td>T-101</td><td>metered black mass</td></tr>
+        <tr><td class="t">S-104</td><td>Sheet 2 (condensate surplus S-204) + Sheet 3 (wash filtrate S-312) + fresh</td><td>T-101</td><td>make-up water</td></tr>
+        <tr><td class="t">S-105</td><td>P-101 A/B</td><td>R-301 (Sheet 3)</td><td>feed slurry</td></tr>
+        <tr><td class="t">S-201</td><td>V-201</td><td>T-201</td><td>glucose syrup</td></tr>
+        <tr><td class="t">S-202</td><td>T-201</td><td>R-201 A/B, R-202 A/B</td><td>fermentation medium</td></tr>
+        <tr><td class="t">S-203</td><td>Sheet 5 (condensate S-517)</td><td>T-201</td><td>returned water</td></tr>
+        <tr><td class="t">S-204</td><td>S-203 tee</td><td>Sheet 1 (T-101)</td><td>condensate surplus</td></tr>
+        <tr><td class="t">S-205</td><td>K-201 / F-202</td><td>all fermenters</td><td>sterile air</td></tr>
+        <tr><td class="t">S-206</td><td>all fermenters</td><td>atmosphere</td><td>off-gas</td></tr>
+        <tr><td class="t">S-207</td><td>R-201A</td><td>R-201B</td><td>inoculum (per batch)</td></tr>
+        <tr><td class="t">S-208</td><td>R-201B</td><td>R-202 A or B</td><td>inoculum (per batch)</td></tr>
+        <tr><td class="t">S-209</td><td>R-202 A/B</td><td>F-201</td><td>harvested broth</td></tr>
+        <tr><td class="t">S-210</td><td>F-201</td><td>Sheet 6 (X-603)</td><td>spent cells</td></tr>
+        <tr><td class="t">S-211</td><td>F-201</td><td>T-202</td><td>cell-free biolixiviant</td></tr>
+        <tr><td class="t">S-212</td><td>P-201</td><td>R-301 (Sheet 3)</td><td>biolixiviant dose</td></tr>
+        <tr><td class="t">S-301</td><td>V-301 / W-301</td><td>R-301 fill line</td><td>FeSO₄·7H₂O, dry</td></tr>
+        <tr><td class="t">S-302</td><td>E-301 + S-212 tee</td><td>R-301 A–D</td><td>heated feed slurry + biolixiviant</td></tr>
+        <tr><td class="t">S-303</td><td>R-301 A–D</td><td>SC-301</td><td>off-gas (CO₂, HF traces)</td></tr>
+        <tr><td class="t">S-304</td><td>SC-301</td><td>Sheet 6 (T-601)</td><td>scrubber blowdown</td></tr>
+        <tr><td class="t">S-305</td><td>R-301 A–D</td><td>T-303</td><td>leached slurry (batch drain)</td></tr>
+        <tr><td class="t">S-306</td><td>P-303</td><td>F-301</td><td>leached slurry (continuous)</td></tr>
+        <tr><td class="t">S-307</td><td>process water</td><td>F-301</td><td>cake wash</td></tr>
+        <tr><td class="t">S-308</td><td>F-301</td><td>Sheet 6</td><td>leach residue (graphite, binder, unleached cathode)</td></tr>
+        <tr><td class="t">S-309</td><td>F-301 strong filtrate</td><td>T-301</td><td>pregnant leach solution</td></tr>
+        <tr><td class="t">S-310</td><td>P-301</td><td>Sheet 4</td><td>PLS to Fe removal</td></tr>
+        <tr><td class="t">S-311</td><td>F-301 wash filtrate</td><td>T-302</td><td>weak liquor</td></tr>
+        <tr><td class="t">S-312</td><td>P-302</td><td>Sheet 1 (T-101, part of S-104)</td><td>wash filtrate recycle</td></tr>
+        <tr><td class="t">S-401</td><td>Sheet 3 (S-310)</td><td>T-401</td><td>PLS</td></tr>
+        <tr><td class="t">S-402</td><td>V-401 / W-401</td><td>T-401</td><td>iron powder</td></tr>
+        <tr><td class="t">S-403</td><td>F-401</td><td>product</td><td>cement copper</td></tr>
+        <tr><td class="t">S-404</td><td>F-401</td><td>T-402</td><td>Cu-free liquor</td></tr>
+        <tr><td class="t">S-405</td><td>K-401</td><td>T-402</td><td>oxidation air</td></tr>
+        <tr><td class="t">S-406</td><td>NaOH 50 %</td><td>T-402</td><td>neutralisation to pH 5.5</td></tr>
+        <tr><td class="t">S-407</td><td>T-402</td><td>F-402</td><td>goethite / gibbsite slurry</td></tr>
+        <tr><td class="t">S-408</td><td>F-402</td><td>Sheet 6</td><td>Fe/Al hydroxide cake</td></tr>
+        <tr><td class="t">S-409</td><td>F-402</td><td>X-401</td><td>Fe/Al-free liquor</td></tr>
+        <tr><td class="t">S-410</td><td>NaOH 50 %</td><td>X-401</td><td>SX pH control</td></tr>
+        <tr><td class="t">S-411</td><td>X-401 → X-402 → X-403 → X-401</td><td>internal</td><td>organic loop (D2EHPA)</td></tr>
+        <tr><td class="t">S-412</td><td>H₂SO₄ 98 %</td><td>X-403</td><td>strip acid</td></tr>
+        <tr><td class="t">S-413</td><td>X-403 → T-404</td><td>product</td><td>MnSO₄ strip liquor</td></tr>
+        <tr><td class="t">S-414</td><td>P-405</td><td>Sheet 5</td><td>purified Co/Ni/Li liquor</td></tr>
+        <tr><td class="t">S-501</td><td>Sheet 4 (S-414)</td><td>X-501</td><td>purified liquor</td></tr>
+        <tr><td class="t">S-502 / S-507</td><td>NaOH 50 %</td><td>X-501 / X-511</td><td>SX pH control</td></tr>
+        <tr><td class="t">S-503 / S-508</td><td>H₂SO₄ 98 %</td><td>X-503 / X-513</td><td>strip acid</td></tr>
+        <tr><td class="t">S-504</td><td>X-503</td><td>X-504</td><td>CoSO₄ strip liquor</td></tr>
+        <tr><td class="t">S-505</td><td>D-501</td><td>product</td><td>CoSO₄·7H₂O</td></tr>
+        <tr><td class="t">S-506 / S-511 / S-513</td><td>X-504 / X-514 / E-501</td><td>condensate header</td><td>vapour → condensate</td></tr>
+        <tr><td class="t">S-509</td><td>X-513</td><td>X-514</td><td>NiSO₄ strip liquor</td></tr>
+        <tr><td class="t">S-510</td><td>D-502</td><td>product</td><td>NiSO₄·6H₂O</td></tr>
+        <tr><td class="t">S-512</td><td>X-511 raffinate</td><td>T-501</td><td>Li / Na / gluconate liquor</td></tr>
+        <tr><td class="t">S-514</td><td>Na₃PO₄</td><td>T-501</td><td>phosphate reagent</td></tr>
+        <tr><td class="t">S-515</td><td>F-501</td><td>product</td><td>Li₃PO₄</td></tr>
+        <tr><td class="t">S-520</td><td>F-501 filtrate</td><td>E-501</td><td>Li-free Na-gluconate liquor</td></tr>
+        <tr><td class="t">S-516</td><td>E-501</td><td>Sheet 6</td><td>barren Na-gluconate brine (the bleed)</td></tr>
+        <tr><td class="t">S-517</td><td>condensate header</td><td>Sheets 1 · 2 · 3</td><td>clean water return</td></tr>
+        <tr><td class="t">S-518 / S-519</td><td>X-504 / X-514</td><td>Sheet 6</td><td>crystalliser mother-liquor purge</td></tr>
+<tr><td class="t">S-601</td><td>T-601</td><td>D-601</td><td>equalised effluent (Na-gluconate / phosphate / sulfate)</td></tr>
+<tr><td class="t">S-602</td><td>D-601</td><td>atmosphere</td><td>humid dryer exhaust — condensable (note ㉜)</td></tr>
+<tr><td class="t">S-603</td><td>D-601</td><td>OSBL by-product</td><td>crude sodium gluconate salt, 5 % moisture</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Flows, compositions, and equipment sizing live in the <a href="https://claude.ai/code/artifact/52fc3d9f-562e-4a9f-a39f-b94f14a5aedc" style="color:var(--text)">PFD Index</a>, one section per block. This page is only meant to show where material goes.</p>
+  </section>
+</div>
