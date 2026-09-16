@@ -1,12 +1,19 @@
-# Black-Mass Bioleaching Refinery — Appendix
+# Zero-Discharge Bioleaching of Spent Lithium-Ion Black Mass
+
+### Process Design and the Cost of a Biological Lixiviant
 
 Process design for a **10,000 t/yr spent lithium-ion black-mass refinery** using a
 *Gluconobacter oxydans* gluconic-acid biolixiviant in place of mineral acid.
 
-This repository is the appendix to the write-up *BioLeach Write Up*. The write-up is the
-summary; everything a reader might want to check, reproduce or argue with is here. The
-folders are lettered to match the appendix, so the paper can cite "Appendix G" and the
-reader can open `G-mass-balance/`.
+## ▶ Start here
+
+**[Black Mass BioLeach Summary.pdf](Black%20Mass%20BioLeach%20Summary.pdf)** — the paper.
+Read this first; it is the whole argument in six pages. The editable source is
+`Black Mass BioLeach Summary.docx`.
+
+Everything else in this repository is the **appendix** to that paper: the detail a reader
+might want to check, reproduce or argue with. Folders are lettered to match, so where the
+paper cites "Appendix G" the reader opens `G-mass-balance/`.
 
 ## Results
 
@@ -46,7 +53,7 @@ source and electrodialytic acid recycle would remove roughly $29M/yr of that gap
 | **H** | `H-acid-recycle/` | Proton and sodium budget showing why raffinate recycle returns water but not acid |
 | **I** | `I-cost-estimate/` | Capital, operating cost, revenue, acid cost per equivalent, and what narrows the gap |
 | **J** | `J-unsourced-assumptions/` | Every number carried without a verified source, and every price |
-| **K** | `K-references/` | The bibliography, [1]–[28], IEEE style |
+| **K** | `K-references/` | The bibliography, [1]–[28], IEEE style — the numbering the paper uses |
 
 `tools/make_pdfs.py` regenerates both PDFs from their HTML sources.
 
