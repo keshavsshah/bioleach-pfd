@@ -1,11 +1,11 @@
 # Appendix Index
 
 The write-up is the front page and the summary. **This repository is the appendix.**
+Anything a reader wants to check, reproduce or argue with lives here.
 
 Appendices A and B are also provided as **PDFs** (`pfd/*.pdf`) for attaching to the paper;
 the HTML sources sit beside them and stay the editable originals. Regenerate with
 `python3 src/make_pdfs.py`.
-Anything a reader wants to check, reproduce or argue with lives here.
 
 Sections are lettered so the paper can cite them as "Appendix C" without needing the
 tables reproduced inline.
