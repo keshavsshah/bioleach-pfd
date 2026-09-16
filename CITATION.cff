@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Shah
     given-names: Keshav
-repository-code: "https://github.com/keshavsshah/bioleach-refinery"
+repository-code: "https://github.com/keshavsshah/bioleach-pfd"
 abstract: >-
   Conceptual process design for a 10,000 t/yr spent lithium-ion black-mass
   refinery using a Gluconobacter oxydans gluconic-acid biolixiviant. Includes a

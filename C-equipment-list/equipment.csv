@@ -4,7 +4,7 @@ T-101,Slurry make-up tank,2.576,m3,2 h at S-105
 P-101 A/B,Feed slurry pump,1.288,m3/h,S-105 volumetric
 V-201,Glucose syrup storage,861.249,m3,7 d of S-201 as 70 % syrup
 T-201,Medium make-up,844.637,m3/batch,1 batch of S-202
-R-201A,Pre-seed fermenter,80.177,L,"1/100 of R-201B (1 % inoculum, Keshav 2026-09-12)"
+R-201A,Pre-seed fermenter,80.177,L,1/100 of R-201B (1 % inoculum)
 R-201B,Seed fermenter,80.177,m3,1/10 of R-202 working
 R-202 A/B,Production fermenter,962.118,m3 each,"24 h of broth, x1.2 headspace"
 K-201,Sterile air blower,24052.955,m3/h,0.5 vvm on R-202 working volume

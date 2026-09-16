@@ -1,8 +1,12 @@
-"""Black-mass bioleach mass balance — one row per PFD stream.
+"""Black-mass bioleach mass balance: one row per PFD stream, plus equipment sizing.
 
-Basis: 10,000 t/yr black mass, 8,000 h/yr, 10 % pulp density (INL demonstrated 2.5 %), gluconate scaled with pulp
-(300 mM; INL 75 mM). The leach liquor is still ~6x short of charge balance -- reported at the end, see Charge Balance Finding.md.
-Grows one block at a time alongside bioleach_PFD_v2.html. Run:  python3 mass_balance.py
+Basis: 10,000 t/yr black mass, 8,000 h/yr. Gluconate is solved for electroneutrality of the
+leach liquor (896 mM at a 150 g/L broth, 4.2 % pulp). Every block asserts closure; an
+infeasible basis raises SystemExit rather than producing a plausible wrong answer.
+
+Run:  python3 G-mass-balance/mass_balance.py           full balance and equipment list
+      python3 G-mass-balance/mass_balance.py --html N  Index tables for block N
+See B-design-basis/ for the basis and I-cost-estimate/ for the economics.
 """
 import os, json
 import pandas as pd
@@ -11,10 +15,10 @@ import pandas as pd
 FEED_TPY = 10_000
 HOURS = 8_000
 FEED_KGH = FEED_TPY * 1000 / HOURS          # 1,250 kg/h
-# 2026-09-13 Keshav: Option A — gluconate supplies the whole anion budget (charge-balanced leach liquor, no mineral acid).
+# Gluconate supplies the whole anion budget: a charge-balanced leach liquor with no mineral acid.
 # GA_BALANCE=1 solves GA_MM for electroneutrality; GA_BALANCE=0 restores the INL pulp-scaled basis (sensitivity runs).
 GA_BALANCE = os.environ.get("GA_BALANCE", "1") == "1"
-PULP = float(os.environ.get("PULP", 0.042 if GA_BALANCE else 0.10))   # 4.2 % = max that fits a 150 g/L broth   # kg solid / kg slurry in R-301. Option A: 7 % is the highest
+PULP = float(os.environ.get("PULP", 0.042 if GA_BALANCE else 0.10))   # 4.2 % = max that fits a 150 g/L broth   # kg solid / kg slurry in R-301. The ceiling is set by the broth, not chosen:
 #   pulp at which a 250 g/L broth can carry the required gluconate without negative make-up water (see water check below).
 GRADE = dict(Ni=.18, Co=.08, Mn=.05, Li=.035, Cu=.02, Al=.03)   # wt fraction of black mass
 GRADE["other"] = 1 - sum(GRADE.values())     # graphite, binder, oxide O — 0.605
@@ -23,13 +27,13 @@ LEACH_REC = dict(Co=.86, Ni=.84, Li=1.0, Mn=1.0)                # INL 2022, leac
 # Area 200 — biolixiviant
 INL_PULP, INL_GA_MM = 0.025, 75          # INL demonstrated condition
 GA_SCALE = float(os.environ.get("GA_SCALE", 1.0))   # extra acid multiple on top of the pulp scaling (sensitivity runs)
-GA_MM_INL = INL_GA_MM * PULP / INL_PULP * GA_SCALE   # 2026-09-12: acid scaled with pulp density -> 300 mM at 10 % (INL shape)
+GA_MM_INL = INL_GA_MM * PULP / INL_PULP * GA_SCALE   # reference-shape basis: acid scaled with pulp density
 GA_MW, GLU_MW = 196.16, 180.16
-# Broth strength: INL lab broth ~80 g/L. Option A needs a concentrated broth; G. oxydans fed-batch reaches 200-250 g/L gluconate
+# Broth strength: the reference lab broth is ~80 g/L. A charge-balanced leach needs a concentrated broth;
 # from ~300 g/L glucose (industrial gluconic-acid fermentation; placeholder to cite). Env BROTH_GA_GL overrides.
 BROTH_GA_GL = float(os.environ.get("BROTH_GA_GL", 150.0 if GA_BALANCE else 80.0))
-# 150 g/L is the literature high for G. oxydans gluconic acid [9]; 250 g/L is unsupported and is
-# carried only as an upside case (BROTH_GA_GL=250 PULP=0.07).
+# 150 g/L is the highest titre reported for G. oxydans gluconic acid.
+# Higher titres can be explored with e.g. BROTH_GA_GL=200 PULP=0.055.
 GLU_YIELD = 0.95           # mol GA / mol glucose
 CELLS_WET_KGH = 40.0       # spent biomass, wet cake, per hour of broth
 AIR_VVM = 0.5              # sparge rate on the working volume, one fermenter running at a time
@@ -38,12 +42,12 @@ BLEED_FRAC = 0.15          # share of returned raffinate bled to effluent (sulfa
 
 # Area 300 — leach
 FESO4_PER_CO = 4.1         # kg FeSO4.7H2O per kg Co recovered (INL 3.75-4.51)
-# Cu/Al not reported by INL. Literature (2026-09-12 search):
+# Cu/Al are not reported in the reference work. From the literature:
 #   Cu: gluconic acid alone 0.3 % (Lerchbammer 2025, H2O2 system) but with Fe3+ present metallic Cu is consumed as a
 #       reductant (Porvali 2020; Partinen 2024) and organic-acid bioleaching reaches 100 % Cu (Bahaloo-Horeh 2017).
 #       -> 0.80 for an Fe(II)/Fe(III) system at 55 C. Sensitivity: 0.3-1.0.
 #   Al: 51.9 % (Lerchbammer 2025), 65-75 % (Horeh 2016; Bahaloo-Horeh 2017) -> 0.60.
-# thermo_speciation.py (2026-09-12): no solubility ceiling on Cu or Al at leach pH 2.5-3.0 (tenorite SI -2.6, gibbsite SI -0.5),
+# thermo_speciation.py: no solubility ceiling on Cu or Al at leach pH 2.5-3.0 (tenorite SI -2.6, gibbsite SI -0.5),
 # so both fractions are kinetic, not thermodynamic -> literature values stand. Gibbsite saturates above pH ~3.2.
 LEACH_FRAC = dict(Co=.86, Ni=.84, Li=1.0, Mn=1.0, Cu=.80, Al=.60, other=0.0)
 CU_REDUCTANT_CREDIT = False  # sensitivity only: metallic Cu gives 2 e-/atom via Fe3+ (Porvali 2020). OFF by default because
@@ -54,7 +58,7 @@ WASH_RATIO = 2.0           # m3 wash water per t dry residue
 WASH_EFF = 0.95            # fraction of PLS displaced from the cake by the wash
 LEACH_T = 55
 
-# Area 400 — impurity removal (Keshav 2026-09-12: cementation, NaOH neutralisation, D2EHPA SX for Mn)
+# Area 400 - impurity removal: cementation, NaOH neutralisation, D2EHPA SX for Mn
 CEM_CU_REMOVAL = 0.99      # Cu2+ + Fe -> Cu + Fe2+
 CEM_FE_EXCESS = 1.3        # Fe powder dosed vs stoichiometric; excess reports to the cement cake
 FE_AL_PH = 5.5             # thermo_speciation.py: goethite complete by 5.5, gibbsite mostly, Co/Ni still dissolved
@@ -68,12 +72,12 @@ MN_STRIP_GL = 100.0        # g/L Mn in strip liquor (MnSO4 product)
 CO_SX_EXT, CO_SX_NI_COEXT, CO_STRIP_GL = 0.99, 0.01, 100.0
 NI_SX_EXT, NI_STRIP_GL = 0.98, 100.0
 COSO4_7H2O, NISO4_6H2O, LI2CO3 = 281.1, 262.8, 73.89
-CRYST_YIELD = 0.86                    # per pass, measured [14] Zhang et al. Hydrometallurgy 208 (2022) 105821
+CRYST_YIELD = 0.86                    # per pass, measured; Zhang et al., Hydrometallurgy 208 (2022) 105821
 CRYST_BLEED = 0.05                    # fraction of mother liquor bled to Sheet 6; the rest recycles to the feed
 # Overall recovery with mother-liquor recycle. Steady state on combined feed C = F + (1-y)(1-b)C gives
 # P/F = y / (y + (1-y)b) -- so the BLEED, not the per-pass yield, sets how much metal is lost.
 CRYST_REC = CRYST_YIELD / (CRYST_YIELD + (1 - CRYST_YIELD) * CRYST_BLEED)
-# 2026-09-13 Keshav: Li recovered as Li3PO4 directly from the barren liquor (~1.9 g/L Li). Li3PO4 solubility ~0.39 g/L
+# Li is recovered as Li3PO4 directly from the barren liquor (~1.9 g/L Li). Li3PO4 solubility ~0.39 g/L
 # (= 0.07 g/L Li), so no evaporation is needed ahead of the precipitation; E-501 becomes a water-recovery evaporator.
 LI_PPT_YIELD = 0.95                   # Li3PO4 with Na3PO4, 10 % excess, 60 C (residual ~0.1 g/L Li)
 PO4_EXCESS = 1.10
@@ -98,7 +102,7 @@ solids = {s: FEED_KGH * f for s, f in GRADE.items()}
 stream("S-101", "OSBL", "V-101", "dry solid", **solids)
 stream("S-102", "V-101 vent", "F-101", "gas+dust")            # no net mass flow (fines return)
 
-# ---- Acid budget: gluconate required for electroneutrality (Option A, 2026-09-13) ----
+# ---- Acid budget: gluconate required for electroneutrality ----
 # Cations set by feed x leach fractions (+ Fe(III) from FeSO4); anions = gluconate + sulfate from FeSO4. Solved before Block 3
 # because the fermenter is sized from it. Fixed by feed chemistry, so the kg/h of gluconate is independent of pulp density.
 Z = dict(Co=2, Ni=2, Mn=2, Li=1, Cu=2, Al=3)
@@ -111,9 +115,9 @@ ga_mm_for_balance = (cation_keq - _so4_in / 96.06 * 2) / _liq_m3h * 1000
 GA_EXCESS = float(os.environ.get("GA_EXCESS", 1.15))   # free gluconic acid left after leaching (15 %): exact balance = zero acidity, pH undefined
 GA_MM = ga_mm_for_balance * GA_EXCESS if GA_BALANCE else GA_MM_INL
 # Gluconate is a ~1 M buffer (pKa 3.86). Downstream base demand = what it takes to hold each unit's pH set-point, not
-# "one NaOH per gluconate" (2026-09-13 fix: the leach already deprotonated the gluconate that balances the metals).
-PKA_GA = 3.86   # Keshav's call 2026-09-13. Merck/Ullmann [17] give 3.70; the spread is the
-                # gluconic acid / glucono-delta-lactone equilibrium. Worth <2 % on base demand either way.
+# "one NaOH per gluconate": the leach has already deprotonated the gluconate that balances the metals.
+PKA_GA = 3.86   # sources also report 3.70; the spread is the gluconic acid /
+                # glucono-delta-lactone equilibrium. Worth <2 % on base demand either way.
 def gluc_anion_frac(pH): return 1 / (1 + 10 ** (PKA_GA - pH))
 def naoh_to_hold(pH, ga_kgh_, cation_eq, so4_kgh_, na_kgh_):
     """kg/h NaOH so that Gluc- = G*f(pH) balances (cations + Na - 2 SO4). Returns 0 if the liquor is already above the set-point."""
@@ -152,7 +156,7 @@ stream("S-212", "P-201", "R-301", "liquid", T=30, H2O=broth_h2o, GA=ga_kgh, gluc
 water_kgh = liquor_kgh - broth_h2o                             # make-up water: pulp density is held in R-301, not T-101
 if water_kgh < 0:
     _pmax = 1 / (1 + broth_h2o / FEED_KGH)   # broth alone would exceed the liquor the pulp allows
-    raise SystemExit(f"Option A infeasible at PULP={PULP:.3f}: broth {broth_h2o:,.0f} kg/h > liquor {liquor_kgh:,.0f} kg/h. "
+    raise SystemExit(f"Infeasible basis at PULP={PULP:.3f}: broth {broth_h2o:,.0f} kg/h > liquor {liquor_kgh:,.0f} kg/h. "
                      f"Max pulp at {BROTH_GA_GL:.0f} g/L broth is {_pmax:.3f}; raise BROTH_GA_GL or lower PULP.")
 stream("S-103", "W-101", "T-101", "dry solid", **solids)
 stream("S-104", "Sh3/4 recycle + fresh", "T-101", "liquid", H2O=water_kgh)
@@ -198,7 +202,7 @@ stream("S-308", "F-301", "Sh 6 residue bunker X-601", "wet cake", T=40, **cake)
 stream("S-310", "P-301", "Sh 4 (Fe removal)", "liquid", T=45, **{c: streams["S-309"][c] for c in COLS})
 stream("S-312", "P-302", "Sh 1 T-101 (S-104)", "liquid", T=40, **{c: streams["S-311"][c] for c in COLS})
 
-# ---- Acid / charge budget of the leach liquor (2026-09-12 finding) ------------------------
+# ---- Acid / charge budget of the leach liquor ------------------------
 anion_keq = ga_kgh / GA_MW + so4_in / 96.06 * 2       # cation_keq, ga_mm_for_balance computed up front (before Block 3)
 liq_m3h = liq_total / 1000
 charge_ratio = anion_keq / cation_keq
@@ -298,10 +302,10 @@ NA_GLUC_GL = raff2["GA"] / GA_MW * 218.1 / (streams["S-512"]["total"] / 1000)   
 stream("S-516", "E-501 brine", "Sh 6 effluent (bleed)", "liquid", T=60, **brine)
 cond_total = streams["S-506"]["H2O"] + streams["S-511"]["H2O"] + evap_h2o
 
-# ---- Block 7 (Sheet 6): Area 600 — effluent and by-product (2026-09-13, balance only; sheet not yet drawn) ----
+# ---- Block 7 (Sheet 6): Area 600 - effluent and by-product ----
 # Liquids: the brine (S-516), crystalliser purges (S-518/519) and the SC-301 scrubber blowdown (S-304) are equalised in
 # T-601 and dried in D-601 to a crude sodium-gluconate salt — the whole sodium/phosphate/gluconate bleed leaves as one
-# saleable-or-disposable solid instead of a 14 t/h liquid effluent (Keshav's no-waste preference; technical grade at best,
+# saleable-or-disposable solid instead of a 14 t/h liquid effluent (no liquid discharge; technical grade at best,
 # note the ppm Co/Ni). Solids (leach residue S-308, Fe/Al cake S-408, spent biomass S-210, Cu cement S-403) go to bunkers.
 CRUDE_SALT_MOISTURE = 0.05
 eff = {c: streams["S-516"][c] + streams["S-518"][c] + streams["S-519"][c] + streams["S-304"][c] for c in COLS}
@@ -334,7 +338,7 @@ size("T-101", "Slurry make-up tank", "2 h at S-105", streams["S-105"]["total"] /
 size("P-101 A/B", "Feed slurry pump", "S-105 volumetric", streams["S-105"]["total"] / 1000 / RHO_SLURRY, "m3/h")
 size("V-201", "Glucose syrup storage", "7 d of S-201 as 70 % syrup", glucose_kgh / 0.7 / 1000 / 1.35 * 24 * 7, "m3")
 size("T-201", "Medium make-up", "1 batch of S-202", streams["S-202"]["total"] / 1000 * 24, "m3/batch")
-size("R-201A", "Pre-seed fermenter", "1/100 of R-201B (1 % inoculum, Keshav 2026-09-12)", R202_WORK_M3 / 100 * 10, "L")
+size("R-201A", "Pre-seed fermenter", "1/100 of R-201B (1 % inoculum)", R202_WORK_M3 / 100 * 10, "L")
 size("R-201B", "Seed fermenter", "1/10 of R-202 working", R202_WORK_M3 / 10, "m3")
 size("R-202 A/B", "Production fermenter", "24 h of broth, x1.2 headspace", broth_m3h * 24 * 1.2, "m3 each")
 size("K-201", "Sterile air blower", f"{AIR_VVM} vvm on R-202 working volume", AIR_VVM * R202_WORK_M3 * 60, "m3/h")
@@ -460,8 +464,8 @@ if __name__ == "__main__":
     print(f"Overall recovery to product: Co {co_x*CRYST_REC/solids['Co']:.1%} · Ni {ni_x*CRYST_REC/solids['Ni']:.1%} · Li {li_ppt/solids['Li']:.1%}")
     print(f"Water: condensate {cond_total:,.0f} kg/h returned · brine bleed {streams['S-516']['total']:,.0f} kg/h (Na {brine['Na']:.0f}) · evaporator duty {evap_h2o:,.0f} kg/h")
     print(f"\nAcid budget in R-301: cations {cation_keq:.1f} keq/h vs anions {anion_keq:.1f} keq/h (gluconate {GA_MM:.0f} mM + sulfate) -> ratio {charge_ratio:.2f}")
-    print(f"  gluconate for strict charge balance: {ga_mm_for_balance:,.0f} mM; INL pulp-scaled basis would be {GA_MM_INL:,.0f} mM ({ga_mm_for_balance/GA_MM_INL:.1f}x short). Mode: {'Option A (balanced)' if GA_BALANCE else 'INL-shape'}.")
-    if charge_ratio < 0.9: print("  WARNING: leach liquor is not charge-balanced as modelled — see Charge Balance Finding.md")
+    print(f"  gluconate for strict charge balance: {ga_mm_for_balance:,.0f} mM; pulp-scaled reference basis would be {GA_MM_INL:,.0f} mM ({ga_mm_for_balance/GA_MM_INL:.1f}x short). Mode: {'charge-balanced' if GA_BALANCE else 'reference-shape'}.")
+    if charge_ratio < 0.9: print("  WARNING: leach liquor is not charge-balanced as modelled — see B-design-basis/design-basis.md")
     print("\nEquipment")
     for t, e in equipment.items():
         print(f"  {t:10s} {e['service']:28s} {e['value']:9,.1f} {e['unit']:9s} ← {e['basis']}")

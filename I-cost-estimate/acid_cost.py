@@ -5,7 +5,7 @@ sulphuric acid is diprotic and light and is made from a waste sulphur stream.
 Per equivalent of acidity delivered to the leach, they are not close.
 
 Prices are estimates (see opex.py). Stoichiometry is exact.
-Run: python3 src/acid_cost.py
+Run: python3 I-cost-estimate/acid_cost.py
 """
 EQ_W = {"sulphuric": 98.08 / 2,    # diprotic
         "gluconic":  196.16 / 1}   # monoprotic

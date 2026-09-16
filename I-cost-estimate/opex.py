@@ -1,15 +1,15 @@
-"""Annual operating cost, and the margin against the cited revenue floor.
+"""Annual operating cost, and the margin against the revenue floor.
 
 !! REAGENT AND UTILITY PRICES BELOW ARE ESTIMATES, NOT CITED VALUES. !!
 They are ordinary industrial ranges, exposed in PRICES so they can be replaced.
 Consumption quantities ARE from the closed mass balance and are not estimates.
-Revenue comes from revenue_floor.py, which uses cited USGS benchmarks.
+Revenue comes from revenue_floor.py, which uses published USGS benchmarks.
 
-Run: python3 src/opex.py
+Run: python3 I-cost-estimate/opex.py
 """
 import io, contextlib, sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "G-mass-balance"))
 
 buf = io.StringIO()
 with contextlib.redirect_stdout(buf):

@@ -1,15 +1,16 @@
 """Sensitivity: pulp density (water side) and acid multiple (acid side) on the black-mass bioleach balance.
 
 Runs mass_balance.py as a subprocess with PULP / GA_SCALE overrides and plots small multiples.
-Output: sensitivity_pulp.png + a table on stdout.   Run: python3 sensitivity_pulp.py
+Output: sensitivity_pulp.png + a table on stdout.   Run: python3 G-mass-balance/sensitivity_pulp.py
 """
 import json, os, subprocess
+from pathlib import Path
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 def run(**env):
     e = {**os.environ, "GA_BALANCE": "0", **{k: str(v) for k, v in env.items()}}   # INL-shape basis for the sweeps
-    return json.loads(subprocess.check_output(["python3", "mass_balance.py", "--json"], env=e, text=True))
+    return json.loads(subprocess.check_output(["python3", str(Path(__file__).resolve().parent / "mass_balance.py"), "--json"], env=e, text=True))
 
 pulps = [0.025, 0.04, 0.05, 0.06, 0.08, 0.10]
 scales = [1, 2, 3, 4, 5, 6]
@@ -47,5 +48,5 @@ panel(ax[1,3], xs, [r["brine_na_kgh"] for r in B], "Na in brine bleed", "kg/h", 
 fig.suptitle("Black-mass bioleach — what pulp density moves (top) vs what the acid budget moves (bottom)", fontsize=10.5, color=INK, x=0.01, ha="left")
 fig.text(0.01, 0.005, "Top row: gluconate scaled with pulp at INL's ratio (75 mM at 2.5 %) — fermenters, glucose, NaOH and the charge ratio are flat because acid demand is set by the solids. "
          "Bottom row: extra acid at 10 % pulp — charge balance needs ~6× (1.8 M), and every kg of acid returns as NaOH and sodium.", fontsize=7.5, color=MUTED, wrap=True)
-fig.tight_layout(rect=(0, 0.06, 1, 0.95)); fig.savefig("sensitivity_pulp.png", dpi=160, facecolor=fig.get_facecolor())
+fig.tight_layout(rect=(0, 0.06, 1, 0.95)); fig.savefig(Path(__file__).resolve().parent / "sensitivity_pulp.png", dpi=160, facecolor=fig.get_facecolor())
 print("\nwrote sensitivity_pulp.png")

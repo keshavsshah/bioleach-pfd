@@ -67,7 +67,7 @@ def liquor_gL():
 def make_pp(fe_gluc_logk=None):
     k = {n: v for n, (v, _) in LOGK.items()}
     if fe_gluc_logk is not None: k["FeGluc+2"] = fe_gluc_logk
-    pp = PhreeqPython(database="minteq.v4.dat", database_directory=Path(__file__).parent.parent / "data")
+    pp = PhreeqPython(database="minteq.v4.dat", database_directory=Path(__file__).parent)
     pp.ip.run_string(GLUC_DB.format(**k))
     return pp
 

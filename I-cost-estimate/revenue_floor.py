@@ -1,5 +1,6 @@
-"""Revenue floor on CITED prices only. USGS MCS 2026 for Co/Ni contained metal;
-a peer-reviewed LFP-recycling TEA for Li3PO4. No paywalled salt assessments used."""
+"""Revenue floor on published prices. USGS Mineral Commodity Summaries 2026 for Co/Ni
+contained metal; a peer-reviewed recycling study for Li3PO4. Subscription-only salt
+assessments are deliberately not used, so this is a floor rather than an expectation."""
 LB_T = 2204.62
 MW = dict(CoSO4_7H2O=281.09, Co=58.93, NiSO4_6H2O=262.84, Ni=58.69, Li3PO4=115.79)
 PROD = dict(CoSO4_7H2O=3065.0, NiSO4_6H2O=6324.0, Li3PO4=1831.0)   # t/yr, closed balance

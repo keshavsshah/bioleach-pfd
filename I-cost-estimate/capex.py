@@ -9,7 +9,7 @@ They are order-of-magnitude costs for the class of equipment at the stated size.
 Every anchor is exposed in ANCHORS so a reader can substitute vendor quotes.
 The METHOD is defensible; the ABSOLUTE NUMBER is indicative only.
 
-Run: python3 src/capex.py
+Run: python3 I-cost-estimate/capex.py
 """
 import csv
 from pathlib import Path
@@ -80,7 +80,7 @@ def klass(tag):
     return None, 0
 
 rows, pec, unpriced = [], 0.0, []
-csv_path = Path(__file__).resolve().parent.parent / "data" / "streams" / "equipment.csv"
+csv_path = Path(__file__).resolve().parents[1] / "C-equipment-list" / "equipment.csv"
 for r in csv.DictReader(open(csv_path)):
     k, n_units = klass(r["tag"])
     size = float(r["size"])

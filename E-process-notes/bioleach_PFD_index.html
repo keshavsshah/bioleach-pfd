@@ -78,8 +78,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
   <header>
     <div class="eyebrow">Black Mass Bioleaching · companion to the PFD</div>
     <h1>Bioleach PFD Index</h1>
-    <p class="sub">Everything the drawing deliberately leaves off: sizing basis per tag, full stream compositions, and numbered notes. Circled numbers on the PFD are footnotes — they resolve here, numbered continuously across blocks. Drawing: <a href="https://claude.ai/code/artifact/89e8ade5-971e-4cfc-8059-5c15b128ee30">Black Mass Bioleach PFD</a>.</p>
-  </header>
+    <p class="sub">Everything the drawing deliberately leaves off: sizing basis per tag, full stream compositions, and numbered notes. Circled numbers on the PFD are footnotes — they resolve here, numbered continuously across blocks. Drawing: <a href="https://claude.ai/code/artifact/89e8ade5-971e-4cfc-8059-5c15b128ee30">Black Mass Bioleach PFD</a>.</p> </header>
 
   <nav>
     <a href="#basis">Basis</a>
@@ -90,22 +89,19 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
     <a href="#b5">Block 5 · Impurity removal</a>
     <a href="#b6">Block 6 · Products + water return</a>
     <a href="#b7">Block 7 · Effluent + by-product</a>
-    <a href="#refs">References</a>
-  </nav>
+    <a href="#refs">References</a> </nav>
 
   <section class="block" id="basis">
     <h2>Design basis</h2>
     <div class="basis">
       <div><b>Throughput</b>10,000 t/yr black mass · 8,000 h/yr · 1,250 kg/h</div>
       <div><b>Feed grade (wt %)</b>Ni 18 · Co 8 · Mn 5 · Li 3.5 · Cu 2 · Al 3 · other 60.5</div>
-      <div class="w"><b>Lixiviant</b>Gluconic acid (<i>G. oxydans</i> broth) + FeSO₄ reductant. <b>Option A (Keshav, 2026-09-13): gluconate supplies the whole anion budget.</b> ~900 mM in the leach liquor (&asymp; 5.0 t/h gluconic acid: the metals dissolved plus a 15 % free-acid margin so the leach has a finite pH, ~4.8; fixed by feed chemistry, not by pulp), delivered as a <b>150 g/L</b> fed-batch broth &mdash; the literature high for <i>G. oxydans</i> <span class="cite">[<a href="#r9">9</a>]</span>; INL lab broth was 80 g/L). No mineral acid in the leach; see the acid-budget note below.</div>
+      <div class="w"><b>Lixiviant</b>Gluconic acid (<i>G. oxydans</i> broth) + FeSO₄ reductant. <b>Charge-balanced: gluconate supplies the whole anion budget.</b> ~900 mM in the leach liquor (&asymp; 5.0 t/h gluconic acid: the metals dissolved plus a 15 % free-acid margin so the leach has a finite pH, ~4.8; fixed by feed chemistry, not by pulp), delivered as a <b>150 g/L</b> fed-batch broth &mdash; the literature high for <i>G. oxydans</i> <span class="cite">[<a href="#r12">12</a>]</span>; INL lab broth was 80 g/L). No mineral acid in the leach; see the acid-budget note below.</div>
       <div><b>Leach conditions</b>55 °C · 30 h · INL 2022 (INL/JOU-22-70203)</div>
-      <div class="w"><b>Pulp density</b>7 % design basis (was 10 %) — the highest pulp at which a 150 g/L broth can carry the required gluconate without negative make-up water. INL demonstrated 2.5 %. Every vessel scales ~3× if the target is not met.</div>
-      <div><b>Leach recovery</b>Co 86 · Ni 84 · Li 100 · Mn 100 %. Downstream losses applied unit by unit.</div>
-    </div>
-    <p class="why"><b>Acid budget (2026-09-12, resolved 2026-09-13).</b> Dissolved metals need ≈ 25 keq/h of counter-anions; the INL pulp-scaled basis (300 mM gluconate at 10 %) supplied ≈ 6 keq/h, a 4× deficit that PHREEQC <span class="cite">[<a href="#r16">16</a>]</span> confirmed independently (cation excess 1.7 eq/L). <b>Option A</b> closes it with gluconate alone: 896 mM at 4.2 % pulp (15 % free-acid margin), charge ratio 1.13. Downstream base demand is now computed as what it takes to hold each unit's pH set-point in the ~1 M gluconate buffer (Fe/Al 5.5, Mn SX 4.2, Co SX 5.5, Ni SX 6.5), not one NaOH per gluconate — the leach already deprotonated the gluconate that balances the metals. Consequences carried through the flowsheet: R-202 575 m³ per vessel, glucose 4.8 t/h, NaOH 0.84 t/h, and a barren liquor that is ~240 g/L sodium gluconate — which is why lithium is taken as Li₃PO₄ before, not after, the evaporator (notes 28–29). Options A/B/C and the reasoning are in <code>Process/Charge Balance Finding.md</code>.</p>
-    <p class="why">Mass balance and sizing: <code>Process/mass_balance.py</code>. Speciation and precipitation thermodynamics: <code>Process/thermo_speciation.py</code> (PHREEQC via phreeqpython, USGS minteq.v4 + gluconate constants added; output in <code>thermo_results.txt</code>). The <b>Sizing</b> and <b>Streams</b> tables in every block are its output (<code>python3 mass_balance.py --html N</code>); the equipment tables are hand-written for material and design notes. Stream notes that were in the tables now live in the numbered notes.</p>
-  </section>
+      <div class="w"><b>Pulp density</b>4.2 % — the highest pulp at which a 150 g/L broth can carry the required gluconate without negative make-up water. The reference work demonstrated 2.5 %.</div>
+      <div><b>Leach recovery</b>Co 86 · Ni 84 · Li 100 · Mn 100 %. Downstream losses applied unit by unit.</div> </div>
+    <p class="why"><b>Acid budget.</b> Dissolved metals need ≈ 25 keq/h of counter-anions; a pulp-scaled reference basis (300 mM gluconate at 10 %) supplied ≈ 6 keq/h, a 4× deficit that PHREEQC <span class="cite">[<a href="#r19">19</a>]</span> confirmed independently (cation excess 1.7 eq/L). The charge-balanced basis closes it with gluconate alone: 896 mM at 4.2 % pulp (15 % free-acid margin), charge ratio 1.13. Downstream base demand is computed as what it takes to hold each unit's pH set-point in the ~1 M gluconate buffer (Fe/Al 5.5, Mn SX 4.2, Co SX 5.5, Ni SX 6.5), not one NaOH per gluconate — the leach already deprotonated the gluconate that balances the metals. Consequences carried through the flowsheet: R-202 575 m³ per vessel, glucose 4.8 t/h, NaOH 0.84 t/h, and a barren liquor that is ~240 g/L sodium gluconate — which is why lithium is taken as Li₃PO₄ before, not after, the evaporator (notes 28–29). Options A/B/C and the reasoning are in <code>Process/Charge Balance Finding.md</code>.</p>
+    <p class="why">Mass balance and sizing: <code>G-mass-balance/mass_balance.py</code>. Speciation and precipitation thermodynamics: <code>F-thermodynamics/thermo_speciation.py</code> (PHREEQC via phreeqpython, USGS minteq.v4 + gluconate constants added; output in <code>F-thermodynamics/thermo_results.txt</code>). The <b>Sizing</b> and <b>Streams</b> tables in every block are its output (<code>python3 mass_balance.py --html N</code>); the equipment tables are hand-written for material and design notes. Stream notes that were in the tables now live in the numbered notes.</p> </section>
 
   <section class="block" id="b1">
     <h2>Block 1 <span>Area 100 · Black mass receiving</span></h2>
@@ -114,31 +110,25 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
       <thead><tr><th>Tag</th><th>Service</th><th>Type</th><th>Sizing basis</th><th>Material / notes</th></tr></thead>
       <tbody>
         <tr><td class="t">V-101</td><td>Black mass receiving silo</td><td>Cone-bottom vertical silo, bulk-bag unloader</td><td class="num">60 t (48 h hold-up)</td><td>CS · N₂ blanket — fine graphite + residual LiPF₆ (dust ignition, HF off-gas)</td></tr>
-        <tr><td class="t">F-101</td><td>Silo dust collector</td><td>Pulse-jet baghouse</td><td class="num">vent + displacement air</td><td>Fines return to V-101; clean air to atmosphere</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">F-101</td><td>Silo dust collector</td><td>Pulse-jet baghouse</td><td class="num">vent + displacement air</td><td>Fines return to V-101; clean air to atmosphere</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
       <tbody>
 <tr><td class="t">V-101</td><td>Black mass receiving silo</td><td class="num">60.0 t</td><td>48 h hold-up</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams — generated by mass_balance.py (kg/h)</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total kg/h</th><th>Ni</th><th>Co</th><th>Mn</th><th>Li</th><th>Cu</th><th>Al</th><th>Other</th><th>T °C</th></tr></thead>
       <tbody>
 <tr><td class="t">S-101</td><td>OSBL → V-101</td><td>dry solid</td><td class="num">1,250</td><td class="num">225</td><td class="num">100</td><td class="num">62.5</td><td class="num">43.8</td><td class="num">25.0</td><td class="num">37.5</td><td class="num">756</td><td class="num">25</td></tr>
 <tr><td class="t">S-102</td><td>V-101 vent → F-101</td><td>gas+dust</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">25</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes — circled numbers on the drawing</h3>
     <ol class="fn">
       <li id="n1"><b>Battery pretreatment is off-plot (OSBL).</b> Upstream of S-101: discharge → shred under inert gas → binder / electrolyte removal (thermal or solvent) → sieve with Cu/Al foil rejection. Only black mass (&lt;200 µm) crosses the battery limit. Out of scope, but the wash and foil-reject efficiency set the F, Cu and Al load on the effluent trains (Areas 400/500) — the one upstream variable this flowsheet is sensitive to.</li>
       <li id="n2"><b>N₂ blanket on V-101.</b> Black mass is fine graphite carrying residual LiPF₆ — an ignition and HF-off-gas concern. Shown as a utility stub rather than omitted.</li>
-      <li id="n3"><b>48 h hold-up (60 t).</b> Decouples truck deliveries from a continuous leach. Sized at the 1,250 kg/h feed rate.</li>
-    </ol>
-  </section>
+      <li id="n3"><b>48 h hold-up (60 t).</b> Decouples truck deliveries from a continuous leach. Sized at the 1,250 kg/h feed rate.</li> </ol> </section>
 
   <section class="block" id="b2">
     <h2>Block 2 <span>Area 100 · Metering and slurry make-up</span></h2>
@@ -148,17 +138,14 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
       <tbody>
         <tr><td class="t">W-101</td><td>Black mass metering</td><td>Loss-in-weight screw feeder</td><td class="num">1,250 kg/h · WIC</td><td>Sets the plant feed rate; only place the 10,000 t/yr basis is enforced</td></tr>
         <tr><td class="t">T-101</td><td>Slurry make-up tank</td><td>Vertical, dished bottom, pitched-blade turbine (axial, solids suspension)</td><td class="num">22 m³ · 2 h at 10.6 t/h</td><td>Rubber-lined CS · surge for a bag change / feeder trip · level to be trended (LIC not drawn)</td></tr>
-        <tr><td class="t">P-101 A/B</td><td>Feed slurry transfer</td><td>Progressive-cavity, installed spare</td><td class="num">10.6 t/h · ~9.8 m³/h</td><td>Abrasive graphite slurry; PC pump avoids the erosion a centrifugal impeller sees at 10 % solids</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">P-101 A/B</td><td>Feed slurry transfer</td><td>Progressive-cavity, installed spare</td><td class="num">10.6 t/h · ~9.8 m³/h</td><td>Abrasive graphite slurry; PC pump avoids the erosion a centrifugal impeller sees at 10 % solids</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
       <tbody>
 <tr><td class="t">T-101</td><td>Slurry make-up tank</td><td class="num">2.6 m3</td><td>2 h at S-105</td></tr>
 <tr><td class="t">P-101 A/B</td><td>Feed slurry pump</td><td class="num">1.3 m3/h</td><td>S-105 volumetric</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams — generated by mass_balance.py (kg/h)</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total kg/h</th><th>Ni</th><th>Co</th><th>Mn</th><th>Li</th><th>Cu</th><th>Al</th><th>Other</th><th>T °C</th></tr></thead>
@@ -166,20 +153,16 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">S-103</td><td>W-101 → T-101</td><td>dry solid</td><td class="num">1,250</td><td class="num">225</td><td class="num">100</td><td class="num">62.5</td><td class="num">43.8</td><td class="num">25.0</td><td class="num">37.5</td><td class="num">756</td><td class="num">25</td></tr>
 <tr><td class="t">S-104</td><td>Sh3/4 recycle + fresh → T-101</td><td>liquid</td><td class="num">141</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">25</td></tr>
 <tr><td class="t">S-105</td><td>P-101 → R-301</td><td>slurry</td><td class="num">1,391</td><td class="num">225</td><td class="num">100</td><td class="num">62.5</td><td class="num">43.8</td><td class="num">25.0</td><td class="num">37.5</td><td class="num">756</td><td class="num">25</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes — circled numbers on the drawing</h3>
     <ol class="fn" start="4">
       <li id="n4"><b>W-101 loss-in-weight feeder.</b> The one instrument that enforces the 1,250 kg/h basis. Everything downstream is sized from what this feeder delivers, so it carries the WIC (weight indicating controller) rather than a simple rotary valve.</li>
       <li id="n5"><b>S-104 make-up water is a blend.</b> Recycled residue-wash filtrate (Area 300) and treated raffinate (Area 400), topped up with fresh water. Recycle fraction is a design variable; a bleed on the raffinate loop (Area 500) controls sulfate and Na/Ca build-up — without it the loop is not closed, only slowly dying.</li>
       <li id="n6"><b>Pulp-density control.</b> A density transmitter on the P-101 discharge (DIC) trims the S-104 valve. This is the loop that guards the 7 % basis: solids are fixed by W-101, so water is the only free variable.</li>
-      <li id="n7"><b>Progressive-cavity pumps.</b> Graphite-laden slurry is abrasive; a PC pump moves it at constant flow with low shear and tolerates the solids a centrifugal would erode on. A/B = installed spare.</li>
-    </ol>
+      <li id="n7"><b>Progressive-cavity pumps.</b> Graphite-laden slurry is abrasive; a PC pump moves it at constant flow with low shear and tolerates the solids a centrifugal would erode on. A/B = installed spare.</li> </ol>
     <h3>Design choice</h3>
     <ul class="why">
-      <li><b>Slurry in water, dose biolixiviant at the reactor.</b> Keeps T-101 out of the Fe(II)/gluconate chemistry and lets pulp density and lixiviant dose be controlled independently. The alternative — slurrying straight into gluconate broth — saves nothing but the water line and couples two controls that should stay separate.</li>
-    </ul>
-  </section>
+      <li><b>Slurry in water, dose biolixiviant at the reactor.</b> Keeps T-101 out of the Fe(II)/gluconate chemistry and lets pulp density and lixiviant dose be controlled independently. The alternative — slurrying straight into gluconate broth — saves nothing but the water line and couples two controls that should stay separate.</li> </ul> </section>
 
   <section class="block" id="b3">
     <h2>Block 3 <span>Area 200 · Biolixiviant fermentation (Sheet 2)</span></h2>
@@ -191,28 +174,25 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
         <tr><td class="t">T-201</td><td>Medium make-up</td><td>Agitated, jacketed (steam-sterilizable)</td><td class="num">1 batch ≈ 845 m³ · 24 h</td><td>Pikovskaya salts + glucose + returned raffinate + fresh water. N/P here is the origin of the nutrient duty on Sheet 5</td></tr>
         <tr><td class="t">R-201A</td><td>Pre-seed fermenter</td><td>Stirred, sparged, jacketed</td><td class="num">50 L working</td><td>Inoculated from lab shake flask (off-sheet)</td></tr>
         <tr><td class="t">R-201B</td><td>Seed fermenter</td><td>Stirred, sparged, jacketed</td><td class="num">5 m³ working</td><td>10 % inoculum from R-201A</td></tr>
-        <tr><td class="t">R-202 A/B</td><td>Production fermenter</td><td>Stirred (2× Rushton), ring sparger, jacketed</td><td class="num">~960 m³ each · ~800 m³ working · 24 h · staggered (was 575 m³ on the retired 250 g/L basis)</td><td>SS316L · 30 °C, pH 5.5→3 uncontrolled · SIP/CIP</td></tr>
+        <tr><td class="t">R-202 A/B</td><td>Production fermenter</td><td>Stirred (2× Rushton), ring sparger, jacketed</td><td class="num">~960 m³ each · ~800 m³ working · 24 h · staggered</td><td>SS316L · 30 °C, pH 5.5→3 uncontrolled · SIP/CIP</td></tr>
         <tr><td class="t">K-201 / F-202</td><td>Sterile air</td><td>Rotary-lobe blower + 0.2 µm depth filter</td><td class="num">0.5 vvm on the R-202 working volume (sizing table shows the scaled figure)</td><td>One header serves all four vessels</td></tr>
         <tr><td class="t">F-201</td><td>Cell removal</td><td>0.22 µm crossflow (or disc-stack centrifuge)</td><td class="num">8.3 m³/h broth</td><td>INL used 0.22 µm filtration; centrifuge is the industrial substitute</td></tr>
         <tr><td class="t">T-202</td><td>Biolixiviant hold</td><td>Vertical, closed</td><td class="num">12 h at 8.3 m³/h</td><td>Turns two batch harvests into a continuous 2 m³/h dose</td></tr>
-        <tr><td class="t">P-201</td><td>Biolixiviant dose</td><td>Centrifugal (clean liquid)</td><td class="num">8.3 m³/h · FIC to R-301</td><td>Dose rate is the gluconate control on the leach</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">P-201</td><td>Biolixiviant dose</td><td>Centrifugal (clean liquid)</td><td class="num">8.3 m³/h · FIC to R-301</td><td>Dose rate is the gluconate control on the leach</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
       <tbody>
 <tr><td class="t">V-201</td><td>Glucose syrup storage</td><td class="num">861 m3</td><td>7 d of S-201 as 70 % syrup</td></tr>
 <tr><td class="t">T-201</td><td>Medium make-up</td><td class="num">845 m3/batch</td><td>1 batch of S-202</td></tr>
-<tr><td class="t">R-201A</td><td>Pre-seed fermenter</td><td class="num">80.2 L</td><td>1/100 of R-201B (1 % inoculum, Keshav 2026-09-12)</td></tr>
+<tr><td class="t">R-201A</td><td>Pre-seed fermenter</td><td class="num">80.2 L</td><td>1/100 of R-201B (1 % inoculum)</td></tr>
 <tr><td class="t">R-201B</td><td>Seed fermenter</td><td class="num">80.2 m3</td><td>1/10 of R-202 working</td></tr>
 <tr><td class="t">R-202 A/B</td><td>Production fermenter</td><td class="num">962 m3 each</td><td>24 h of broth, x1.2 headspace</td></tr>
 <tr><td class="t">K-201</td><td>Sterile air blower</td><td class="num">24,053 m3/h</td><td>0.5 vvm on R-202 working volume</td></tr>
 <tr><td class="t">F-201</td><td>Cell removal</td><td class="num">33.4 m3/h</td><td>S-209 volumetric</td></tr>
 <tr><td class="t">T-202</td><td>Biolixiviant hold</td><td class="num">401 m3</td><td>12 h at S-211</td></tr>
 <tr><td class="t">P-201</td><td>Biolixiviant dose pump</td><td class="num">33.4 m3/h</td><td>S-212 volumetric</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams — generated by mass_balance.py (kg/h)</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total kg/h</th><th>H₂O</th><th>Gluconic acid</th><th>Glucose</th><th>Organics / cells</th><th>Air</th><th>T °C</th></tr></thead>
@@ -229,17 +209,14 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">S-210</td><td>F-201 → Sh 5 effluent</td><td>wet cake</td><td class="num">40.0</td><td class="num">30.0</td><td class="num">0</td><td class="num">0</td><td class="num">10.0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">30</td></tr>
 <tr><td class="t">S-211</td><td>F-201 → T-202</td><td>liquid</td><td class="num">33,397</td><td class="num">28,371</td><td class="num">5,011</td><td class="num">5.0</td><td class="num">10.0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">30</td></tr>
 <tr><td class="t">S-212</td><td>P-201 → R-301</td><td>liquid</td><td class="num">33,397</td><td class="num">28,371</td><td class="num">5,011</td><td class="num">5.0</td><td class="num">10.0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">30</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes — circled numbers on the drawing</h3>
     <ol class="fn" start="8">
       <li id="n8"><b>Seed train.</b> Lab shake flask (off-sheet) → R-201A 50 L → R-201B 5 m³ → R-202 50 m³, 10 % inoculum at each step. Same shape as a pharma cell-culture train, at a fraction of the cost: the product is a dilute acid, not an injectable, so the plant is <i>aseptic</i> rather than sterile-critical, and gluconic acid at pH ~3 self-selects against most contaminants. Brewery-grade stainless with SIP/CIP, not GMP.</li>
-      <li id="n9"><b>Staggered batch, not continuous.</b> (1) Product inhibition — <i>G. oxydans</i> stalls as gluconate accumulates and pH falls; a continuous fermenter runs at the outlet condition and can only hold low titer, which would multiply the broth volume dosed at R-301 and break the pulp-density basis. (2) Containment — a contaminated batch costs 24 h of one vessel; a contaminated continuous fermenter starves the leach. (3) Precedent — industrial gluconic acid has been batch/fed-batch since the 1950s and INL's demonstration was batch; no continuous reference plant exists. (4) The leach still sees continuous feed: A/B offset 12 h plus T-202's 12 h hold. (5) At the original 75 mM basis this was 60 m³, brewery scale; Option A (charge-balanced gluconate, 150 g/L broth) makes it ~960 m³ per vessel — large industrial fermenter scale (citric/gluconic plants run 100–300 m³ for real citric/gluconic plants), where the batch-vs-continuous case should be revisited.</li>
+      <li id="n9"><b>Staggered batch, not continuous.</b> (1) Product inhibition — <i>G. oxydans</i> stalls as gluconate accumulates and pH falls; a continuous fermenter runs at the outlet condition and can only hold low titer, which would multiply the broth volume dosed at R-301 and break the pulp-density basis. (2) Containment — a contaminated batch costs 24 h of one vessel; a contaminated continuous fermenter starves the leach. (3) Precedent — industrial gluconic acid has been batch/fed-batch since the 1950s and INL's demonstration was batch; no continuous reference plant exists. (4) The leach still sees continuous feed: A/B offset 12 h plus T-202's 12 h hold. (5) The charge-balanced gluconate requirement at a 150 g/L broth makes the production fermenter ~960 m³ per vessel — large industrial fermenter scale (citric/gluconic plants run 100–300 m³ for real citric/gluconic plants), where the batch-vs-continuous case should be revisited.</li>
       <li id="n10"><b>One sterile-air train.</b> K-201 + F-202 0.2 µm feed all four vessels from one header. O₂ demand is ½ mol per glucose — ~410 kg/h, and the 0.5 vvm rate on the ~800 m³ working volume (~24,000 m³/h air) supplies several times the stoichiometric O₂; mass transfer, not stoichiometry, still sets the rate.</li>
       <li id="n11"><b>Condensate return, not raffinate (revised at Sheet 5).</b> The SX raffinate leaves Area 500 as a sodium-gluconate brine (~640 kg/h Na, ~5.0 t/h gluconate) that the fermenter cannot take, so the water that comes back is the <i>evaporator and crystalliser condensate</i> (S-517, ~22 t/h, clean). It supplies the medium water here and the surplus (S-204) goes to T-101 make-up on Sheet 1. Nutrients and gluconate therefore do <i>not</i> recycle — they leave in the brine bleed (S-516) to Sheet 6. Sheet 6 now closes the balance: condensate ~10.4 t/h covers the S-104 make-up and most of the medium, leaving ~6.9 t/h net fresh water. Condensing the D-601 exhaust (~7.8 t/h) would close it entirely (note ㉜).</li>
-      <li id="n12"><b>Broth water counts toward pulp density.</b> On the Option A basis S-212 brings ~28 t/h of water into R-301 (33 m³/h of 150 g/L broth), so S-104 make-up water on Sheet 1 is only ~1,700 kg/h against a 16.6 t/h liquor; T-101 is now a small make-up tank rather than the ~43 % solids paste the 7 % basis required and the 4.2 % basis is reached in the reactor. Most of the leach water is broth — the fermenter is the water plant.</li>
-    </ol>
-  </section>
+      <li id="n12"><b>Broth water counts toward pulp density.</b> S-212 brings ~28 t/h of water into R-301 (33 m³/h of 150 g/L broth), so S-104 make-up water on Sheet 1 is only ~1,700 kg/h against a 16.6 t/h liquor; T-101 is now a small make-up tank rather than the ~43 % solids paste the 7 % basis required and the 4.2 % basis is reached in the reactor. Most of the leach water is broth — the fermenter is the water plant.</li> </ol> </section>
 
   <section class="block" id="b4">
     <h2>Block 4 <span>Area 300 · Batch leach and solid/liquid separation (Sheet 3 of 6)</span></h2>
@@ -254,9 +231,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
         <tr><td class="t">T-303 / P-303</td><td>Leached-slurry surge + filter feed</td><td>Agitated tank, PC pump</td><td>Turns a 7.5 h batch drain into steady 12 m³/h to the belt filter — the price of batch tanks</td></tr>
         <tr><td class="t">F-301</td><td>Residue filter</td><td>Horizontal vacuum belt, 2-stage countercurrent wash</td><td>Strong filtrate → T-301; wash filtrate → T-302. Graphite fines may blind the cloth: filterability test is the first lab question this sheet raises</td></tr>
         <tr><td class="t">T-301 / P-301</td><td>PLS tank + pump</td><td>Closed tank, centrifugal</td><td>Pregnant leach solution to Fe removal (Sheet 4)</td></tr>
-        <tr><td class="t">T-302 / P-302</td><td>Wash-filtrate tank + pump</td><td>Closed tank, centrifugal</td><td>Returns to T-101 as part of S-104 — carries ~2 % of the leached Co back into the leach, which is a recycle, not a loss</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">T-302 / P-302</td><td>Wash-filtrate tank + pump</td><td>Closed tank, centrifugal</td><td>Returns to T-101 as part of S-104 — carries ~2 % of the leached Co back into the leach, which is a recycle, not a loss</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
@@ -269,8 +244,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">T-301</td><td>PLS tank</td><td class="num">136 m3</td><td>4 h at S-309</td></tr>
 <tr><td class="t">T-302</td><td>Wash-filtrate tank</td><td class="num">6.3 m3</td><td>4 h at S-311</td></tr>
 <tr><td class="t">SC-301</td><td>Vent scrubber</td><td class="num">116 m3/h gas</td><td>S-303 + displacement air</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams — generated by mass_balance.py (kg/h)</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total</th><th>Ni</th><th>Co</th><th>Mn</th><th>Li</th><th>Cu</th><th>Al</th><th>Other</th><th>H₂O</th><th>Fe</th><th>SO₄</th><th>Gluconate</th><th>T °C</th></tr></thead>
@@ -287,8 +261,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">S-310</td><td>P-301 → Sh 4 (Fe removal)</td><td>liquid</td><td class="num">33,978</td><td class="num">187</td><td class="num">85.2</td><td class="num">61.9</td><td class="num">43.3</td><td class="num">19.8</td><td class="num">22.3</td><td class="num">0</td><td class="num">28,391</td><td class="num">70.1</td><td class="num">121</td><td class="num">4,962</td><td class="num">45</td></tr>
 <tr><td class="t">S-311</td><td>F-301 wash → T-302</td><td>liquid</td><td class="num">1,569</td><td class="num">1.8</td><td class="num">0.8</td><td class="num">0.6</td><td class="num">0.4</td><td class="num">0.2</td><td class="num">0.2</td><td class="num">0</td><td class="num">1,517</td><td class="num">0.7</td><td class="num">1.1</td><td class="num">46.7</td><td class="num">40</td></tr>
 <tr><td class="t">S-312</td><td>P-302 → Sh 1 T-101 (S-104)</td><td>liquid</td><td class="num">1,569</td><td class="num">1.8</td><td class="num">0.8</td><td class="num">0.6</td><td class="num">0.4</td><td class="num">0.2</td><td class="num">0.2</td><td class="num">0</td><td class="num">1,517</td><td class="num">0.7</td><td class="num">1.1</td><td class="num">46.7</td><td class="num">40</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes — circled numbers on the drawing</h3>
     <ol class="fn" start="13">
       <li id="n13"><b>Batch leach, staggered.</b> INL's 30 h / 55 °C / 86 % Co figure was measured in a batch vessel; a batch tank reproduces that condition exactly, where a CSTR train only approximates it through a residence-time distribution. Four tanks offset by 12.5 h give the continuous filter a steady feed via T-303. Same argument as the fermenters (note ⑨): batch where the kinetics were measured, continuous where the equipment wants it.</li>
@@ -296,10 +269,8 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
       <li id="n15"><b>Off-gas.</b> Carbonate in the black mass (Li₂CO₃, SEI) releases CO₂ on acid contact; residual LiPF₆ can release HF. A small caustic scrubber is drawn rather than an open vent because of the HF, not the CO₂. CO₂ is a placeholder (30 % of Li as carbonate).</li>
       <li id="n16"><b>Residue is the largest single loss.</b> ~830 kg/h dry: graphite and binder plus the unleached 14 % of the Co (14.1 kg/h) and 16 % of the Ni. To Sheet 5 as waste for this flowsheet; graphite recovery and a second-stage residue leach are the two obvious upgrades, both needing data INL does not give.</li>
       <li id="n17"><b>Wash filtrate closes the first water loop.</b> S-312 (~1.6 t/h) is the "Sh 3" arrow on Sheet 1 — about 90 % of the S-104 make-up (make-up is small because the broth is most of the water). It carries the PLS displaced from the cake, so a few kg/h of dissolved Co/Ni cycle back through the leach at steady state. Not a loss, but the balance here is single-pass; steady-state build-up is a later refinement.</li>
-      <li id="n18"><b>Cu and Al leach fractions — literature-anchored, not measured.</b> INL does not report them. Gluconic acid on its own barely dissolves copper (0.3 % Cu, 9.7 % Fe, 51.9 % Al — Lerchbammer et al. 2025 <span class="cite">[<a href="#r8">8</a>]</span>, an H₂O₂ system), but once Fe³⁺ is present metallic Cu in black mass is consumed as a reductant (Porvali et al. 2020 <span class="cite">[<a href="#r19">19</a>]</span>; Partinen et al. 2024), and organic-acid bioleaching reaches 100 % Cu with 65–75 % Al (Horeh et al. 2016 <span class="cite">[<a href="#r4">4</a>]</span>; Bahaloo-Horeh et al. 2017 <span class="cite">[<a href="#r5">5</a>]</span>). Basis: <b>Cu 80 %, Al 60 %</b>; sensitivity Cu 0.3–100 %. Upside not taken: Cu's electrons would offset ~half the FeSO₄ dose, but INL's 4.1 kg/kg ratio was measured on Cu-bearing black mass, so the credit is assumed already inside it. Both fractions drive Sheet 4 (Cu poisons Co/Ni recovery; Al makes gelatinous hydroxide). Thermodynamic ceiling from <code>thermo_speciation.py</code>: see note ⑲.</li>
-      <li id="n19"><b>Thermodynamics of the PLS (PHREEQC, minteq.v4 + gluconate; re-run on Option A, 2026-09-13).</b> Liquor from the balance (Co 4.0, Ni 8.7, Mn 2.9, Li 2.0, Cu 0.9, Al 1.0, Fe 3.3 g/L; gluconate 200 g/L ≈ 1.0 M; 55 °C, Fe as Fe(III)). <b>(0) Charge balance is pH-dependent.</b> Gluconic acid has pKa 3.86, so at the INL leach pH of 2.5 only a few % of the 1 M gluconate is the anion and PHREEQC still reports a 1.0 eq/L cation excess. The balanced liquor therefore cannot sit at pH 2.5: as metals dissolve and consume protons the pH rises to ~4.5–5, where gluconate is deprotonated and the budget closes. <b>Leach pH is now a design variable, not the INL number.</b> <b>(a) Iron and aluminium drop out in the leach itself.</b> With 1 M gluconate goethite is complete from pH 3 (Fe dissolved 0.2 %) and gibbsite takes Al from pH 4 (55 % out at 4.0, 91 % at 4.5, 99 % at 5.5); Co, Ni, Cu, Mn stay 100 % dissolved through pH 8, held by gluconate chelation. So on Option A most of the Fe/Al removal happens in R-301 and reports to the leach residue (S-308), and T-402's duty shrinks to a polish — but the Fe(III) oxidant is largely solid above pH 3 (only 3–45 % Fe(III)-gluconate in solution), which questions the FeSO₄ reductant chemistry at that pH. <b>(b) Cu now stays dissolved</b> to pH 8 (was 5 % on the 300 mM basis): cementation (T-401) remains the right removal step. <b>(c) Fe(III)–gluconate log K</b> still controls whether Fe is held in solution: ≤ 8 → Fe precipitates, 10 → 100 % dissolved at pH 3.5. Still the single most valuable lab measurement. <i>Caveats:</i> I ≈ 1 M is beyond the Davies model; 25 °C gluconate constants; goethite as control phase; equilibrium only. Output: <code>thermo_results.txt</code>.</li>
-    </ol>
-  </section>
+      <li id="n18"><b>Cu and Al leach fractions — literature-anchored, not measured.</b> INL does not report them. Gluconic acid on its own barely dissolves copper (0.3 % Cu, 9.7 % Fe, 51.9 % Al — Lerchbammer et al. 2025 <span class="cite">[<a href="#r11">11</a>]</span>, an H₂O₂ system), but once Fe³⁺ is present metallic Cu in black mass is consumed as a reductant (Porvali et al. 2020 <span class="cite">[<a href="#r22">22</a>]</span>; Partinen et al. 2024), and organic-acid bioleaching reaches 100 % Cu with 65–75 % Al (Horeh et al. 2016 <span class="cite">[<a href="#r8">8</a>]</span>; Bahaloo-Horeh et al. 2017 <span class="cite">[<a href="#r9">9</a>]</span>). Basis: <b>Cu 80 %, Al 60 %</b>; sensitivity Cu 0.3–100 %. Upside not taken: Cu's electrons would offset ~half the FeSO₄ dose, but INL's 4.1 kg/kg ratio was measured on Cu-bearing black mass, so the credit is assumed already inside it. Both fractions drive Sheet 4 (Cu poisons Co/Ni recovery; Al makes gelatinous hydroxide). Thermodynamic ceiling from <code>thermo_speciation.py</code>: see note ⑲.</li>
+      <li id="n19"><b>Thermodynamics of the PLS (PHREEQC, minteq.v4 + gluconate; leach liquor from the balance).</b> Liquor from the balance (Co 4.0, Ni 8.7, Mn 2.9, Li 2.0, Cu 0.9, Al 1.0, Fe 3.3 g/L; gluconate 200 g/L ≈ 1.0 M; 55 °C, Fe as Fe(III)). <b>(0) Charge balance is pH-dependent.</b> Gluconic acid has pKa 3.86, so at the INL leach pH of 2.5 only a few % of the 1 M gluconate is the anion and PHREEQC still reports a 1.0 eq/L cation excess. The balanced liquor therefore cannot sit at pH 2.5: as metals dissolve and consume protons the pH rises to ~4.5–5, where gluconate is deprotonated and the budget closes. <b>Leach pH is now a design variable, not the INL number.</b> <b>(a) Iron and aluminium drop out in the leach itself.</b> With 1 M gluconate goethite is complete from pH 3 (Fe dissolved 0.2 %) and gibbsite takes Al from pH 4 (55 % out at 4.0, 91 % at 4.5, 99 % at 5.5); Co, Ni, Cu, Mn stay 100 % dissolved through pH 8, held by gluconate chelation. Most of the Fe/Al removal happens in R-301 and reports to the leach residue (S-308), and T-402's duty shrinks to a polish — but the Fe(III) oxidant is largely solid above pH 3 (only 3–45 % Fe(III)-gluconate in solution), which questions the FeSO₄ reductant chemistry at that pH. <b>(b) Cu now stays dissolved</b> to pH 8 (was 5 % on the 300 mM basis): cementation (T-401) remains the right removal step. <b>(c) Fe(III)–gluconate log K</b> still controls whether Fe is held in solution: ≤ 8 → Fe precipitates, 10 → 100 % dissolved at pH 3.5. Still the single most valuable lab measurement. <i>Caveats:</i> I ≈ 1 M is beyond the Davies model; 25 °C gluconate constants; goethite as control phase; equilibrium only. Output: <code>thermo_results.txt</code>.</li> </ol> </section>
 
   <section class="block" id="b5">
     <h2>Block 5 <span>Area 400 · Impurity removal: Cu → Fe/Al → Mn (Sheet 4)</span></h2>
@@ -308,16 +279,14 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
       <thead><tr><th>Tag</th><th>Service</th><th>Type</th><th>Material / notes</th></tr></thead>
       <tbody>
         <tr><td class="t">V-401 / W-401</td><td>Iron powder storage + feeder</td><td>Hopper, screw feeder</td><td>1.3× stoichiometric on Cu; ratio-controlled to the PLS Cu assay</td></tr>
-        <tr><td class="t">T-401</td><td>Copper cementation</td><td>Agitated, closed (H₂ vent)</td><td>pH 2.5 as received; Cu²⁺ + Fe⁰ → Cu⁰ + Fe²⁺. Keshav's choice over sulfide/SX — see note ⑳</td></tr>
+        <tr><td class="t">T-401</td><td>Copper cementation</td><td>Agitated, closed (H₂ vent)</td><td>pH 2.5 as received; Cu²⁺ + Fe⁰ → Cu⁰ + Fe²⁺. Chosen over sulfide precipitation or SX — see note ⑳</td></tr>
         <tr><td class="t">F-401</td><td>Cement copper filter</td><td>Small filter press / candle filter</td><td>~30 kg/h wet cake, ~64 % Cu — a salable intermediate</td></tr>
         <tr><td class="t">T-402</td><td>Fe oxidation + Fe/Al precipitation</td><td>Agitated, air-sparged, NaOH dosed, pHC</td><td>Fe²⁺ → Fe³⁺ with air, then NaOH to pH 5.5 → goethite + gibbsite (thermo note ⑲). 50 °C. NaOH not lime — note ㉑</td></tr>
         <tr><td class="t">K-401</td><td>Oxidation air</td><td>Rotary-lobe blower</td><td>2× stoichiometric O₂ on Fe²⁺</td></tr>
         <tr><td class="t">F-402</td><td>Fe/Al cake filter</td><td>Membrane filter press</td><td>Gelatinous Al(OH)₃ blinds cloths — the press, not a belt. Cake to Sheet 6; carries occluded Co/Ni (note ㉒)</td></tr>
         <tr><td class="t">X-401 / 402 / 403</td><td>Mn solvent extraction</td><td>Mixer-settlers: 2 extraction, 1 scrub, 2 strip</td><td>20 % D2EHPA in kerosene, O/A 1, pH 3.0 held with NaOH; scrub with water; strip with H₂SO₄. Also scavenges residual Fe/Al (note ㉓)</td></tr>
         <tr><td class="t">T-404</td><td>MnSO₄ strip liquor</td><td>Closed tank</td><td>~100 g/L Mn. Product as liquor or to a crystalliser (future)</td></tr>
-        <tr><td class="t">T-405 / P-405</td><td>Purified liquor to Sheet 5</td><td>Closed tank, centrifugal</td><td>Co 80 · Ni 180 · Li 43 kg/h; Mn 1.2, Cu 0.2, Fe/Al nil</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">T-405 / P-405</td><td>Purified liquor to Sheet 5</td><td>Closed tank, centrifugal</td><td>Co 80 · Ni 180 · Li 43 kg/h; Mn 1.2, Cu 0.2, Fe/Al nil</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
@@ -330,8 +299,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">X-401/402/403</td><td>D2EHPA mixer-settlers (2E + 1S + 2St)</td><td class="num">11.4 m3 mixer each</td><td>10 min mixer at O/A 1, S-409 + organic</td></tr>
 <tr><td class="t">T-404</td><td>MnSO4 strip liquor tank</td><td class="num">14.6 m3</td><td>24 h at S-413</td></tr>
 <tr><td class="t">T-405</td><td>Purified liquor tank</td><td class="num">137 m3</td><td>4 h at S-414</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams — generated by mass_balance.py (kg/h)</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total</th><th>Ni</th><th>Co</th><th>Mn</th><th>Li</th><th>Cu</th><th>Al</th><th>Other</th><th>H₂O</th><th>Fe</th><th>SO₄</th><th>Gluconate</th><th>Na</th><th>T °C</th></tr></thead>
@@ -350,17 +318,14 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">S-412</td><td>H2SO4 98 % → X-403</td><td>liquid</td><td class="num">108</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">2.2</td><td class="num">0</td><td class="num">106</td><td class="num">0</td><td class="num">0</td><td class="num">25</td></tr>
 <tr><td class="t">S-413</td><td>X-403 strip → T-404 MnSO4 product</td><td>liquid</td><td class="num">608</td><td class="num">0</td><td class="num">1.7</td><td class="num">60.6</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">440</td><td class="num">0</td><td class="num">106</td><td class="num">0</td><td class="num">0</td><td class="num">25</td></tr>
 <tr><td class="t">S-414</td><td>X-401 raffinate → T-405 -> Sh 5</td><td>liquid</td><td class="num">34,133</td><td class="num">183</td><td class="num">81.8</td><td class="num">1.2</td><td class="num">43.3</td><td class="num">0.2</td><td class="num">0</td><td class="num">0</td><td class="num">28,497</td><td class="num">0</td><td class="num">121</td><td class="num">4,962</td><td class="num">229</td><td class="num">40</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes — circled numbers on the drawing</h3>
     <ol class="fn" start="20">
       <li id="n20"><b>Cementation puts iron back in.</b> Every mole of Cu removed adds a mole of Fe²⁺ (~17 kg/h) to a liquor that is about to be de-ironed, and the excess powder (30 %) reports to the cement cake. Cost: an air-oxidation duty in T-402 and ~20 % more goethite. Benefit: no H₂S handling, no SX circuit for 20 kg/h of copper, and the cement is salable. The alternative sulfide route (NaHS at pH 2–3) would avoid the iron but needs a scrubbed vent.</li>
       <li id="n21"><b>NaOH, not lime, for the Fe/Al step.</b> Dose is set by the pH target in the gluconate buffer: after the leach the liquor already sits near pH 4.8, so reaching 5.5 while dropping Fe³⁺ and Al³⁺ as hydroxides takes ~390 kg/h NaOH (not the ~1.2 t/h a one-NaOH-per-gluconate count gives). Mn SX at pH 4.2 needs none; Co and Ni SX take ~190 and ~260 kg/h to hold 5.5 and 6.5 as the extractants release protons. This is a gluconate liquor with only ~6 g/L sulfate (from FeSO₄), so lime would strip all of it as gypsum and leave ~90 kg/h of dissolved Ca — which D2EHPA extracts ahead of Mn and which would contaminate every downstream product. Sodium goes to the raffinate bleed instead. Lime is kept for the effluent sheet, where gypsum is wanted.</li>
       <li id="n22"><b>Co/Ni occlusion in the Fe/Al cake — placeholder 2 % each.</b> Goethite/gibbsite co-precipitation loss is real but unmeasured here; 1.7 kg/h Co is ~$1.5 M/yr. The number to test first in the lab, together with cake filterability.</li>
       <li id="n23"><b>D2EHPA runs at pH 3.0 and doubles as a scavenger.</b> Extraction order Fe³⁺ &gt; Al³⁺ &gt; Ca &gt; Mn &gt; Co &gt; Ni: whatever Fe/Al passes F-402 is taken here and leaves with the strip liquor. Co co-extraction is held to ~2 % by keeping pH ≤ 3; above ~3.5 cobalt follows manganese. Two extraction stages for 98 % Mn; scrub stage returns entrained Co/Ni.</li>
-      <li id="n24"><b>MnSO₄ is a by-product, not a headline.</b> ~60 kg/h Mn as ~100 g/L strip liquor. Sold as liquor to a Mn refiner or crystallised later; not in the revenue basis. Carries ~1.6 kg/h Co that the scrub stage should reduce.</li>
-    </ol>
-  </section>
+      <li id="n24"><b>MnSO₄ is a by-product, not a headline.</b> ~60 kg/h Mn as ~100 g/L strip liquor. Sold as liquor to a Mn refiner or crystallised later; not in the revenue basis. Carries ~1.6 kg/h Co that the scrub stage should reduce.</li> </ol> </section>
 
   <section class="block" id="b6">
     <h2>Block 6 <span>Area 500 · Products and water return (Sheet 5)</span></h2>
@@ -368,15 +333,13 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Type</th><th>Material / notes</th></tr></thead>
       <tbody>
-        <tr><td class="t">X-501 / 502 / 503</td><td>Cobalt solvent extraction</td><td>Mixer-settlers: 3 extraction, 2 scrub, 2 strip</td><td>Cyanex 272 <span class="cite">[<a href="#r12">12</a>]</span>, saponified with NaOH; pH 5.5–6.0; O/A 1. Ni co-extraction ~1 %, scrubbed back (note ㉕)</td></tr>
-        <tr><td class="t">X-504 / C-501 / D-501</td><td>CoSO₄·7H₂O</td><td>Evaporative crystalliser, pusher centrifuge, fluid-bed dryer</td><td>Strip liquor ~100 g/L Co; 86 % per-pass [14] with the mother liquor recycled; only a 5 % bleed leaves as S-518, so overall recovery is 99.2 %. Product hydrate is what the TEA priced (note ㉗)</td></tr>
+        <tr><td class="t">X-501 / 502 / 503</td><td>Cobalt solvent extraction</td><td>Mixer-settlers: 3 extraction, 2 scrub, 2 strip</td><td>Cyanex 272 <span class="cite">[<a href="#r15">15</a>]</span>, saponified with NaOH; pH 5.5–6.0; O/A 1. Ni co-extraction ~1 %, scrubbed back (note ㉕)</td></tr>
+        <tr><td class="t">X-504 / C-501 / D-501</td><td>CoSO₄·7H₂O</td><td>Evaporative crystalliser, pusher centrifuge, fluid-bed dryer</td><td>Strip liquor ~100 g/L Co; 86 % per-pass [14] with the mother liquor recycled; only a 5 % bleed leaves as S-518, so overall recovery is 99.2 %. Product is the hydrated sulfate (note ㉗)</td></tr>
         <tr><td class="t">X-511 / 512 / 513</td><td>Nickel solvent extraction</td><td>Mixer-settlers: 3 extraction, 1 scrub, 2 strip</td><td>Versatic 10 (neodecanoic acid), pH 6.5–7; extracts Ni ahead of Li/Na (note ㉖)</td></tr>
         <tr><td class="t">X-514 / C-502 / D-502</td><td>NiSO₄·6H₂O</td><td>Evaporative crystalliser, centrifuge, dryer</td><td>As above; purge S-519</td></tr>
         <tr><td class="t">T-501 / F-501</td><td>Lithium phosphate</td><td>Agitated, jacketed 60 °C; pressure filter with water wash</td><td>Na₃PO₄ 10 % excess; Li₃PO₄ solubility ~0.39 g/L so it precipitates straight from the ~1.9 g/L barren — no evaporation ahead of it (note ㉙)</td></tr>
         <tr><td class="t">E-501</td><td>Water recovery</td><td>Mechanical vapour recompression evaporator</td><td>Li-free barren 22.7 t/h → 13.7 t/h brine at ~500 g/L Na-gluconate; 9 t/h condensate back to Sheets 1–3. Largest energy user after the fermenter air (note ㉘)</td></tr>
-        <tr><td class="t">Condensate header</td><td>Water return</td><td>—</td><td>S-517 to Sheets 1–3: medium water, T-101 make-up, F-301 wash. Closes the water loop Sheet 2 note ⑪ assumed</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">Condensate header</td><td>Water return</td><td>—</td><td>S-517 to Sheets 1–3: medium water, T-101 make-up, F-301 wash. Closes the water loop Sheet 2 note ⑪ assumed</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
@@ -388,8 +351,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">E-501</td><td>Barren evaporator (MVR), water recovery</td><td class="num">20.9 t/h H2O</td><td>to 500 g/L Na-gluconate</td></tr>
 <tr><td class="t">T-501</td><td>Li3PO4 precipitation</td><td class="num">34.6 m3</td><td>1 h at barren flow, 60 C</td></tr>
 <tr><td class="t">D-501/D-502</td><td>Product dryers</td><td class="num">1,174 kg/h</td><td>CoSO4 + NiSO4 crystals</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams — generated by mass_balance.py (kg/h)</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total</th><th>Ni</th><th>Co</th><th>Mn</th><th>Li</th><th>Cu</th><th>Al</th><th>Other</th><th>H₂O</th><th>Fe</th><th>SO₄</th><th>Gluconate</th><th>Na</th><th>PO₄</th><th>T °C</th></tr></thead>
@@ -414,18 +376,15 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">S-518</td><td>X-504 mother-liquor purge → Sh 6</td><td>liquid</td><td class="num">33.6</td><td class="num">1.8</td><td class="num">0.7</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">30.0</td><td class="num">0</td><td class="num">1.1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">25</td></tr>
 <tr><td class="t">S-519</td><td>X-514 mother-liquor purge → Sh 6</td><td>liquid</td><td class="num">63.8</td><td class="num">1.4</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">60.0</td><td class="num">0</td><td class="num">2.4</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">25</td></tr>
 <tr><td class="t">S-520</td><td>F-501 filtrate → E-501 evaporator</td><td>liquid</td><td class="num">34,682</td><td class="num">3.6</td><td class="num">0.8</td><td class="num">1.2</td><td class="num">2.2</td><td class="num">0.2</td><td class="num">0</td><td class="num">0</td><td class="num">28,917</td><td class="num">0</td><td class="num">121</td><td class="num">4,962</td><td class="num">640</td><td class="num">18.8</td><td class="num">40</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes — circled numbers on the drawing</h3>
     <ol class="fn" start="25">
-      <li id="n25"><b>Cobalt first, Cyanex 272.</b> The industry Co/Ni separation. Tait <span class="cite">[<a href="#r12">12</a>]</span> measures pH₅₀ ≈ 5.3 for Co and ≈ 7.0 for Ni, so at pH 5.5–6.0 cobalt loads and nickel mostly stays. The window is real but narrower than the 4.5 / 6.5 pair often quoted in reviews. Saponified organic (NaOH pre-neutralised) so pH does not crash on loading; the sodium that adds joins the barren brine. Three extraction stages for 99 %, two scrub stages to hold Ni in the product below spec. Gluconate in the aqueous is a weak Co ligand (log K ~1.9) and does not compete with the extractant.</li>
+      <li id="n25"><b>Cobalt first, Cyanex 272.</b> The industry Co/Ni separation. Tait <span class="cite">[<a href="#r15">15</a>]</span> measures pH₅₀ ≈ 5.3 for Co and ≈ 7.0 for Ni, so at pH 5.5–6.0 cobalt loads and nickel mostly stays. The window is real but narrower than the 4.5 / 6.5 pair often quoted in reviews. Saponified organic (NaOH pre-neutralised) so pH does not crash on loading; the sodium that adds joins the barren brine. Three extraction stages for 99 %, two scrub stages to hold Ni in the product below spec. Gluconate in the aqueous is a weak Co ligand (log K ~1.9) and does not compete with the extractant.</li>
       <li id="n26"><b>Nickel by Versatic 10, not a second Cyanex circuit.</b> Cyanex 272 takes Ni only near pH 7 where hydroxide risk starts; Versatic 10 at pH 6.5–7 is the standard Ni extractant over Li/Na/Ca. Strip with H₂SO₄ to a NiSO₄ liquor for crystallisation — the sulfate matrix for the product is made here, not inherited from the leach (this is a gluconate plant).</li>
-      <li id="n27"><b>Products are the hydrated sulfates.</b> CoSO₄·7H₂O and NiSO₄·6H₂O at <b>86 % per-pass</b> crystalliser yield <span class="cite">[<a href="#r14">14</a>]</span>, with the mother liquor <b>recycled to the crystalliser feed</b> and only a 5 % bleed leaving as S-518/519 to Sheet 6. Because the bleed rather than the per-pass yield sets the loss, overall crystalliser recovery is 99.2 %. Overall recovery to saleable product: <b>Co 80 %, Ni 78 %, Li 94 %</b> — the "downstream losses applied" answer to the 86 / 84 / 100 % leach figures. Lithium is now <b>Li₃PO₄</b> (Keshav, 2026-09-13), not Li₂CO₃: 1,821 t/yr at 94 % Li recovery. Products 2,981 / 6,152 / 1,821 t/yr against the TEA basis of 3,265 / 6,285 / 1,164 (Li₂CO₃) — the TEA needs re-pricing on phosphate.</li>
-      <li id="n28"><b>The evaporator recovers water, not lithium.</b> On Option A the barren liquor (S-512, ~23 t/h) is already ~240 g/L sodium gluconate, so it can never be concentrated 13× to a carbonate-grade 25 g/L Li — the salt would pass its ~590 g/L solubility long before. Lithium therefore comes out first as Li₃PO₄ (note 29) and E-501 then concentrates the Li-free filtrate (S-520) only to ~500 g/L sodium gluconate: ~9 t/h of water evaporated, returned as clean condensate (S-517 with the crystalliser condensates, ~10 t/h) to the fermenter medium and make-up on Sheets 1–3. MVR keeps this to roughly 25–35 kWh per tonne evaporated. Alternatives recorded and not taken: recycling the raffinate to R-301 (<code>recycle_loop_check.py</code>: it returns as sodium gluconate at pH 6.5 with no free acid) and bipolar-membrane electrodialysis to split the salt back into acid + base (the true closed loop; a Sheet 6 option).</li>
-      <li id="n29"><b>Li₃PO₄ at 60 °C with trisodium phosphate.</b> Li₃PO₄ solubility is ~0.39 g/L (0.07 g/L as Li), two orders below Li₂CO₃, so the barren at ~1.9 g/L Li precipitates directly: 3 Li⁺ + PO₄³⁻ → Li₃PO₄. Na₃PO₄ at 10 % excess (~355 kg/h), 95 % yield assumed (residual ~0.1 g/L Li), 1 h residence, water wash on F-501; the excess phosphate leaves in the brine. Product 228 kg/h (1,821 t/yr) is a lower-value intermediate than battery-grade Li₂CO₃ — it is converted to Li₂CO₃ or LiOH by the buyer (H₃PO₄/Ca or electrochemical routes) — so the TEA's lithium line must be re-priced. Adds ~150 kg/h Na to the brine.</li>
-      <li id="n30"><b>The brine is the bleed.</b> S-516 (~13.7 t/h at 60 °C, ~500 g/L sodium gluconate) carries essentially all the sodium (~630 kg/h from three NaOH additions plus the phosphate — set by pH targets in the gluconate buffer), ~4.9 t/h of gluconate, excess phosphate, organics, and residual Li/Co/Ni. Nothing salty goes back to the fermenter. It is the main COD (~4.4 t/h as O₂, gluconate ThOD ≈ 0.9 g/g) and salt duty on Sheet 6 — and the reason NaOH dosing is the number to minimise across Sheets 4–5. Technical-grade sodium gluconate (concrete admixture) is a possible outlet if phosphate and metals are controlled; food/pharma grades are not realistic from this stream.</li>
-    </ol>
-  </section>
+      <li id="n27"><b>Products are the hydrated sulfates.</b> CoSO₄·7H₂O and NiSO₄·6H₂O at <b>86 % per-pass</b> crystalliser yield <span class="cite">[<a href="#r17">17</a>]</span>, with the mother liquor <b>recycled to the crystalliser feed</b> and only a 5 % bleed leaving as S-518/519 to Sheet 6. Because the bleed rather than the per-pass yield sets the loss, overall crystalliser recovery is 99.2 %. Overall recovery to saleable product: <b>Co 80 %, Ni 78 %, Li 94 %</b> — the "downstream losses applied" answer to the 86 / 84 / 100 % leach figures. Lithium is recovered as <b>Li₃PO₄</b> rather than Li₂CO₃: 1,831 t/yr at 94.1 % Li recovery. Products are 3,065 / 6,324 / 1,831 t/yr of CoSO₄·7H₂O, NiSO₄·6H₂O and Li₃PO₄.</li>
+      <li id="n28"><b>The evaporator recovers water, not lithium.</b> The barren liquor (S-512, ~23 t/h) is already ~240 g/L sodium gluconate, so it can never be concentrated 13× to a carbonate-grade 25 g/L Li — the salt would pass its ~590 g/L solubility long before. Lithium therefore comes out first as Li₃PO₄ (note 29) and E-501 then concentrates the Li-free filtrate (S-520) only to ~500 g/L sodium gluconate: ~9 t/h of water evaporated, returned as clean condensate (S-517 with the crystalliser condensates, ~10 t/h) to the fermenter medium and make-up on Sheets 1–3. MVR keeps this to roughly 25–35 kWh per tonne evaporated. Alternatives recorded and not taken: recycling the raffinate to R-301 (<code>recycle_loop_check.py</code>: it returns as sodium gluconate at pH 6.5 with no free acid) and bipolar-membrane electrodialysis to split the salt back into acid + base (the true closed loop; a Sheet 6 option).</li>
+      <li id="n29"><b>Li₃PO₄ at 60 °C with trisodium phosphate.</b> Li₃PO₄ solubility is ~0.39 g/L (0.07 g/L as Li), two orders below Li₂CO₃, so the barren at ~1.9 g/L Li precipitates directly: 3 Li⁺ + PO₄³⁻ → Li₃PO₄. Na₃PO₄ at 10 % excess (~355 kg/h), 95 % yield assumed (residual ~0.1 g/L Li), 1 h residence, water wash on F-501; the excess phosphate leaves in the brine. Product 228 kg/h (1,821 t/yr) is a lower-value intermediate than battery-grade Li₂CO₃ — it is converted to Li₂CO₃ or LiOH by the buyer (H₃PO₄/Ca or electrochemical routes) — and is priced accordingly. Adds ~150 kg/h Na to the brine.</li>
+      <li id="n30"><b>The brine is the bleed.</b> S-516 (~13.7 t/h at 60 °C, ~500 g/L sodium gluconate) carries essentially all the sodium (~630 kg/h from three NaOH additions plus the phosphate — set by pH targets in the gluconate buffer), ~4.9 t/h of gluconate, excess phosphate, organics, and residual Li/Co/Ni. Nothing salty goes back to the fermenter. It is the main COD (~4.4 t/h as O₂, gluconate ThOD ≈ 0.9 g/g) and salt duty on Sheet 6 — and the reason NaOH dosing is the number to minimise across Sheets 4–5. Technical-grade sodium gluconate (concrete admixture) is a possible outlet if phosphate and metals are controlled; food/pharma grades are not realistic from this stream.</li> </ol> </section>
   <section class="block" id="b7">
     <h2>Block 7 <span>Area 600 · Effluent and by-product (Sheet 6)</span></h2>
     <h3>Equipment</h3>
@@ -437,9 +396,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
         <tr><td class="t">X-601</td><td>Leach residue bunker</td><td>Covered concrete bay, 3 days</td><td>S-308 graphite/binder/oxide residue with the Fe/Al that precipitated in the leach; to graphite recovery or licensed disposal (note ㉝)</td></tr>
         <tr><td class="t">X-602</td><td>Fe/Al hydroxide cake bunker</td><td>Covered bay, 3 days</td><td>S-408 goethite/gibbsite cake at 60 % moisture, carries the 2 % Co/Ni occlusion loss</td></tr>
         <tr><td class="t">X-603</td><td>Spent-biomass skip</td><td>Skip, 7 days</td><td>S-210 G. oxydans cells from F-201; compostable</td></tr>
-        <tr><td class="t">Cu cement</td><td>By-product</td><td>Drummed</td><td>S-403 cement copper (~19 kg/h Cu with excess Fe) to a smelter — leaves from Sheet 4, listed here for completeness</td></tr>
-      </tbody>
-    </table></div>
+        <tr><td class="t">Cu cement</td><td>By-product</td><td>Drummed</td><td>S-403 cement copper (~19 kg/h Cu with excess Fe) to a smelter — leaves from Sheet 4, listed here for completeness</td></tr> </tbody> </table></div>
     <h3>Sizing — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>Tag</th><th>Service</th><th>Size</th><th>Basis</th></tr></thead>
@@ -449,8 +406,7 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">X-601</td><td>Leach residue bunker</td><td class="num">80.7 t</td><td>3 days of wet cake</td></tr>
 <tr><td class="t">X-602</td><td>Fe/Al cake bunker</td><td class="num">37.6 t</td><td>3 days of wet cake</td></tr>
 <tr><td class="t">X-603</td><td>Spent-biomass skip</td><td class="num">6.7 t</td><td>7 days of wet cake</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Streams (kg/h) — generated by mass_balance.py</h3>
     <div class="tbl"><table>
       <thead><tr><th>No.</th><th>From → To</th><th>Phase</th><th>Total</th><th>Ni</th><th>Co</th><th>Mn</th><th>Li</th><th>Cu</th><th>Al</th><th>Other</th><th>H₂O</th><th>Fe</th><th>SO₄</th><th>Gluconate</th><th>Na</th><th>PO₄</th><th>T °C</th></tr></thead>
@@ -458,63 +414,59 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 <tr><td class="t">S-601</td><td>T-601 equalisation → D-601 dryer</td><td>liquid</td><td class="num">13,981</td><td class="num">6.9</td><td class="num">1.5</td><td class="num">1.2</td><td class="num">2.2</td><td class="num">0.2</td><td class="num">0</td><td class="num">0</td><td class="num">8,168</td><td class="num">0</td><td class="num">124</td><td class="num">4,962</td><td class="num">640</td><td class="num">18.8</td><td class="num">50</td></tr>
 <tr><td class="t">S-602</td><td>D-601 exhaust → atmosphere (humid air)</td><td>gas</td><td class="num">7,862</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">7,862</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">90</td></tr>
 <tr><td class="t">S-603</td><td>D-601 → crude Na-gluconate salt, OSBL</td><td>solid</td><td class="num">6,119</td><td class="num">6.9</td><td class="num">1.5</td><td class="num">1.2</td><td class="num">2.2</td><td class="num">0.2</td><td class="num">0</td><td class="num">41.6</td><td class="num">306</td><td class="num">0</td><td class="num">124</td><td class="num">4,962</td><td class="num">640</td><td class="num">18.8</td><td class="num">40</td></tr>
-</tbody>
-    </table></div>
+</tbody> </table></div>
     <h3>Notes</h3>
     <ol class="fn" start="31">
-      <li id="n31"><b>One liquid effluent, and it is dried, not discharged.</b> The plant's only liquid bleed is the sodium/phosphate/gluconate stream: ~13.9 t/h combined (brine 13.7, purges 0.1, scrubber blowdown 0.1). Treating it biologically would be a 4.4 t/h COD (as O₂) duty — a wastewater plant bigger than the leach — and would throw away 4.9 t/h of gluconate that cost 4.8 t/h of glucose to make. Drying it instead gives ~6.1 t/h (49 kt/yr) of crude sodium gluconate (~90 % Na-gluconate, plus Na₂SO₄, excess phosphate, carbonate from the scrubber, and ppm Co/Ni/Li). Technical-grade outlets (concrete set-retarder, industrial chelating cleaners) exist at roughly $0.6–0.9/kg; food or pharma grade is not reachable from this stream without a separate purification plant. <b>The TEA carries this salt at zero credit</b> — metals recovery is the project's purpose, so the salt is an off-take obligation, not a revenue line, and the glucose behind it is an unoffset cost. Any off-take actually signed is upside on top of the metals case. <i>Keshav's no-waste preference; the alternative — bipolar-membrane electrodialysis returning gluconic acid to R-301 and NaOH to Sheets 4–5 — is the true closed loop and is the option to study next.</i></li>
+      <li id="n31"><b>One liquid effluent, and it is dried, not discharged.</b> The plant's only liquid bleed is the sodium/phosphate/gluconate stream: ~13.9 t/h combined (brine 13.7, purges 0.1, scrubber blowdown 0.1). Treating it biologically would be a 4.4 t/h COD (as O₂) duty — a wastewater plant bigger than the leach — and would throw away 4.9 t/h of gluconate that cost 4.8 t/h of glucose to make. Drying it instead gives ~6.1 t/h (49 kt/yr) of crude sodium gluconate (~90 % Na-gluconate, plus Na₂SO₄, excess phosphate, carbonate from the scrubber, and ppm Co/Ni/Li). Technical-grade outlets (concrete set-retarder, industrial chelating cleaners) exist at roughly $0.6–0.9/kg; food or pharma grade is not reachable from this stream without a separate purification plant. <b>The salt is carried at zero credit</b>: metals recovery is the purpose of the plant, so it is an off-take obligation rather than a revenue line, and the glucose behind it is an unoffset cost. Any off-take actually signed is upside on the metals case. <i>The alternative — bipolar-membrane electrodialysis returning gluconic acid to R-301 and NaOH to Sheets 4–5 — is the true closed loop and is the option to study next.</i></li>
       <li id="n32"><b>Water closes with a small fresh make-up.</b> Condensate (crystallisers + E-501, ~10.4 t/h) supplies the S-104 make-up and most of the fermenter medium; the remainder of the medium (~5.8 t/h) and the F-301 wash (~1.6 t/h) are fresh water, less a 0.5 t/h condensate surplus — net ~6.9 t/h fresh. The D-601 exhaust carries ~7.8 t/h of water: condensing it would make the plant water-neutral, at the cost of a condenser and a slightly larger dryer. Water leaves in the product hydrates (~1.0 t/h), the three cakes (~0.7 t/h), the salt (0.3 t/h) and the dryer exhaust. The fermenter off-gas humidity is not counted.</li>
-      <li id="n33"><b>Solids leave as three cakes.</b> Leach residue S-308 (~1.1 t/h wet; graphite, binder, unleached oxide and — on the Option A basis — the goethite/gibbsite that precipitates in R-301 at pH ~4.8), Fe/Al cake S-408 (~0.5 t/h wet), spent biomass S-210 (40 kg/h). None is hazardous by composition, but the residue carries fluoride from the electrolyte (not modelled) and should be leach-tested before a disposal route is fixed. Copper cement S-403 is a by-product, not a waste.</li>
-    </ol>
-  </section>
+      <li id="n33"><b>Solids leave as three cakes.</b> Leach residue S-308 (~1.1 t/h wet; graphite, binder, unleached oxide and the goethite/gibbsite that precipitates in R-301 at pH ~4.8), Fe/Al cake S-408 (~0.5 t/h wet), spent biomass S-210 (40 kg/h). None is hazardous by composition, but the residue carries fluoride from the electrolyte (not modelled) and should be leach-tested before a disposal route is fixed. Copper cement S-403 is a by-product, not a waste.</li> </ol> </section>
   <section class="block" id="refs">
-    <h2>References <span>IEEE style &middot; compiled 2026-09-13</span></h2>
+    <h2>References <span>IEEE style</span></h2>
     <p style="max-width:78ch">Sources verified by DOI resolution where possible. Entries marked in bold could not be
     confirmed word-for-word because the publisher blocked full-text access; the paper and its identity are real, but
     the author list or exact figures should be checked against the PDF before print. Ordinary engineering practice
-    (tank residence times, pump sparing, silo hold-up) is deliberately left uncited.</p>
+    (tank residence times, pump sparing, silo hold-up) is deliberately left uncited. Entries [1]&ndash;[4] are cited in the write-up; the numbering matches <code>K-references/REFERENCES.md</code>.</p>
     <ol class="refs">
-      <li id="r1">J. J. Roy, S. Madhavi, and B. Cao, "Metal extraction from spent lithium-ion batteries (LIBs) at high pulp density by environmentally friendly bioleaching process," <i>J. Cleaner Prod.</i>, vol. 280, Art. no. 124242, 2021, doi: 10.1016/j.jclepro.2020.124242.</li>
-      <li id="r2">Mandl <i>et al.</i>, "Bioleaching of black mass using <i>Gluconobacter oxydans</i> compared to <i>Acidithiobacillus thiooxidans</i>," <i>Metals</i>, vol. 15, no. 10, Art. no. 1112, 2025, doi: 10.3390/met15101112. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r3">Kiskira <i>et al.</i>, "Microbial bioleaching of critical metals from spent lithium-ion batteries: a biohydrometallurgical approach," <i>Minerals</i>, vol. 16, no. 3, Art. no. 277, 2026, doi: 10.3390/min16030277. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r4">N. Bahaloo-Horeh, S. M. Mousavi, and S. A. Shojaosadati, "Bioleaching of valuable metals from spent lithium-ion mobile phone batteries using <i>Aspergillus niger</i>," <i>J. Power Sources</i>, vol. 320, pp. 257&ndash;266, 2016, doi: 10.1016/j.jpowsour.2016.04.104.</li>
-      <li id="r5">N. Bahaloo-Horeh and S. M. Mousavi, "Enhanced recovery of valuable metals from spent lithium-ion batteries through optimization of organic acids produced by <i>Aspergillus niger</i>," <i>Waste Manage.</i>, vol. 60, pp. 666&ndash;679, 2017, doi: 10.1016/j.wasman.2016.10.034.</li>
-      <li id="r6">B. K. Biswal <i>et al.</i>, "Recovery of valuable metals from spent lithium-ion batteries: a review," <i>Front. Microbiol.</i>, vol. 14, Art. no. 1197081, 2023, doi: 10.3389/fmicb.2023.1197081. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r7">M. Alipanah <i>et al.</i>, "Sustainable bioleaching of lithium-ion batteries for critical materials recovery," <i>J. Cleaner Prod.</i>, vol. 382, Art. no. 135274, 2023, doi: 10.1016/j.jclepro.2022.135274. Also Idaho Nat. Lab., Idaho Falls, ID, USA, Rep. INL/JOU-22-70203-Rev000, OSTI ID 1959805.</li>
-      <li id="r8">Lerchbammer <i>et al.</i>, "High yield gluconic acid leaching and recovery of valuable metals from end-of-life lithium-ion batteries," <i>Case Stud. Chem. Environ. Eng.</i>, vol. 12, Art. no. 101271, 2025, doi: 10.1016/j.cscee.2025.101271. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r9">Y. Zhang, Y. Zheng, and W. Fan, "The versatility of <i>Gluconobacter oxydans</i>: production of ketogluconates, gluconic acid and related compounds," <i>World J. Microbiol. Biotechnol.</i>, vol. 38, Art. no. 134, 2022, doi: 10.1007/s11274-022-03310-8.</li>
-      <li id="r10">W. Olijve and J. J. Kok, "Analysis of growth of <i>Gluconobacter oxydans</i> in glucose containing media," <i>Arch. Microbiol.</i>, vol. 121, pp. 283&ndash;290, 1979, doi: 10.1007/BF00425069.</li>
-      <li id="r11">W. Olijve and J. J. Kok, "An analysis of the growth of <i>Gluconobacter oxydans</i> in chemostat cultures," <i>Arch. Microbiol.</i>, vol. 121, pp. 291&ndash;297, 1979, doi: 10.1007/BF00425070.</li>
-      <li id="r12">B. K. Tait, "Cobalt&ndash;nickel separation: the extraction of cobalt(II) and nickel(II) by Cyanex 301, Cyanex 302 and Cyanex 272," <i>Hydrometallurgy</i>, vol. 32, no. 3, pp. 365&ndash;372, 1993, doi: 10.1016/0304-386X(93)90046-E.</li>
-      <li id="r13">D. T. Sawyer, "Metal&ndash;gluconate complexes," <i>Chem. Rev.</i>, vol. 64, no. 6, pp. 633&ndash;643, 1964, doi: 10.1021/cr60232a003.</li>
-      <li id="r14">O. Zhang <i>et al.</i>, "Semi-batch evaporative crystallization and drying of cobalt sulphate hydrates," <i>Hydrometallurgy</i>, vol. 208, Art. no. 105821, 2022, doi: 10.1016/j.hydromet.2021.105821. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r15">O. Levenspiel, <i>Chemical Reaction Engineering</i>, 3rd ed. New York, NY, USA: Wiley, 1999, ch. 11&ndash;14.</li>
-      <li id="r16">D. L. Parkhurst and C. A. J. Appelo, "Description of input and examples for PHREEQC version 3," U.S. Geological Survey, Reston, VA, USA, Techniques and Methods 6-A43, 2013.</li>
-      <li id="r17"><i>The Merck Index</i>, 13th ed. Whitehouse Station, NJ, USA: Merck &amp; Co., 1996. (Sodium gluconate solubility 590 g/L at 25 &deg;C; gluconic acid pK<sub>a</sub> 3.70.)</li>
-      <li id="r18">Organisation for Economic Co-operation and Development, "SIDS initial assessment report: gluconic acid and its derivatives," OECD, Paris, France, SIAM 18, 2004.</li>
-      <li id="r19">A. Porvali <i>et al.</i>, "Lithium-ion battery active material dissolution kinetics in Fe(II)/Fe(III) catalyzed Cu&ndash;H<sub>2</sub>SO<sub>4</sub> leaching system," <i>Sep. Purif. Technol.</i>, 2020. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r20">&ldquo;Choosing a slurry pump,&rdquo; <i>The Chemical Engineer</i> (IChemE), no. 932, 2018. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
-      <li id="r21">U.S. Geological Survey, "Cobalt," in <i>Mineral Commodity Summaries 2026</i>. Reston, VA, USA: U.S. Dept. of the Interior, Feb. 2026, pp. 70&ndash;71, doi: 10.3133/mcs2026.</li>
-      <li id="r22">U.S. Geological Survey, "Nickel," in <i>Mineral Commodity Summaries 2026</i>. Reston, VA, USA: U.S. Dept. of the Interior, Feb. 2026, doi: 10.3133/mcs2026.</li>
-      <li id="r23">S. M. Ewing, "Cobalt in December 2025," Mineral Industry Surveys, U.S. Geological Survey, Reston, VA, USA, Mar. 2026.</li>
-      <li id="r24">Z. Wang <i>et al.</i>, "Recycling technologies for cathode materials from spent lithium iron phosphate batteries: an overview," <i>Materials</i>, vol. 19, no. 4, Art. no. 674, Feb. 2026, doi: 10.3390/ma19040674. <b>[bibliographic details confirmed via Crossref. Note this is a review: the Li<sub>3</sub>PO<sub>4</sub> figures it carries are quoted from its own sources, not an original assessment, so they inherit that provenance.]</b></li>
-      <li id="r25">Fastmarkets, "Cobalt sulfate 20.5% Co basis, exw China, yuan/tonne," assessment MB-CO-0017. [Online]. Available: https://www.fastmarkets.com/commodity-prices/ (subscription required; series confirmed, value not public).</li>
+      <li id="r1">Benchmark Mineral Intelligence, "Forecasts | Lithium, Cobalt, Graphite &amp; Nickel," Mar. 2021.</li>
+      <li id="r2">Roskill, "The Resurgence of LFP Cathodes: A Safe and Cost-Efficient Battery Active Material to Support the EV Revolution," 2020.</li>
+      <li id="r3">C. Xu <i>et al.</i>, "Future material demand for automotive lithium-based batteries," <i>Commun. Mater.</i>, vol. 1, no. 1, pp. 1&ndash;10, 2020.</li>
+      <li id="r4">M. Alipanah <i>et al.</i>, "Sustainable bioleaching of lithium-ion batteries for critical materials recovery," <i>J. Cleaner Prod.</i>, vol. 382, Art. no. 135274, 2023, doi: 10.1016/j.jclepro.2022.135274. Also Idaho Nat. Lab., Idaho Falls, ID, USA, Rep. INL/JOU-22-70203-Rev000, OSTI ID 1959805.</li>
+      <li id="r5">J. J. Roy, S. Madhavi, and B. Cao, "Metal extraction from spent lithium-ion batteries (LIBs) at high pulp density by environmentally friendly bioleaching process," <i>J. Cleaner Prod.</i>, vol. 280, Art. no. 124242, 2021, doi: 10.1016/j.jclepro.2020.124242.</li>
+      <li id="r6">Mandl <i>et al.</i>, "Bioleaching of black mass using <i>Gluconobacter oxydans</i> compared to <i>Acidithiobacillus thiooxidans</i>," <i>Metals</i>, vol. 15, no. 10, Art. no. 1112, 2025, doi: 10.3390/met15101112. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r7">Kiskira <i>et al.</i>, "Microbial bioleaching of critical metals from spent lithium-ion batteries: a biohydrometallurgical approach," <i>Minerals</i>, vol. 16, no. 3, Art. no. 277, 2026, doi: 10.3390/min16030277. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r8">N. Bahaloo-Horeh, S. M. Mousavi, and S. A. Shojaosadati, "Bioleaching of valuable metals from spent lithium-ion mobile phone batteries using <i>Aspergillus niger</i>," <i>J. Power Sources</i>, vol. 320, pp. 257&ndash;266, 2016, doi: 10.1016/j.jpowsour.2016.04.104.</li>
+      <li id="r9">N. Bahaloo-Horeh and S. M. Mousavi, "Enhanced recovery of valuable metals from spent lithium-ion batteries through optimization of organic acids produced by <i>Aspergillus niger</i>," <i>Waste Manage.</i>, vol. 60, pp. 666&ndash;679, 2017, doi: 10.1016/j.wasman.2016.10.034.</li>
+      <li id="r10">B. K. Biswal <i>et al.</i>, "Recovery of valuable metals from spent lithium-ion batteries: a review," <i>Front. Microbiol.</i>, vol. 14, Art. no. 1197081, 2023, doi: 10.3389/fmicb.2023.1197081. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r11">Lerchbammer <i>et al.</i>, "High yield gluconic acid leaching and recovery of valuable metals from end-of-life lithium-ion batteries," <i>Case Stud. Chem. Environ. Eng.</i>, vol. 12, Art. no. 101271, 2025, doi: 10.1016/j.cscee.2025.101271. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r12">Y. Zhang, Y. Zheng, and W. Fan, "The versatility of <i>Gluconobacter oxydans</i>: production of ketogluconates, gluconic acid and related compounds," <i>World J. Microbiol. Biotechnol.</i>, vol. 38, Art. no. 134, 2022, doi: 10.1007/s11274-022-03310-8.</li>
+      <li id="r13">W. Olijve and J. J. Kok, "Analysis of growth of <i>Gluconobacter oxydans</i> in glucose containing media," <i>Arch. Microbiol.</i>, vol. 121, pp. 283&ndash;290, 1979, doi: 10.1007/BF00425069.</li>
+      <li id="r14">W. Olijve and J. J. Kok, "An analysis of the growth of <i>Gluconobacter oxydans</i> in chemostat cultures," <i>Arch. Microbiol.</i>, vol. 121, pp. 291&ndash;297, 1979, doi: 10.1007/BF00425070.</li>
+      <li id="r15">B. K. Tait, "Cobalt&ndash;nickel separation: the extraction of cobalt(II) and nickel(II) by Cyanex 301, Cyanex 302 and Cyanex 272," <i>Hydrometallurgy</i>, vol. 32, no. 3, pp. 365&ndash;372, 1993, doi: 10.1016/0304-386X(93)90046-E.</li>
+      <li id="r16">D. T. Sawyer, "Metal&ndash;gluconate complexes," <i>Chem. Rev.</i>, vol. 64, no. 6, pp. 633&ndash;643, 1964, doi: 10.1021/cr60232a003.</li>
+      <li id="r17">O. Zhang <i>et al.</i>, "Semi-batch evaporative crystallization and drying of cobalt sulphate hydrates," <i>Hydrometallurgy</i>, vol. 208, Art. no. 105821, 2022, doi: 10.1016/j.hydromet.2021.105821. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r18">O. Levenspiel, <i>Chemical Reaction Engineering</i>, 3rd ed. New York, NY, USA: Wiley, 1999, ch. 11&ndash;14.</li>
+      <li id="r19">D. L. Parkhurst and C. A. J. Appelo, "Description of input and examples for PHREEQC version 3," U.S. Geological Survey, Reston, VA, USA, Techniques and Methods 6-A43, 2013.</li>
+      <li id="r20"><i>The Merck Index</i>, 13th ed. Whitehouse Station, NJ, USA: Merck &amp; Co., 1996. (Sodium gluconate solubility 590 g/L at 25 &deg;C; gluconic acid pK<sub>a</sub> 3.70.)</li>
+      <li id="r21">Organisation for Economic Co-operation and Development, "SIDS initial assessment report: gluconic acid and its derivatives," OECD, Paris, France, SIAM 18, 2004.</li>
+      <li id="r22">A. Porvali <i>et al.</i>, "Lithium-ion battery active material dissolution kinetics in Fe(II)/Fe(III) catalyzed Cu&ndash;H<sub>2</sub>SO<sub>4</sub> leaching system," <i>Sep. Purif. Technol.</i>, 2020. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r23">&ldquo;Choosing a slurry pump,&rdquo; <i>The Chemical Engineer</i> (IChemE), no. 932, 2018. <b>[details need a final check against the source PDF — access was blocked during sourcing]</b></li>
+      <li id="r24">U.S. Geological Survey, "Cobalt," in <i>Mineral Commodity Summaries 2026</i>. Reston, VA, USA: U.S. Dept. of the Interior, Feb. 2026, pp. 70&ndash;71, doi: 10.3133/mcs2026.</li>
+      <li id="r25">U.S. Geological Survey, "Nickel," in <i>Mineral Commodity Summaries 2026</i>. Reston, VA, USA: U.S. Dept. of the Interior, Feb. 2026, doi: 10.3133/mcs2026.</li>
+      <li id="r26">S. M. Ewing, "Cobalt in December 2025," Mineral Industry Surveys, U.S. Geological Survey, Reston, VA, USA, Mar. 2026.</li>
+      <li id="r27">Z. Wang <i>et al.</i>, "Recycling technologies for cathode materials from spent lithium iron phosphate batteries: an overview," <i>Materials</i>, vol. 19, no. 4, Art. no. 674, Feb. 2026, doi: 10.3390/ma19040674. <b>[bibliographic details confirmed via Crossref. Note this is a review: the Li<sub>3</sub>PO<sub>4</sub> figures it carries are quoted from its own sources, not an original assessment, so they inherit that provenance.]</b></li>
+      <li id="r28">Fastmarkets, "Cobalt sulfate 20.5% Co basis, exw China, yuan/tonne," assessment MB-CO-0017. [Online]. Available: https://www.fastmarkets.com/commodity-prices/ (subscription required; series confirmed, value not public).</li>
     </ol>
 
     <div class="unsourced">
-      <h4>Numbers that are NOT sourced — read this before quoting the model</h4>
+      <h4>Assumptions carried without a cited value</h4>
       <ul>
-        <li><b>Broth titer &mdash; resolved 2026-09-13.</b> The plant is now sized at <b>150 g/L and 4.2 % pulp</b>, the literature high for <i>G. oxydans</i> <span class="cite">[<a href="#r9">9</a>]</span>. The earlier 250 g/L basis was unsupported and is kept only as an upside case (<code>BROTH_GA_GL=250 PULP=0.07</code>), which is what the smaller equipment in earlier revisions reflected.</li>
-        <li><b>Fe(III)&ndash;gluconate stability constant.</b> Still the key unknown the notes already flag. Sawyer [13] is the right reference to consult but no numeric value was verified.</li>
-        <li><b>Li<sub>3</sub>PO<sub>4</sub> solubility 0.39 g/L</b>, and its behaviour at 60 &deg;C. Not verified.</li>
-        <li><b>Co/Ni occlusion loss 2 %</b> in the goethite/gibbsite cake. Literature suggests 2&ndash;5 % but no specific figure was verified.</li>
-        <li><b>MVR 25&ndash;35 kWh per tonne evaporated.</b> Order of magnitude is right; the exact range is vendor-typical, not from a verified reference.</li>
-        <li><b>Fermenter scale 300&ndash;1,000 m&sup3;</b> and the <b>1950s batch/fed-batch history</b>. Not verified; real citric-acid fermenters are commonly quoted at 100&ndash;300 m&sup3;.</li>
-        <li><b>SX stage count (3 extraction / 2 scrub / 2 strip)</b> and <b>0.2 &micro;m air filtration</b>. Ordinary design practice, deliberately uncited.</li>
-        <li><b>Gluconic acid pK<sub>a</sub> 3.86 &mdash; a noted choice, not a gap.</b> Held at 3.86 by decision; Merck and Ullmann <span class="cite">[<a href="#r17">17</a>]</span> give 3.70, and the spread is the gluconic acid / glucono-&delta;-lactone equilibrium. Worth under 2 % on base demand either way.</li>
-        <li><b>Salt prices (CoSO<sub>4</sub>&middot;7H<sub>2</sub>O, NiSO<sub>4</sub>&middot;6H<sub>2</sub>O).</b> The Fastmarkets and SMM series exist <span class="cite">[<a href="#r25">25</a>]</span> but sit behind a subscription. Revenue is therefore quoted as a <b>floor</b> on contained metal at USGS benchmarks <span class="cite">[<a href="#r21">21</a>, <a href="#r22">22</a>]</span>; the conversion premium a real salt sale earns is left unquantified rather than guessed. No agency assesses Li<sub>3</sub>PO<sub>4</sub> at all &mdash; it is priced off a peer-reviewed recycling study <span class="cite">[<a href="#r24">24</a>]</span>. See <i>Product Pricing &mdash; Cited Basis</i>.</li>
+        <li><b>Fe(III)&ndash;gluconate stability constant.</b> Not fixed. Sawyer <span class="cite">[<a href="#r16">16</a>]</span> is the reference to consult; values from 8 to 10 change whether iron precipitates cleanly or stays complexed.</li>
+        <li><b>Li<sub>3</sub>PO<sub>4</sub> solubility 0.39 g/L</b>, and its behaviour at 60 &deg;C. Sets whether lithium precipitates from the 1.9 g/L barren without evaporation.</li>
+        <li><b>Co/Ni occlusion in the hydroxide cake, 2 %.</b> Literature suggests 2&ndash;5 %; no specific figure verified.</li>
+        <li><b>MVR specific energy 25&ndash;35 kWh per tonne evaporated.</b> Order of magnitude is right; the range is vendor-typical.</li>
+        <li><b>Solvent-extraction stage counts</b> (3 extraction / 2 scrub / 2 strip) and <b>0.2 &micro;m air filtration</b>. Ordinary design practice, uncited by intent.</li>
+        <li><b>Gluconic acid pK<sub>a</sub> 3.86.</b> Sources also report 3.70 <span class="cite">[<a href="#r20">20</a>]</span>; the spread is the equilibrium with glucono-&delta;-lactone. Under 2 % effect on base demand.</li>
+        <li><b>Every price.</b> Battery-grade sulfate assessments are subscription-only <span class="cite">[<a href="#r28">28</a>]</span> and no agency assesses Li<sub>3</sub>PO<sub>4</sub> <span class="cite">[<a href="#r27">27</a>]</span>, so revenue is a floor on contained metal at USGS benchmarks <span class="cite">[<a href="#r24">24</a>, <a href="#r25">25</a>, <a href="#r26">26</a>]</span>. All cost inputs are named constants in <code>I-cost-estimate/</code>. Full list: <code>J-unsourced-assumptions/</code>.</li>
       </ul>
-    </div>
-
-  </section>
+    </div> </section>
 </div>

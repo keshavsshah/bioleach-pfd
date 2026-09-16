@@ -1,8 +1,11 @@
-"""Proton / sodium budget of a barren-raffinate recycle loop (Option A, 2026-09-13).
+"""Proton and sodium budget of a barren-raffinate recycle loop.
 Question: if S-512 returns to R-301, how much fresh gluconic acid does the fermenter still have to make,
 how much Na enters per pass, and what bleed does Na-gluconate solubility force? Uses mass_balance.py metals.
 Gluconate is a 1 M buffer (pKa 3.86): Gluc- fraction f(pH) = 1/(1+10^(pKa-pH)). Electroneutrality: Gluc- = sum(z*M) + Na - 2*SO4.
 """
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "G-mass-balance"))
 import mass_balance as mb
 PKA = 3.86
 f = lambda pH: 1 / (1 + 10 ** (PKA - pH))

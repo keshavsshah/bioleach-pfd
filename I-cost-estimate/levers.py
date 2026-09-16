@@ -1,13 +1,13 @@
-"""What would close the cost gap. The 'now' in 'costs more now'.
+"""Sensitivity: what narrows the operating-cost gap to mineral-acid hydrometallurgy.
 
 Baseline is opex.py. Each lever is applied to the same closed mass balance;
 only the price or the recycle fraction changes. Prices are estimates (see opex.py).
 
-Run: python3 src/levers.py
+Run: python3 I-cost-estimate/levers.py
 """
 import io, contextlib, sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "G-mass-balance"))
 buf = io.StringIO()
 with contextlib.redirect_stdout(buf):
     import mass_balance as m
@@ -38,7 +38,7 @@ cases = [
   total(P_GLU_STOVER, glucose_tpy, mvr_kwh, steam_t)),
  ("BMED acid recycle, 70 % of gluconate returned",
   total(P_GLU_SYRUP, glucose_tpy*0.30, mvr_kwh, steam_t)),
- ("titre 150 -> 250 g/L (evaporator back to 9.1 t/h)",
+ ("titre 150 -> 250 g/L (smaller evaporator, 9.1 t/h)",
   total(P_GLU_SYRUP, glucose_tpy, 9.1*30*HOURS, steam_t)),
  ("all three together",
   total(P_GLU_STOVER, glucose_tpy*0.30, 9.1*30*HOURS, steam_t)),
