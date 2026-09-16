@@ -42,7 +42,7 @@ source and electrodialytic acid recycle would remove roughly $29M/yr of that gap
 
 | | Folder | Contents |
 |---|---|---|
-| **A** | `A-process-flow-diagram/` | Six-sheet PFD as **PDF** (A3 landscape, one sheet per page), a **combined single-sheet version** (1119 × 595 mm, all six on one drawing), and the HTML sources |
+| **A** | `A-process-flow-diagram/` | The **unified flowsheet** — all six areas on one drawing with the inter-area streams actually connected (1612 × 682 mm) — plus the six-sheet PDF for reading, and the HTML sources |
 | **B** | `B-design-basis/` | Feed, products, the electroneutrality constraint, set-points, water closure |
 | **C** | `C-equipment-list/` | Every unit with its size and sizing basis, CSV |
 | **D** | `D-stream-tables/` | Every stream, Blocks 1–7, CSV; key model parameters |
@@ -54,9 +54,14 @@ source and electrodialytic acid recycle would remove roughly $29M/yr of that gap
 | **J** | `J-unsourced-assumptions/` | Every number carried without a verified source, and every price |
 | **K** | `K-references/` | The bibliography, [1]–[28], IEEE style — the numbering the paper uses |
 
-`tools/make_pdfs.py` regenerates the per-sheet PDFs from their HTML sources. The combined drawing is
-`A-process-flow-diagram/bioleach_PFD_combined.pdf` — one page, poster format, useful for printing or
-for showing the whole flowsheet at once.
+Two forms of the same drawing. **`bioleach_PFD_unified.pdf`** is the whole plant as one continuous
+flowsheet: the areas sit in process order, each inside a dashed boundary, and the streams that would
+otherwise say "to Sheet 4" are drawn as real routed lines. Solid lines carry the main flow, dashed are
+recycles, dotted are solids and bleeds. **`bioleach_PFD.pdf`** is the same content split one area per
+page, which is easier to read at desk size.
+
+`tools/build_unified_pfd.py` rebuilds the unified drawing from the per-sheet source and asserts that no
+connector is drawn diagonally. `tools/make_pdfs.py` regenerates the per-sheet PDFs.
 
 ## Two classes of number
 
