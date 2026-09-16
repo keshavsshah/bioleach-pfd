@@ -15,11 +15,16 @@ SRC = ROOT / "A-process-flow-diagram" / "bioleach_PFD.html"
 OUT = ROOT / "A-process-flow-diagram" / "bioleach_PFD_unified.html"
 
 SW, SH = 1100, 720                       # one area's own coordinate system
-GX, GY = 260, 340                        # gutters that carry the inter-area lines
-ML, MT, MB = 150, 300, 240               # margins: left, top, bottom
+GX, GY = 300, 380                        # gutters that carry the inter-area lines
+ML, MT, MB = 150, 300, 300               # margins: left, top, bottom
 
-# area -> (column, row). Laid out so the main flow runs left to right.
-PLACE = {1: (0, 0), 3: (1, 0), 4: (2, 0), 5: (3, 0), 2: (0, 1), 6: (2, 1)}
+# area -> (column, row), chosen so every process connection joins neighbouring
+# cells and no line has to cross the page:
+#     100 feed  ->  300 leach  ->  400 impurity
+#     200 ferm  ->  500 products -> 600 effluent
+# 400 drops into 500 below it; 300 and 400 drop into 600; 500 returns
+# condensate to 200 next door. Only the spent-cell line runs any distance.
+PLACE = {1: (0, 0), 3: (1, 0), 4: (2, 0), 2: (0, 1), 5: (1, 1), 6: (2, 1)}
 TITLES = {1: ("AREA 100", "Feed preparation"),
           2: ("AREA 200", "Biolixiviant fermentation"),
           3: ("AREA 300", "Batch leach · solid/liquid separation"),
@@ -31,7 +36,7 @@ def org(a):
     c, r = PLACE[a]
     return ML + c * (SW + GX), MT + r * (SH + GY)
 
-W = ML * 2 + 4 * SW + 3 * GX
+W = ML * 2 + 3 * SW + 2 * GX
 H = MT + MB + 2 * SH + GY
 
 src = SRC.read_text(encoding="utf-8")
@@ -70,9 +75,9 @@ def P(a, lx, ly):
     x, y = org(a); return (x + lx, y + ly)
 
 # routing channels that keep lines out of the drawings
-CH_V = {"1-3": ML + SW + GX//2, "3-4": ML + 2*SW + GX + GX//2, "4-5": ML + 3*SW + 2*GX + GX//2}
-LANE = [MT + SH + 70, MT + SH + 130, MT + SH + 190, MT + SH + 250]   # horizontal lanes
-BOT = MT + 2*SH + GY + 110                                            # bottom highway
+CH_V = {"0-1": ML + SW + GX//2, "1-2": ML + 2*SW + GX + GX//2}
+LANE = [MT + SH + 80, MT + SH + 150, MT + SH + 220, MT + SH + 290]   # the gutter between rows
+BOT  = MT + 2*SH + GY + 120                                           # below the bottom row
 
 def route(src, dst, *, via_x=None, via_y=None, out=0, into=0):
     """Strictly orthogonal path from src to dst.
@@ -98,41 +103,58 @@ def route(src, dst, *, via_x=None, via_y=None, out=0, into=0):
 
 L = lambda a, lx, ly: P(a, lx, ly)
 CONNS = [
+ # ---- main flow: each hop joins neighbouring areas -------------------------
  ("S-105 feed slurry", "main",
-  route(L(1,707,622), L(3,28,250), via_x=CH_V["1-3"], out=60, into=60)),
+  route(L(1,707,622), L(3,28,250), via_x=CH_V["0-1"], out=60, into=60)),
  ("S-212 biolixiviant", "main",
-  route(L(2,955,585), L(3,28,320), via_x=CH_V["1-3"]-70, out=60, into=60)),
+  route(L(2,955,585), L(3,28,320), via_x=CH_V["0-1"]-80, out=60, into=60)),
  ("S-310 PLS", "main",
-  route(L(3,1062,600), L(4,24,250), via_x=CH_V["3-4"], out=60, into=60)),
+  route(L(3,1062,600), L(4,24,250), via_x=CH_V["1-2"], out=60, into=60)),
  ("S-414 purified liquor", "main",
-  route(L(4,1027,560), L(5,24,315), via_x=CH_V["4-5"], out=60, into=60)),
- ("S-311 wash filtrate", "recycle",
-  route(L(3,1062,560), L(1,40,500), via_x=CH_V["3-4"]+70, via_y=LANE[3], out=60, into=-60)),
- ("S-308 leach residue", "solids",
-  route(L(3,667,580), L(6,24,450), via_y=LANE[0], into=70)),
- ("S-304 blowdown", "solids",
-  route(L(3,1027,200), L(6,24,274), via_x=CH_V["3-4"]-70, via_y=LANE[1], out=50, into=130)),
- ("S-408 Fe/Al cake", "solids",
-  route(L(4,563,500), L(6,24,530), via_y=LANE[0], into=190)),
- ("S-403 cement Cu", "solids",
-  route(L(4,300,830), L(6,600,530), via_y=LANE[2])),
+  route(L(4,300,830), L(5,24,315), via_y=LANE[0], into=120)),
  ("S-516 brine", "main",
-  route(L(5,418,488), L(6,24,100), via_y=LANE[1], into=250)),
+  route(L(5,1032,488), L(6,24,100), via_x=CH_V["1-2"]-90, out=50, into=60)),
  ("S-518 / S-519 purges", "main",
-  route(L(5,1032,488), L(6,24,158), via_y=LANE[2], into=310)),
+  route(L(5,1032,560), L(6,24,158), via_x=CH_V["1-2"]-30, out=50, into=60)),
+ # ---- solids and bleeds dropping into Area 600 -----------------------------
+ ("S-308 leach residue", "solids",
+  route(L(3,667,580), L(6,24,450), via_y=LANE[3], into=150)),
+ ("S-304 blowdown", "solids",
+  route(L(3,1027,200), L(6,24,274), via_x=CH_V["1-2"]+90, via_y=LANE[1], out=50, into=210)),
+ ("S-408 Fe/Al cake", "solids",
+  route(L(4,563,500), L(6,24,530), via_y=LANE[2], into=90)),
+ ("S-403 cement Cu", "solids",
+  route(L(4,830,830), L(6,600,530), via_y=LANE[1])),
  ("S-210 spent cells", "solids",
-  route(L(2,877,620), L(6,24,610), via_y=BOT, into=370)),
+  route(L(2,877,620), L(6,24,610), via_y=BOT, into=270)),
+ # ---- recycles -------------------------------------------------------------
  ("S-517 condensate return", "recycle",
-  route(L(5,95,660), L(2,28,245), via_x=ML+70, via_y=BOT, out=-70, into=-60)),
+  route(L(5,95,660), L(2,28,245), via_x=ML-80, via_y=BOT, out=-70, into=-55)),
+ ("S-311 wash filtrate", "recycle",
+  route(L(3,1062,560), L(1,40,500), via_x=ML-80, via_y=LANE[3], out=60, into=-55)),
  ("S-204 medium surplus", "recycle",
-  route(L(2,197,320), L(1,40,540), via_x=ML+70, out=-60, into=-60)),
+  route(L(2,197,320), L(1,40,540), via_x=ML-140, out=-60)),
 ]
 
 STYLE = {"main": 'stroke="#111111" stroke-width="2.6"',
          "recycle": 'stroke="#111111" stroke-width="2" stroke-dasharray="12 7"',
          "solids": 'stroke="#111111" stroke-width="2.2" stroke-dasharray="3 5"'}
 
+BOXES = {a: (org(a)[0]+8, org(a)[1]+8, org(a)[0]+SW-8, org(a)[1]+SH-8) for a in PLACE}
+
+def crosses(seg, box):
+    (x1, y1), (x2, y2) = seg
+    bx1, by1, bx2, by2 = box
+    if y1 == y2:                                  # horizontal run
+        return by1 < y1 < by2 and max(bx1, min(x1, x2)) < min(bx2, max(x1, x2))
+    return bx1 < x1 < bx2 and max(by1, min(y1, y2)) < min(by2, max(y1, y2))
+
 for label, _, pts in CONNS:                       # a PFD has no diagonals
+    for seg in zip(pts, pts[1:]):
+        for a, box in BOXES.items():
+            ends = {pts[0], pts[-1]}
+            if crosses(seg, box) and not any(box[0] <= e[0] <= box[2] and box[1] <= e[1] <= box[3] for e in ends):
+                raise AssertionError(f"{label}: {seg} runs through Area {a}00")
     for (x1, y1), (x2, y2) in zip(pts, pts[1:]):
         assert x1 == x2 or y1 == y2, f"{label}: diagonal segment ({x1},{y1})->({x2},{y2})"
 
@@ -156,7 +178,7 @@ svg = f'''<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">
 <rect width="{W}" height="{H}" fill="#F7F5EE"/>
 <text x="{ML}" y="112" class="t1">BLACK MASS BIOLEACH — UNIFIED PROCESS FLOW DIAGRAM</text>
 <text x="{ML}" y="158" class="t2">Zero-discharge refinery · 10,000 t/yr spent lithium-ion black mass · gluconic-acid biolixiviant</text>
-<text x="{ML}" y="194" class="t3">All six areas on one drawing. Solid lines carry the main process flow; dashed lines are recycles; dotted lines are solids and bleeds. Equipment, sizing, stream tables and notes are in the companion PFD Index.</text>
+<text x="{ML}" y="194" class="t3">All six areas on one drawing, placed so that every process connection joins neighbouring areas. Solid lines carry the main process flow; dashed lines are recycles; dotted lines are solids and bleeds. Equipment, sizing, stream tables and notes are in the companion PFD Index.</text>
 <line x1="{ML}" y1="222" x2="{W-ML}" y2="222" stroke="#111111" stroke-width="1.6"/>
 {chr(10).join(boxes)}
 {chr(10).join(tiles)}
