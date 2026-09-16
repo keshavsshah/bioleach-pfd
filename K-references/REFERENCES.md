@@ -1,8 +1,6 @@
 # References
 
-The complete bibliography for the project, in IEEE style. Entries [1]-[4] are cited in the
-main write-up; [5]-[28] support the design work in this repository. Verified by DOI
-resolution where possible.
+The complete bibliography for the project, in IEEE style. 
 
 `pfd/bioleach_PFD_index.html` flags the few entries whose full text the publisher blocked,
 and separately lists the numbers that remain **unsourced**. Read that list before quoting

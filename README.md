@@ -8,8 +8,7 @@ Process design for a **10,000 t/yr spent lithium-ion black-mass refinery** using
 ## ▶ Start here
 
 **[Black Mass BioLeach Summary.pdf](Black%20Mass%20BioLeach%20Summary.pdf)** — the paper.
-Read this first; it is the whole argument in six pages. The editable source is
-`Black Mass BioLeach Summary.docx`.
+Read this first; it is the whole argument in eight pages, references included.
 
 Everything else in this repository is the **appendix** to that paper: the detail a reader
 might want to check, reproduce or argue with. Folders are lettered to match, so where the
