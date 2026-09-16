@@ -37,6 +37,20 @@ tr:nth-child(even) td{background:var(--row)}
 td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
 td.t{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:15px;color:var(--text);white-space:nowrap}
 .note{font-size:12.5px;color:var(--muted);max-width:68ch;margin:8px 0 0}
+
+/* ---- print: one PFD sheet per landscape page ---- */
+@media print{
+  @page{ size:420mm 297mm; margin:10mm; }
+  html,body{ background:#fff !important; }
+  body{ padding:0 !important; margin:0 !important; }
+  nav,.nav,.toolbar{ display:none !important; }
+  .sheeth{ break-before:page; page-break-before:always; break-after:avoid;
+           page-break-after:avoid; margin:0 0 6px; }
+  .sheeth:first-of-type{ break-before:auto; page-break-before:auto; }
+  .sheet{ break-inside:avoid; page-break-inside:avoid; margin:0; box-shadow:none; border:0; }
+  .sheet svg{ width:100%; height:auto; }
+  section{ break-before:page; page-break-before:always; }
+}
 </style>
 
 <div class="wrap">

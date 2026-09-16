@@ -1,6 +1,10 @@
 # Appendix Index
 
 The write-up is the front page and the summary. **This repository is the appendix.**
+
+Appendices A and B are also provided as **PDFs** (`pfd/*.pdf`) for attaching to the paper;
+the HTML sources sit beside them and stay the editable originals. Regenerate with
+`python3 src/make_pdfs.py`.
 Anything a reader wants to check, reproduce or argue with lives here.
 
 Sections are lettered so the paper can cite them as "Appendix C" without needing the
@@ -8,8 +12,8 @@ tables reproduced inline.
 
 | | Appendix section | Where it lives |
 |---|---|---|
-| **A** | Process flow diagram, six sheets | `pfd/bioleach_PFD_v2.html` |
-| **B** | Design basis and assumptions | `pfd/bioleach_PFD_index.html`, top section |
+| **A** | Process flow diagram, six sheets | **`pfd/bioleach_PFD.pdf`** (HTML source alongside) |
+| **B** | Design basis and assumptions | **`pfd/bioleach_PFD_index.pdf`**, top section |
 | **C** | Equipment list with sizing basis | `data/streams/equipment.csv`, and per block in the Index |
 | **D** | Stream tables, Blocks 1–7 | `data/streams/streams.csv`, and per block in the Index |
 | **E** | Numbered process notes ①–㉝ | `pfd/bioleach_PFD_index.html`, per block |

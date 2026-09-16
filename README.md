@@ -50,8 +50,10 @@ src/   -- balance and chemistry: quantities, not estimates
        revenue_floor.py      revenue on cited prices only
        li_upgrade.py         Li3PO4 conversion screening (header marks its prices void)
 
-pfd/   bioleach_PFD_v2.html      six-sheet process flow diagram
-       bioleach_PFD_index.html   equipment, sizing, stream tables, notes, references
+pfd/   bioleach_PFD.pdf          six-sheet PFD, A3 landscape, one sheet per page
+       bioleach_PFD_index.pdf    the Index, A4 portrait
+       bioleach_PFD_v2.html      the PFD source (interactive, links resolve)
+       bioleach_PFD_index.html   the Index source
 data/  minteq.v4.dat             PHREEQC thermodynamic database (USGS)
        thermo_results.txt        speciation output
        streams/*.csv             machine-readable stream and equipment tables
@@ -74,6 +76,7 @@ pip install -r requirements.txt
 python3 src/mass_balance.py            # full balance; every assert must pass
 python3 src/mass_balance.py --html 3   # regenerate the Index tables for one block
 python3 src/export_tables.py           # refresh data/streams/*.csv
+python3 src/make_pdfs.py               # re-render both PDFs from the HTML
 ```
 
 The balance is self-checking. It asserts elemental closure across every unit, a

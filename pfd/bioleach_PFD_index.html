@@ -54,6 +54,24 @@ ol.refs li:target{background:var(--row);outline:3px solid var(--row)}
 .unsourced{border-left:3px solid var(--tag);padding:10px 14px;margin:14px 0;background:var(--row)}
 .unsourced h4{margin:0 0 6px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
 .unsourced ul{margin:0;padding-left:18px}.unsourced li{margin:4px 0;font-size:13.5px}
+
+/* ---- print: A4 portrait, one block per page, tables unbroken where possible ---- */
+@media print{
+  @page{ size:A4; margin:14mm 12mm; }
+  html,body{ background:#fff !important; color:#111 !important; }
+  body{ padding:0 !important; }
+  nav,.nav{ display:none !important; }
+  .block{ break-before:page; page-break-before:always; }
+  .block:first-of-type{ break-before:auto; page-break-before:auto; }
+  h2,h3{ break-after:avoid; page-break-after:avoid; }
+  tr,li{ break-inside:avoid; page-break-inside:avoid; }
+  thead{ display:table-header-group; }
+  .tbl{ overflow:visible !important; }
+  table{ font-size:8.5px; width:100%; }
+  .fn,ol.refs{ font-size:10px; }
+  a{ color:#111 !important; text-decoration:none; }
+  .unsourced{ break-inside:avoid; page-break-inside:avoid; }
+}
 </style>
 
 <div class="wrap">
