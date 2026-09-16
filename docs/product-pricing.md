@@ -1,6 +1,5 @@
 # Product Pricing — Cited Basis
 
-> Created 2026-09-13. Replaces the voided TEA, which used unsourced prices.
 > Companion script: [[revenue_floor.py]]. Physical basis: [[mass_balance.py]].
 
 ## What can actually be cited, and what cannot
@@ -56,7 +55,7 @@ A Fastmarkets or SMM subscription converts the floor into an actual revenue line
 supplying the two salt assessments. Short of that, the floor is the honest number and
 the conversion premium should be stated as unquantified rather than guessed.
 
-## 2026-09-13 — Second search for a Li₃PO₄ price: none found
+## Second search for a Li₃PO₄ price: none found
 
 A dedicated second sweep (EverBatt, DLE project technical reports, SMM / Asian Metal /
 Baiinfo / Mysteel for 磷酸锂, EU LCA-TEA studies, payability papers) found **no independent

@@ -31,21 +31,41 @@ earlier boundary and are not comparable.
 
 ## Repository map
 
+This repository **is the appendix** to the write-up. `docs/appendix-index.md` maps every
+appendix section to the file that holds it.
+
 ```
-src/     mass_balance.py      every stream and equipment size; the single source of truth
-         thermo_speciation.py PHREEQC speciation of the Option A liquor
-         export_tables.py     writes the stream/equipment CSVs in data/streams/
-         sensitivity_pulp.py  pulp-density sweep
-         recycle_loop_check.py proton and sodium budget for raffinate recycle
-         revenue_floor.py     revenue on cited prices only
-         li_upgrade.py        screening for Li3PO4 to Li2CO3/LiOH conversion (see header)
-pfd/     bioleach_PFD_v2.html      six-sheet process flow diagram
-         bioleach_PFD_index.html   equipment, sizing, stream tables, notes, references
-data/    minteq.v4.dat        PHREEQC thermodynamic database (USGS)
-         thermo_results.txt   speciation output
-         streams/*.csv        machine-readable stream and equipment tables
-docs/    design and findings notes, including the ones that changed the design
+src/   -- balance and chemistry: quantities, not estimates
+       mass_balance.py       every stream and equipment size; the single source of truth
+       thermo_speciation.py  PHREEQC speciation of the leach liquor
+       export_tables.py      writes the stream/equipment CSVs in data/streams/
+       sensitivity_pulp.py   pulp-density sweep
+       recycle_loop_check.py proton and sodium budget for raffinate recycle
+
+       -- economics: the METHOD is standard, the PRICES are estimates
+       capex.py              Class 5 factored capital estimate
+       opex.py               annual operating cost against the revenue floor
+       acid_cost.py          gluconic vs sulphuric, per equivalent of acidity
+       levers.py             what would close the cost gap
+       revenue_floor.py      revenue on cited prices only
+       li_upgrade.py         Li3PO4 conversion screening (header marks its prices void)
+
+pfd/   bioleach_PFD_v2.html      six-sheet process flow diagram
+       bioleach_PFD_index.html   equipment, sizing, stream tables, notes, references
+data/  minteq.v4.dat             PHREEQC thermodynamic database (USGS)
+       thermo_results.txt        speciation output
+       streams/*.csv             machine-readable stream and equipment tables
+docs/  appendix-index.md         what the paper's appendix letters point at
+       charge-balance-findings.md  the findings that changed the flowsheet
+       mass-balance-log.md       block-by-block build log
+       product-pricing.md        prices, and why most of them cannot be cited
+       waste-streams.md, software-build-order.md
 ```
+
+**Every script in `src/` that prints a dollar sign carries estimated prices**, named as
+constants at the top of the file so they can be replaced with quotes. Quantities always
+come from the balance. The cost *structure* is therefore much more robust than the
+totals — see `docs/appendix-index.md`.
 
 ## Running it
 
@@ -95,11 +115,20 @@ practice — tank residence times, pump sparing, silo hold-up — is deliberatel
 
 See `REFERENCES.md` for the bibliography in IEEE format.
 
+## Economics, in one line
+
+Approximately **$118M** fixed capital and **$33–47M/yr** operating cost against a
+**$46–58M/yr** revenue floor. Glucose is 53 % of operating cost, because gluconic acid
+costs **eleven to twenty-seven times more per equivalent of acidity** than sulphuric:
+it is monoprotic, heavy, and bought as food-grade sugar, where sulphuric is diprotic,
+light, and made from a waste stream. Switching to corn stover hydrolysate and recycling
+the acid by electrodialysis would remove roughly $29M/yr of that. The route is **not yet
+cheaper than conventional hydrometallurgy; it is already cleaner.**
+
 ## Status
 
 Design is complete and internally consistent: six sheets drawn, balance closed, basis
-cited. Not built, not piloted, and not independently reviewed. Capital cost is not yet
-estimated.
+cited, costs estimated. Not built, not piloted, and not independently reviewed.
 
 ## Licence
 
